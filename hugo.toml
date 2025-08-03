@@ -1,6 +1,6 @@
 ######################## Default configuration ####################
 # Project site URL (include the /kailab/ path and a trailing slash)
-baseURL = "https://polla.dev/kailab/"
+baseURL = "https://kailab.org/"
 title = "Hugoplate"
 theme = "hugoplate"
 
