@@ -1,40 +1,37 @@
 ######################## Default configuration ####################
-# The base URL of your site (required). For GitHub Pages project sites,
-# include the repository name and a trailing slash.
+# Project site URL (include the /kailab/ path and a trailing slash)
 baseURL = "https://polla.dev/kailab/"
 title = "Hugoplate"
 theme = "hugoplate"
 
-# Serve correct absolute/relative URLs when the site lives under /kailab/
+# Ensure CSS/JS and links resolve correctly when the site lives under /kailab/
 canonifyURLs = true
-relativeURLs = true
+# (Do NOT set relativeURLs here; it can cause doubled subpaths on project sites)
 
-# Set your preferred time zone
+# Local time zone
 timeZone = "Asia/Baghdad"
 
-# Content language settings
+# Language settings
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 hasCJKLanguage = false
-disableLanguages = []  # e.g., ["fr"] to disable French
+disableLanguages = []   # e.g., ["fr"] to disable French
 
-# Post excerpt length
+# Post excerpts
 summaryLength = 10
 
 ############################# Services #############################
 [services]
-
   [services.googleAnalytics]
   ID = "G-MEASUREMENT_ID"  # replace with your GA4 ID or leave empty
 
   [services.disqus]
-  shortname = "themefisher-template"  # replace or remove if not used
+  shortname = "themefisher-template"  # replace/remove if not used
 
 ############################ Permalinks ############################
-# Correct table shape for permalinks. Map section names directly.
-# Adjust section names ("pages", "posts", etc.) to match your content tree.
+# Map sections explicitly as needed (example for a "pages" section):
 [permalinks]
-pages = "/:slugorfilename/"
+  pages = "/:slug/"
 
 ############################ Pagination ############################
 [pagination]
@@ -44,7 +41,6 @@ path = "page"
 
 ############################## Build ###############################
 [build]
-
   [build.buildStats]
   enable = true
 
@@ -72,15 +68,12 @@ home = ["HTML", "RSS", "WebAppManifest", "SearchIndex"]
 
 ############################# Imaging ##############################
 [imaging]
-# Default JPEG/WebP quality and resample filter
 quality = 80
 resampleFilter = "Lanczos"
 
 ############################# Caches ###############################
 [caches]
-
   [caches.images]
-  # Keep generated images inside the resourceDir for CI friendliness
   dir = ":resourceDir/_gen"
   maxAge = "720h"
 
@@ -90,12 +83,11 @@ resampleFilter = "Lanczos"
 
 ############################# Markup ###############################
 [markup]
-
   [markup.goldmark.renderer]
   unsafe = true
 
   [markup.highlight]
-  style = "monokai"     # see https://xyproto.github.io/splash/docs/all.html
+  style = "monokai"         # see https://xyproto.github.io/splash/docs/all.html
   lineNumbersInTable = false
 
   [markup.tableOfContents]
@@ -121,9 +113,7 @@ resampleFilter = "Lanczos"
   notAlternative = true
 
 ############################# Plugins ##############################
-# Hugoplate expects these plugin assets to be available under /plugins and /js.
-# With baseURL + canonifyURLs + relativeURLs, they will resolve correctly
-# on GitHub Pages project sites.
+# Hugoplate plugin assets expected under /plugins and /js
 
 # CSS Plugins
 [[params.plugins.css]]
