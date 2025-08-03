@@ -1,7 +1,7 @@
 ######################## Default configuration ####################
 # The base URL of your site (required). For GitHub Pages project sites,
 # include the repository name and a trailing slash.
-baseURL = "https://polla-fattah.github.io/kailab/"
+baseURL = "https://polla.dev/kailab/"
 title = "Hugoplate"
 theme = "hugoplate"
 
