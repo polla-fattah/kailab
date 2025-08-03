@@ -306,6 +306,84 @@
   margin-right: 0.75rem !important;
 }
 
+/* RTL List Items with Icons - Fix bullet point positioning */
+[dir="rtl"] li.relative.pl-6 {
+  padding-left: 0 !important;
+  padding-right: 1.5rem !important;
+}
+
+[dir="rtl"] li.relative .fa.absolute.left-0 {
+  left: auto !important;
+  right: 0 !important;
+}
+
+[dir="rtl"] li.relative .fa-check.absolute.left-0 {
+  left: auto !important;
+  right: 0 !important;
+}
+
+/* RTL About Page - Fix content alignment and spacing */
+[dir="rtl"] .content {
+  text-align: right !important;
+}
+
+[dir="rtl"] .content h2,
+[dir="rtl"] .content h3,
+[dir="rtl"] .content h4 {
+  text-align: right !important;
+}
+
+[dir="rtl"] .content p {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .content ul,
+[dir="rtl"] .content ol {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .content li {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+/* RTL Content - Strong and bold text alignment */
+[dir="rtl"] .content strong {
+  text-align: right !important;
+}
+
+/* RTL 404 Page - Center alignment for 404 content */
+[dir="rtl"] .section-sm.text-center h1,
+[dir="rtl"] .section-sm.text-center p,
+[dir="rtl"] .section-sm.text-center .content {
+  text-align: center !important;
+  direction: rtl !important;
+}
+
+/* RTL Elements Page - Code blocks and components */
+[dir="rtl"] .content pre {
+  text-align: left !important; /* Keep code left-aligned for readability */
+  direction: ltr !important;
+}
+
+[dir="rtl"] .content code {
+  direction: ltr !important;
+}
+
+[dir="rtl"] .content table {
+  text-align: right !important;
+}
+
+[dir="rtl"] .content blockquote {
+  text-align: right !important;
+  border-right: 4px solid #e2e8f0 !important;
+  border-left: none !important;
+  padding-right: 1rem !important;
+  padding-left: 0 !important;
+}
+
 /* RTL Contact Form */
 [dir="rtl"] .form-label {
   text-align: right;

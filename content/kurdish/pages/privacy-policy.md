@@ -2,6 +2,8 @@
 title: "سیاسەتی تایبەتمەندی"
 description: "سیاسەتی تایبەتمەندی ماڵپەڕ"
 layout: "privacy-policy"
+# custom URL slug
+slug: "privacy-policy"
 draft: false
 ---
 
