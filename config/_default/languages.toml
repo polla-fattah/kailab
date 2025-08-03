@@ -1,6 +1,15 @@
 ################ English language ##################
 [en]
-languageName = "En"
+languageName = "English"
 languageCode = "en-us"
 contentDir = "content/english"
 weight = 1
+
+################ Kurdish language ##################
+[ku]
+languageName = "کوردی"
+languageCode = "ku"
+contentDir = "content/kurdish"
+weight = 2
+title = "هوگۆپلەیت"
+description = "هوگۆپلەیت - پلاتفۆرمی دروستکردنی وێبسایت"

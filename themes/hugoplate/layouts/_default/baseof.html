@@ -5,6 +5,7 @@
     {{- site.Params.theme_default -}}
   {{- end -}}"
   lang="{{ site.LanguageCode | default `en-US` }}"
+  dir="{{ if eq site.Language.Lang `ku` }}rtl{{ else }}ltr{{ end }}"
   itemtype="http://schema.org/WebPage">
   <head>
     <!-- head (don't cache it) -->

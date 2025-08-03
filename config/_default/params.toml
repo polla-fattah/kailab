@@ -29,6 +29,11 @@ custom_script = ""
 # copyright
 copyright = "Designed & Developed by [Zeon Studio](https://zeon.studio)"
 
+# language-specific settings
+[ku]
+logo_text = "هوگۆپلەیت"
+copyright = "دیزاین و گەشەپێدراوە لەلایەن [Zeon Studio](https://zeon.studio)"
+
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
 [preloader]
@@ -37,7 +42,7 @@ preloader = "" # use jpg, png, svg or gif format.
 
 # Navigation button
 [navigation_button]
-enable = true
+enable = false
 label = "get a quote"
 link = "contact"
 
