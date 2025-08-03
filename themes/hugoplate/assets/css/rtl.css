@@ -85,23 +85,41 @@
 /* RTL Navigation Spacing */
 [dir="rtl"] .lg\:space-x-2 > * + * {
   margin-left: 0 !important;
-  margin-right: 0.5rem !important;
+  margin-right: 0.6rem !important;
 }
 
 [dir="rtl"] .xl\:space-x-8 > * + * {
   margin-left: 0 !important;
-  margin-right: 2rem !important;
+  margin-right: 2.2rem !important;
 }
 
 /* RTL Navigation - Additional spacing fixes */
 [dir="rtl"] .navbar-nav.lg\:space-x-2 > .nav-item + .nav-item {
   margin-left: 0 !important;
-  margin-right: 0.5rem !important;
+  margin-right: 0.6rem !important;
 }
 
 [dir="rtl"] .navbar-nav.xl\:space-x-8 > .nav-item + .nav-item {
   margin-left: 0 !important;
-  margin-right: 2rem !important;
+  margin-right: 2.2rem !important;
+}
+
+/* RTL Navigation - Fix dropdown item spacing */
+[dir="rtl"] .navbar-nav > .nav-item.nav-dropdown {
+  margin-left: 0 !important;
+  margin-right: 0.6rem !important;
+}
+
+[dir="rtl"] .navbar-nav.lg\:space-x-2 > .nav-item.nav-dropdown + .nav-item,
+[dir="rtl"] .navbar-nav.lg\:space-x-2 > .nav-item + .nav-item.nav-dropdown {
+  margin-left: 0 !important;
+  margin-right: 0.6rem !important;
+}
+
+[dir="rtl"] .navbar-nav.xl\:space-x-8 > .nav-item.nav-dropdown + .nav-item,
+[dir="rtl"] .navbar-nav.xl\:space-x-8 > .nav-item + .nav-item.nav-dropdown {
+  margin-left: 0 !important;
+  margin-right: 2.2rem !important;
 }
 
 /* RTL Navigation - First and last child spacing */
