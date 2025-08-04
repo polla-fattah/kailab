@@ -1,11 +1,14 @@
 {{ define "main" }}
   <section class="section-sm">
     <div class="container">
-      <div class="row justify-center">
-        <div class="md:col-10 lg:col-7 text-center">
-          {{ partial "image" (dict "Src" .Params.image "Context" .Page "Alt" .Title "Class" "mx-auto mb-6" "Size" "200x200") }}
-          <h2 class="h3 mb-6">{{ .Title }}</h2>
-          <div class="content">{{ .Content }}</div>
+      <div class="row">
+        <div class="col-12">
+          <!-- Light mode image -->
+          {{ partial "image" (dict "Src" "/images/about.png" "Context" .Page "Alt" .Title "Class" "w-full h-[300px] object-cover mb-8 block dark:hidden" "Size" "1200x300") }}
+          <!-- Dark mode image -->
+          {{ partial "image" (dict "Src" "/images/about-dark.png" "Context" .Page "Alt" .Title "Class" "w-full h-[300px] object-cover mb-8 hidden dark:block" "Size" "1200x300") }}
+          <h2 class="h3 mb-6 text-center">{{ .Title }}</h2>
+          <div class="content text-left">{{ .Content }}</div>
         </div>
       </div>
     </div>

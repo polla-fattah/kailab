@@ -349,6 +349,15 @@
   direction: rtl !important;
 }
 
+/* RTL About Page - Right align all text content */
+[dir="rtl"] .section-sm .content.text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .section-sm h2 {
+  text-align: center !important;
+}
+
 /* RTL Content - Strong and bold text alignment */
 [dir="rtl"] .content strong {
   text-align: right !important;
