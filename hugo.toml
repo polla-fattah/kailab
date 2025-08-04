@@ -1,5 +1,5 @@
 ######################## Default configuration ####################
-# Project site URL (include the /kailab/ path and a trailing slash)
+# Custom domain for GitHub Pages
 baseURL = "https://kailab.org/"
 title = "KaiLab"
 theme = "hugoplate"
