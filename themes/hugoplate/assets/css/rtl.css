@@ -362,6 +362,16 @@
   direction: rtl !important;
 }
 
+/* RTL Banner Video - Ensure proper display */
+[dir="rtl"] #banner-video {
+  direction: ltr !important; /* Keep video controls in LTR */
+}
+
+[dir="rtl"] .col-12 video {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* RTL Elements Page - Code blocks and components */
 [dir="rtl"] .content pre {
   text-align: left !important; /* Keep code left-aligned for readability */

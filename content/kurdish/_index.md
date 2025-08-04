@@ -3,7 +3,6 @@
 banner:
   title: "نموونەی سەرەتایی کە پێویستە بۆ دەستپێکردنی پڕۆژەی Hugo"
   content: "Hugoplate نموونەیەکی سەرەتایی خۆڕاییە بە Hugo و TailwindCSS دروستکراوە، هەموو ئەو شتانە دەدات کە پێویستە بۆ دەستپێکردنی پڕۆژەی Hugo و پاشەکەوتکردنی کاتی بەهای."
-  image: "/images/banner.png"
   button:
     enable: true
     label: "دەستپێبکە بە خۆڕایی"

@@ -4,6 +4,7 @@ languageName = "English"
 languageCode = "en-us"
 contentDir = "content/english"
 weight = 1
+title = "KaiLab"
 
 ################ Kurdish language ##################
 [ku]
@@ -11,5 +12,6 @@ languageName = "کوردی"
 languageCode = "ku"
 contentDir = "content/kurdish"
 weight = 2
-title = "هوگۆپلەیت"
-description = "هوگۆپلەیت - پلاتفۆرمی دروستکردنی وێبسایت"
+title = "كايلاب"
+description = "كايلاب - پلاتفۆرمی دروستکردنی وێبسایت"
+

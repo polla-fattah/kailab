@@ -1,7 +1,7 @@
 ######################## Default configuration ####################
 # Project site URL (include the /kailab/ path and a trailing slash)
 baseURL = "https://kailab.org/"
-title = "Hugoplate"
+title = "KaiLab"
 theme = "hugoplate"
 
 # Ensure CSS/JS and links resolve correctly when the site lives under /kailab/

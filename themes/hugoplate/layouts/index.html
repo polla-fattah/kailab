@@ -25,9 +25,41 @@
               {{ end }}
             {{ end }}
           </div>
-          <div class="col-12">
-            {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px]" "DisplayXL" "800x" ) }}
-          </div>
+          {{ if or .video .image }}
+            <div class="col-12">
+              {{ if .video }}
+                {{ $video := resources.Get .video }}
+                <video 
+                  id="banner-video"
+                  class="mx-auto lg:!max-w-[800px] rounded-lg w-full"
+                  width="800"
+                  height="auto"
+                  autoplay
+                  muted
+                  playsinline>
+                  <source src="{{ $video.RelPermalink }}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const video = document.getElementById('banner-video');
+                    let playCount = 0;
+                    const maxPlays = 2;
+                    
+                    video.addEventListener('ended', function() {
+                      playCount++;
+                      if (playCount < maxPlays) {
+                        video.currentTime = 0;
+                        video.play();
+                      }
+                    });
+                  });
+                </script>
+              {{ else if .image }}
+                {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px]" "DisplayXL" "800x" ) }}
+              {{ end }}
+            </div>
+          {{ end }}
         </div>
       </div>
     </section>
