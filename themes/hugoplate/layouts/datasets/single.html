@@ -1,0 +1,263 @@
+{{ define "main" }}
+  {{ $datasetId := .File.BaseFileName | int }}
+  <!-- Load datasets data based on language -->
+  {{ $datasets := site.Data.datasets }}
+  {{ if eq site.Language.Lang "ku" }}
+    {{ $datasets = site.Data.datasets_ku }}
+  {{ end }}
+  {{ $dataset := index (where $datasets "id" $datasetId) 0 }}
+  
+  {{ if $dataset }}
+    <section class="section-sm">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Breadcrumb -->
+            {{ partial "components/breadcrumb" (dict "Context" . "Class" "mb-6") }}
+            
+            <!-- Dataset Header -->
+            <article class="mb-8">
+              <header class="mb-6">
+                <h1 class="h2 mb-4">{{ $dataset.title }}</h1>
+                
+                <!-- Quick Info -->
+                <div class="flex flex-wrap gap-4 text-text-light dark:text-darkmode-text-light mb-4">
+                  <div>
+                    <i class="fas fa-calendar mr-2"></i>
+                    Published: {{ dateFormat "January 2, 2006" $dataset.publishedDate }}
+                  </div>
+                  <div>
+                    <i class="fas fa-hdd mr-2"></i>
+                    Size: {{ $dataset.size }}
+                  </div>
+                  <div>
+                    <i class="fas fa-balance-scale mr-2"></i>
+                    License: {{ $dataset.license }}
+                  </div>
+                  <div>
+                    <i class="fas fa-tag mr-2"></i>
+                    Domain: {{ $dataset.domain }}
+                  </div>
+                </div>
+
+                <!-- Languages -->
+                {{ if $dataset.languages }}
+                  <div class="mb-4">
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Languages:</span>
+                    <div class="inline-flex flex-wrap gap-2">
+                      {{ range $dataset.languages }}
+                        <span class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-sm px-2 py-1 rounded">
+                          {{ . }}
+                        </span>
+                      {{ end }}
+                    </div>
+                  </div>
+                {{ end }}
+
+                <!-- Formats -->
+                {{ if $dataset.format }}
+                  <div class="mb-4">
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Formats:</span>
+                    <div class="inline-flex flex-wrap gap-2">
+                      {{ range $dataset.format }}
+                        <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-sm px-2 py-1 rounded">
+                          {{ . }}
+                        </span>
+                      {{ end }}
+                    </div>
+                  </div>
+                {{ end }}
+
+                <!-- Organization Associations -->
+                {{ if $dataset.organizationIds }}
+                  <div class="mb-4">
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Contributing Organizations:</span>
+                    <div class="inline-flex flex-wrap gap-2 mt-2">
+                      {{ range $dataset.organizationIds }}
+                        <!-- Load organizations data based on language -->
+                        {{ $orgs := site.Data.organizations }}
+                        {{ if eq site.Language.Lang "ku" }}
+                          {{ $orgs = site.Data.organizations_ku }}
+                        {{ end }}
+                        {{ $org := index (where $orgs "id" .) 0 }}
+                        {{ if $org }}
+                          <a href="{{ `/organizations/` | relLangURL }}{{ $org.id }}" 
+                             class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-sm px-3 py-1 rounded hover:underline">
+                            {{ $org.title }}
+                          </a>
+                        {{ end }}
+                      {{ end }}
+                    </div>
+                  </div>
+                {{ end }}
+              </header>
+            </article>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Main Content -->
+          <div class="col-12 lg:col-8 mb-8">
+            <!-- Description -->
+            <div class="content mb-8">
+              <h2 class="h3 mb-4">Dataset Description</h2>
+              <p class="text-justify">{{ $dataset.description }}</p>
+            </div>
+
+            <!-- Structure -->
+            {{ if $dataset.structure }}
+              <div class="mb-8">
+                <h3 class="h4 mb-4">Data Structure</h3>
+                <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
+                  <p class="text-sm">{{ $dataset.structure }}</p>
+                </div>
+              </div>
+            {{ end }}
+
+            <!-- Main Paper -->
+            {{ if $dataset.mainPaper }}
+              {{ $mainPaper := index (where site.Data.papers "id" $dataset.mainPaper) 0 }}
+              {{ if $mainPaper }}
+                <div class="mb-8">
+                  <h3 class="h4 mb-4">Primary Publication</h3>
+                  <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
+                    <h4 class="h6 mb-2">
+                      <a href="{{ `/papers/` | relLangURL }}{{ $mainPaper.id }}" 
+                         class="text-primary dark:text-darkmode-primary hover:underline">
+                        {{ $mainPaper.title }}
+                      </a>
+                    </h4>
+                    <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
+                      {{ delimit $mainPaper.authors ", " }} ({{ dateFormat "2006" $mainPaper.publishedDate }})
+                    </p>
+                    <p class="text-sm">{{ truncate 200 $mainPaper.abstract }}</p>
+                  </div>
+                </div>
+              {{ end }}
+            {{ end }}
+
+            <!-- Related Papers -->
+            {{ if $dataset.papers }}
+              <div class="mb-8">
+                <h3 class="h4 mb-4">Related Publications</h3>
+                <div class="space-y-4">
+                  {{ range $dataset.papers }}
+                    {{ if ne . $dataset.mainPaper }}
+                      <!-- Load papers data based on language -->
+                      {{ $paps := site.Data.papers }}
+                      {{ if eq site.Language.Lang "ku" }}
+                        {{ $paps = site.Data.papers_ku }}
+                      {{ end }}
+                      {{ $paper := index (where $paps "id" .) 0 }}
+                      {{ if $paper }}
+                        <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
+                          <h4 class="h6 mb-2">
+                            <a href="{{ `/papers/` | relLangURL }}{{ $paper.id }}" 
+                               class="text-primary dark:text-darkmode-primary hover:underline">
+                              {{ $paper.title }}
+                            </a>
+                          </h4>
+                          <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
+                            {{ delimit $paper.authors ", " }} ({{ dateFormat "2006" $paper.publishedDate }})
+                          </p>
+                          <p class="text-sm">{{ truncate 150 $paper.abstract }}</p>
+                        </div>
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+
+            <!-- Citation -->
+            <div class="mb-8">
+              <h3 class="h4 mb-4">How to Cite</h3>
+              <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
+                <p class="text-sm font-mono mb-3">{{ $dataset.cite }}</p>
+                <button onclick="navigator.clipboard.writeText('{{ $dataset.cite }}')" 
+                        class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-copy mr-1"></i>
+                  Copy Citation
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-12 lg:col-4">
+            <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 sticky top-4">
+              <!-- Quick Facts -->
+              <h3 class="h5 mb-4">Dataset Information</h3>
+              <div class="space-y-3 mb-6">
+                <div>
+                  <span class="font-semibold text-sm block">Total Size</span>
+                  <span class="text-sm">{{ $dataset.size }}</span>
+                </div>
+                <div>
+                  <span class="font-semibold text-sm block">Languages</span>
+                  <span class="text-sm">{{ len $dataset.languages }} language{{ if gt (len $dataset.languages) 1 }}s{{ end }}</span>
+                </div>
+                <div>
+                  <span class="font-semibold text-sm block">Formats</span>
+                  <span class="text-sm">{{ len $dataset.format }} format{{ if gt (len $dataset.format) 1 }}s{{ end }}</span>
+                </div>
+                {{ if $dataset.papers }}
+                  <div>
+                    <span class="font-semibold text-sm block">Related Papers</span>
+                    <span class="text-sm">{{ len $dataset.papers }} publication{{ if gt (len $dataset.papers) 1 }}s{{ end }}</span>
+                  </div>
+                {{ end }}
+              </div>
+
+              <!-- Access -->
+              <div class="mb-6">
+                <h4 class="h6 mb-3">Data Access</h4>
+                {{ if $dataset.url }}
+                  <a href="{{ $dataset.url }}" target="_blank" rel="noopener" 
+                     class="btn btn-primary w-full mb-3">
+                    <i class="fas fa-download mr-2"></i>
+                    Download Dataset
+                  </a>
+                {{ end }}
+                <p class="text-xs text-text-light dark:text-darkmode-text-light">
+                  Licensed under {{ $dataset.license }}
+                </p>
+              </div>
+
+              <!-- Quick Actions -->
+              <div class="space-y-2">
+                {{ if $dataset.mainPaper }}
+                  <a href="{{ `/papers/` | relLangURL }}{{ $dataset.mainPaper }}" 
+                     class="btn btn-outline-primary btn-sm w-full">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    View Main Paper
+                  </a>
+                {{ end }}
+                <a href="{{ `/datasets/` | relLangURL }}" 
+                   class="btn btn-outline-primary btn-sm w-full">
+                  <i class="fas fa-arrow-left mr-2"></i>
+                  Back to Datasets
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ else }}
+    <section class="section-sm">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1 class="h2 mb-4">Dataset Not Found</h1>
+            <p class="mb-6">The requested dataset could not be found.</p>
+            <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-primary">
+              <i class="fas fa-arrow-left mr-2"></i>
+              Back to Datasets
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

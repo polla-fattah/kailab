@@ -1,0 +1,160 @@
+{{ define "main" }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="h2 mb-6">{{ .Title }}</h1>
+          <div class="content mb-12">{{ .Content }}</div>
+        </div>
+      </div>
+
+      <!-- Load organizations data based on language -->
+      {{ $organizations := site.Data.organizations }}
+      {{ if eq site.Language.Lang "ku" }}
+        {{ $organizations = site.Data.organizations_ku }}
+      {{ end }}
+      
+      <!-- Organizations Grid -->
+      <div class="row gy-8">
+        {{ range $organizations }}
+          <div class="col-12 lg:col-6 mb-8">
+            <article class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col">
+              <!-- Organization Header -->
+              <header class="mb-4">
+                <div class="flex items-start justify-between mb-3">
+                  <h2 class="h5 mb-0 flex-grow">
+                    <a href="{{ `/organizations/` | relLangURL }}{{ .id }}" 
+                       class="text-primary dark:text-darkmode-primary hover:underline">
+                      {{ .title }}
+                    </a>
+                  </h2>
+                  <span class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-xs px-2 py-1 rounded ml-3">
+                    {{ .type }}
+                  </span>
+                </div>
+                
+                <!-- Organization Info -->
+                <div class="text-text-light dark:text-darkmode-text-light text-sm mb-3">
+                  <div class="flex flex-wrap gap-4">
+                    <span>
+                      <i class="fas fa-map-marker-alt mr-1"></i>
+                      {{ .location }}
+                    </span>
+                    <span>
+                      <i class="fas fa-calendar mr-1"></i>
+                      Est. {{ .established }}
+                    </span>
+                    {{ if .website }}
+                      <span>
+                        <i class="fas fa-globe mr-1"></i>
+                        <a href="{{ .website }}" target="_blank" rel="noopener" class="hover:underline">
+                          Website
+                        </a>
+                      </span>
+                    {{ end }}
+                  </div>
+                </div>
+              </header>
+
+              <!-- Description -->
+              <div class="mb-4 flex-grow">
+                <p class="text-sm text-justify">{{ truncate 250 .description }}</p>
+              </div>
+
+              <!-- Focus Areas -->
+              {{ if .focus }}
+                <div class="mb-4">
+                  <h4 class="text-sm font-semibold mb-2">Focus Areas:</h4>
+                  <div class="flex flex-wrap gap-2">
+                    {{ range .focus }}
+                      <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-xs px-2 py-1 rounded">
+                        {{ . }}
+                      </span>
+                    {{ end }}
+                  </div>
+                </div>
+              {{ end }}
+
+              <!-- Statistics -->
+              <div class="mb-4">
+                <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                  <div>
+                    <div class="font-bold text-primary dark:text-darkmode-primary">{{ len .papers }}</div>
+                    <div class="text-xs text-text-light dark:text-darkmode-text-light">Papers</div>
+                  </div>
+                  <div>
+                    <div class="font-bold text-primary dark:text-darkmode-primary">{{ len .datasets }}</div>
+                    <div class="text-xs text-text-light dark:text-darkmode-text-light">Datasets</div>
+                  </div>
+                  <div>
+                    <div class="font-bold text-primary dark:text-darkmode-primary">{{ len .contributors }}</div>
+                    <div class="text-xs text-text-light dark:text-darkmode-text-light">Contributors</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer with Actions -->
+              <footer class="mt-auto pt-4 border-t border-border dark:border-darkmode-border">
+                <div class="flex gap-2">
+                  <a href="{{ `/organizations/` | relLangURL }}{{ .id }}" 
+                     class="btn btn-outline-primary btn-sm flex-1">
+                    <i class="fas fa-eye mr-1"></i>
+                    View Details
+                  </a>
+                  {{ if .website }}
+                    <a href="{{ .website }}" target="_blank" rel="noopener" 
+                       class="btn btn-primary btn-sm flex-1">
+                      <i class="fas fa-external-link-alt mr-1"></i>
+                      Visit Site
+                    </a>
+                  {{ end }}
+                </div>
+              </footer>
+            </article>
+          </div>
+        {{ end }}
+      </div>
+
+      <!-- Network Statistics -->
+      <div class="row mt-16">
+        <div class="col-12">
+          <div class="bg-gradient rounded-lg p-8 text-center">
+            <h2 class="h3 mb-4">Research Network Overview</h2>
+            <div class="row">
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  {{ len $organizations }}
+                </div>
+                <p class="text-sm">Partner Organizations</p>
+              </div>
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  {{ len site.Data.papers }}
+                </div>
+                <p class="text-sm">Collaborative Papers</p>
+              </div>
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  {{ len site.Data.datasets }}
+                </div>
+                <p class="text-sm">Shared Datasets</p>
+              </div>
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  50+
+                </div>
+                <p class="text-sm">Active Researchers</p>
+              </div>
+            </div>
+            <div class="mt-6">
+              <a href="{{ `/projects/` | relLangURL }}" class="btn btn-primary">
+                <i class="fas fa-project-diagram mr-2"></i>
+                Explore Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

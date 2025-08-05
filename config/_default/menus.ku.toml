@@ -2,48 +2,24 @@
 
 # main menu
 [[main]]
+name = "سەرەکی"
+url = "/"
 weight = 1
-name = "پەڕەکان"
 
 [[main]]
-name = "ئەلێمێنتەکان"
-url = "/elements"
+name = "پڕۆژەکان"
+url = "/projects"
 weight = 2
+
+[[main]]
+name = "بلۆگ"
+url = "/blog"
+weight = 3
 
 [[main]]
 name = "دەربارە"
 url = "/about"
-weight = 3
-
-[[main]]
-name = "سەرەکی"
-url = "/"
 weight = 4
-
-[[main]]
-parent = "پەڕەکان"
-name = "بلۆگ"
-url = "/blog"
-
-[[main]]
-parent = "پەڕەکان"
-name = "پەیوەندی"
-url = "/contact"
-
-[[main]]
-parent = "پەڕەکان"
-name = "نووسەرەکان"
-url = "/authors"
-
-[[main]]
-parent = "پەڕەکان"
-name = "پۆلەکان"
-url = "/categories"
-
-[[main]]
-parent = "پەڕەکان"
-name = "پەڕەی 404"
-url = "/404"
 
 
 # footer menu
@@ -53,8 +29,8 @@ url = "/about"
 weight = 1
 
 [[footer]]
-name = "ئەلێمێنتەکان"
-url = "/elements"
+name = "پەیوەندی"
+url = "/contact"
 weight = 2
 
 [[footer]]

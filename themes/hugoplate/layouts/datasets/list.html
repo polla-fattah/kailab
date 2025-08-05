@@ -1,0 +1,157 @@
+{{ define "main" }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="h2 mb-6">{{ .Title }}</h1>
+          <div class="content mb-12">{{ .Content }}</div>
+        </div>
+      </div>
+
+      <!-- Load datasets data based on language -->
+      {{ $datasets := site.Data.datasets }}
+      {{ if eq site.Language.Lang "ku" }}
+        {{ $datasets = site.Data.datasets_ku }}
+      {{ end }}
+      
+      <!-- Datasets Grid -->
+      <div class="row gy-8">
+        {{ range $datasets }}
+          <div class="col-12 md:col-6 mb-8">
+            <article class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col">
+              <!-- Dataset Header -->
+              <header class="mb-4">
+                <h2 class="h5 mb-3">
+                  <a href="{{ `/datasets/` | relLangURL }}{{ .id }}" 
+                     class="text-primary dark:text-darkmode-primary hover:underline">
+                    {{ .title }}
+                  </a>
+                </h2>
+                
+                <!-- Dataset Info -->
+                <div class="text-text-light dark:text-darkmode-text-light text-sm mb-3">
+                  <div class="flex flex-wrap gap-4 mb-2">
+                    <span>
+                      <i class="fas fa-calendar mr-1"></i>
+                      {{ dateFormat "Jan 2006" .publishedDate }}
+                    </span>
+                    <span>
+                      <i class="fas fa-hdd mr-1"></i>
+                      {{ .size }}
+                    </span>
+                    <span>
+                      <i class="fas fa-balance-scale mr-1"></i>
+                      {{ .license }}
+                    </span>
+                  </div>
+                  <div class="flex flex-wrap gap-2 mb-2">
+                    {{ range .format }}
+                      <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-xs px-2 py-1 rounded">
+                        {{ . }}
+                      </span>
+                    {{ end }}
+                  </div>
+                </div>
+              </header>
+
+              <!-- Description -->
+              <div class="mb-4 flex-grow">
+                <p class="text-sm text-justify">{{ truncate 200 .description }}</p>
+              </div>
+
+              <!-- Languages -->
+              {{ if .languages }}
+                <div class="mb-4">
+                  <div class="flex flex-wrap gap-2">
+                    {{ range .languages }}
+                      <span class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-xs px-2 py-1 rounded">
+                        {{ . }}
+                      </span>
+                    {{ end }}
+                  </div>
+                </div>
+              {{ end }}
+
+              <!-- Domain -->
+              <div class="mb-4">
+                <span class="text-xs text-text-light dark:text-darkmode-text-light">
+                  <i class="fas fa-tag mr-1"></i>
+                  {{ .domain }}
+                </span>
+              </div>
+
+              <!-- Related Papers -->
+              {{ if .papers }}
+                <div class="mb-4 text-sm">
+                  <span class="text-text-light dark:text-darkmode-text-light">
+                    <i class="fas fa-file-alt mr-1"></i>
+                    {{ len .papers }} related paper{{ if gt (len .papers) 1 }}s{{ end }}
+                  </span>
+                </div>
+              {{ end }}
+
+              <!-- Footer with Actions -->
+              <footer class="mt-auto pt-4 border-t border-border dark:border-darkmode-border">
+                <div class="flex gap-2">
+                  <a href="{{ `/datasets/` | relLangURL }}{{ .id }}" 
+                     class="btn btn-outline-primary btn-sm flex-1">
+                    <i class="fas fa-eye mr-1"></i>
+                    View Details
+                  </a>
+                  {{ if .url }}
+                    <a href="{{ .url }}" target="_blank" rel="noopener" 
+                       class="btn btn-primary btn-sm flex-1">
+                      <i class="fas fa-download mr-1"></i>
+                      Access Data
+                    </a>
+                  {{ end }}
+                </div>
+              </footer>
+            </article>
+          </div>
+        {{ end }}
+      </div>
+
+      <!-- Dataset Statistics -->
+      <div class="row mt-16">
+        <div class="col-12">
+          <div class="bg-gradient rounded-lg p-8 text-center">
+            <h2 class="h3 mb-4">Dataset Collection Overview</h2>
+            <div class="row">
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  {{ len $datasets }}
+                </div>
+                <p class="text-sm">Total Datasets</p>
+              </div>
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  10+
+                </div>
+                <p class="text-sm">Research Domains</p>
+              </div>
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  8+
+                </div>
+                <p class="text-sm">Data Formats</p>
+              </div>
+              <div class="col-6 md:col-3 mb-4">
+                <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
+                  {{ len site.Data.papers }}
+                </div>
+                <p class="text-sm">Related Papers</p>
+              </div>
+            </div>
+            <div class="mt-6">
+              <a href="{{ `/papers/` | relLangURL }}" class="btn btn-primary">
+                <i class="fas fa-file-alt mr-2"></i>
+                Browse Publications
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

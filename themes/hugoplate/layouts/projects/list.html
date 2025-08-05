@@ -1,0 +1,105 @@
+{{ define "main" }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="h2 mb-6">{{ .Title }}</h1>
+          <div class="content mb-12">{{ .Content }}</div>
+        </div>
+      </div>
+
+      <!-- Load projects data based on language -->
+      {{ $projects := site.Data.projects }}
+      {{ if eq site.Language.Lang "ku" }}
+        {{ $projects = site.Data.projects_ku }}
+      {{ end }}
+      
+      <!-- Projects Grid -->
+      <div class="row gy-4">
+        {{ range $projects }}
+          <div class="col-12 md:col-6 lg:col-4">
+            <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col">
+              <!-- Project Icon -->
+              <div class="mb-4">
+                <i class="fas {{ .icon }} text-3xl text-primary dark:text-darkmode-primary"></i>
+              </div>
+              
+              <!-- Project Title -->
+              <h3 class="h5 mb-3">{{ .title }}</h3>
+              
+              <!-- Short Description -->
+              <p class="text-text-light dark:text-darkmode-text-light mb-4 flex-grow">
+                {{ .shortDescription }}
+              </p>
+              
+              <!-- Project Stats -->
+              <div class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
+                <div class="flex justify-between items-center mb-2">
+                  <span><i class="fas fa-file-alt mr-1"></i> Papers:</span>
+                  <span>{{ .publications }}</span>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                  <span><i class="fas fa-database mr-1"></i> Datasets:</span>
+                  <span>{{ .datasets }}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span><i class="fas fa-play-circle mr-1"></i> Status:</span>
+                  <span class="capitalize 
+                    {{ if eq .status "active" }}text-green-600 dark:text-green-400{{ end }}
+                    {{ if eq .status "completed" }}text-blue-600 dark:text-blue-400{{ end }}
+                    {{ if eq .status "planning" }}text-yellow-600 dark:text-yellow-400{{ end }}">
+                    {{ .status }}
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Technologies -->
+              <div class="mb-4">
+                <p class="text-xs text-text-light dark:text-darkmode-text-light mb-2">Technologies:</p>
+                <div class="flex flex-wrap gap-1">
+                  {{ range (first 3 .technologies) }}
+                    <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-xs px-2 py-1 rounded">
+                      {{ . }}
+                    </span>
+                  {{ end }}
+                  {{ if gt (len .technologies) 3 }}
+                    <span class="text-xs text-text-light dark:text-darkmode-text-light">+{{ sub (len .technologies) 3 }} more</span>
+                  {{ end }}
+                </div>
+              </div>
+              
+              <!-- View Details Button -->
+              <div class="mt-auto">
+                <a href="{{ `/projects/` | relLangURL }}{{ .id }}" 
+                   class="btn btn-outline-primary btn-sm w-full">
+                  View Details
+                  <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+
+      <!-- Quick Links Section -->
+      <div class="row mt-16">
+        <div class="col-12">
+          <div class="bg-gradient rounded-lg p-8 text-center">
+            <h2 class="h3 mb-4">Explore Our Research</h2>
+            <p class="mb-6">Discover our publications, datasets, and ongoing research contributions to Kurdish language technology.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href="{{ `/papers/` | relLangURL }}" class="btn btn-primary">
+                <i class="fas fa-file-alt mr-2"></i>
+                Browse Papers
+              </a>
+              <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-outline-primary">
+                <i class="fas fa-database mr-2"></i>
+                Explore Datasets
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

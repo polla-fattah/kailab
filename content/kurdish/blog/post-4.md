@@ -5,7 +5,7 @@ description: "ئەمە وەسفی مێتا"
 date: 2022-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["ئەرکیتێکت"]
-author: "John Doe"
+contributors: "John Doe"
 tags: ["سیلیکۆن", "تەکنەلۆجیا"]
 draft: false
 ---

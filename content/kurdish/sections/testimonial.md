@@ -1,31 +1,33 @@
 ---
 enable: true
-title: "بەکارهێنەرەکان چی دەڵێن دەربارەی Hugoplate"
-description: "تەنها ووشەی ئێمە مەگرە - لە بەکارهێنەرە دڵخۆشەکانمان بەرەوە! سەیری هەندێک لە ڕاپۆرتەکانمان بکە لە خوارەوە بۆ بینینی ئەوەی کەسانی تر چی دەڵێن دەربارەی Hugoplate."
+title: "ڕێکخراوە هاوبەشەکانمان"
+description: "ئێمە لەگەڵ دامەزراوە ئەکادیمیە پێشڕەوەکان، ناوەندە توێژینەوەییەکان و ڕێکخراوە کلتوورییەکان لە سەرانسەری جیهان هاریکاری دەکەین بۆ پێشخستنی تەکنەلۆژیای زمانی کوردی و پاراستنی میراتی کلتووری."
 
-# Testimonials
+# Organizations link
+organizations_link:
+  enable: true
+  label: "بینینی هەموو ڕێکخراوەکان"
+  link: "/organizations"
+
+# Organizations (simplified cards with links)
 testimonials:
-  - name: "Marvin McKinney"
-    designation: "دیزاینەری وێب"
+  - name: "پەیمانگای میراتی دیجیتاڵی کوردستان"
     avatar: "/images/avatar-sm.png"
-    content: "Hugoplate یارمەتیدەر بوو بۆ دروستکردنی وێبسایتەکەم. ئاسانە بۆ بەکارهێنان و کوالیتییەکی بەرزی هەیە. پێشنیار دەکەم بۆ هەموو کەسێک کە دەیەوێت وێبسایتێک دروست بکات."
+    org_id: 2
 
-  - name: "Marvin McKinney"
-    designation: "دیزاینەری وێب"
+  - name: "زانکۆی دهۆک - بەشی زانستی کۆمپیوتەر"
     avatar: "/images/avatar-sm.png"
-    content: "Hugoplate یارمەتیدەر بوو بۆ دروستکردنی وێبسایتەکەم. ئاسانە بۆ بەکارهێنان و کوالیتییەکی بەرزی هەیە. پێشنیار دەکەم بۆ هەموو کەسێک کە دەیەوێت وێبسایتێک دروست بکات."
+    org_id: 4
 
-  - name: "Marvin McKinney"
-    designation: "دیزاینەری وێب"
+  - name: "ئەکادیمیای زمانی کوردی"
     avatar: "/images/avatar-sm.png"
-    content: "Hugoplate یارمەتیدەر بوو بۆ دروستکردنی وێبسایتەکەم. ئاسانە بۆ بەکارهێنان و کوالیتییەکی بەرزی هەیە. پێشنیار دەکەم بۆ هەموو کەسێک کە دەیەوێت وێبسایتێک دروست بکات."
+    org_id: 3
 
-  - name: "Marvin McKinney"
-    designation: "دیزاینەری وێب"
+  - name: "کایلاب - تاقیگەی هۆشی دەستکردی کوردی"
     avatar: "/images/avatar-sm.png"
-    content: "Hugoplate یارمەتیدەر بوو بۆ دروستکردنی وێبسایتەکەم. ئاسانە بۆ بەکارهێنان و کوالیتییەکی بەرزی هەیە. پێشنیار دەکەم بۆ هەموو کەسێک کە دەیەوێت وێبسایتێک دروست بکات."
+    org_id: 1
 
 # don't create a separate page
 build:
   render: "never"
---- 
+---

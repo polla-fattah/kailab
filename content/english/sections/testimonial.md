@@ -1,29 +1,31 @@
 ---
 enable: true
-title: "What Users Are Saying About Hugoplate"
-description: "Don't just take our word for it - hear from some of our satisfied users!  Check out some of our testimonials below to see what others are saying about Hugoplate."
+title: "Our Partner Organizations"
+description: "We collaborate with leading academic institutions, research centers, and cultural organizations worldwide to advance Kurdish language technology and preserve cultural heritage."
 
-# Testimonials
+# Organizations link
+organizations_link:
+  enable: true
+  label: "View All Organizations"
+  link: "/organizations"
+
+# Organizations (simplified cards with links)
 testimonials:
-  - name: "Marvin McKinney"
-    designation: "Web Designer"
+  - name: "Kurdistan Digital Heritage Institute"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    org_id: 2
 
-  - name: "Marvin McKinney"
-    designation: "Web Designer"
+  - name: "University of Duhok - Computer Science Department"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    org_id: 4
 
-  - name: "Marvin McKinney"
-    designation: "Web Designer"
+  - name: "Kurdish Language Academy"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    org_id: 3
 
-  - name: "Marvin McKinney"
-    designation: "Web Designer"
+  - name: "KaiLab - Kurdish AI Laboratory"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    org_id: 1
 
 # don't create a separate page
 build:

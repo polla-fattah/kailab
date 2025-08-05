@@ -5,8 +5,8 @@ banner:
   content: "KaiLab is a pioneering research initiative dedicated to advancing the Kurdish language in the digital age through artificial intelligence and machine learning technologies."
   button:
     enable: true
-    label: "Learn More About Us"
-    link: "/about"
+    label: "Contributors"
+    link: "/authors"
 
 # Features
 features:
@@ -21,9 +21,9 @@ features:
       - "Automatic speech recognition for all dialects"
       - "**Community-driven** research and development"
     button:
-      enable: false
-      label: "Learn More"
-      link: "/about"
+      enable: true
+      label: "More Projects"
+      link: "/projects"
 
   - title: "Scientific Terminology Standardization"
     image: "/images/service-2.png"
@@ -36,18 +36,18 @@ features:
     button:
       enable: true
       label: "Explore Our Work"
-      link: "/about"
+      link: "/projects/terminology-standardization"
 
-  - title: "Digital Heritage Preservation"
+  - title: "Publication"
     image: "/images/service-3.png"
-    content: "We digitize and preserve Kurdish cultural heritage while making it accessible to researchers and communities worldwide through advanced technological solutions."
+    content: "Our research findings and technological innovations are published in prestigious academic journals and conferences, contributing to the global body of knowledge in computational linguistics and language technology."
     bulletpoints:
-      - "200,000+ pages of Kurdish literature digitized"
-      - "Searchable archives for academic research"
-      - "Support for 47 doctoral dissertations"
-      - "Accessible preservation for future generations"
+      - "15+ peer-reviewed papers published in top-tier journals"
+      - "Research presented at international conferences"
+      - "Open-access publications for global research community"
+      - "Collaborative research with leading universities worldwide"
     button:
-      enable: false
-      label: ""
-      link: ""
+      enable: true
+      label: "Browse Publications"
+      link: "/papers"
 ---

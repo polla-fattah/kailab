@@ -1,0 +1,205 @@
+{{ define "main" }}
+  {{ $projectId := .File.BaseFileName }}
+  <!-- Load projects data based on language -->
+  {{ $projects := site.Data.projects }}
+  {{ if eq site.Language.Lang "ku" }}
+    {{ $projects = site.Data.projects_ku }}
+  {{ end }}
+  {{ $project := index (where $projects "id" $projectId) 0 }}
+  
+  {{ if $project }}
+    <section class="section-sm">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Breadcrumb -->
+            {{ partial "components/breadcrumb" (dict "Context" . "Class" "mb-6") }}
+            
+            <!-- Project Header -->
+            <div class="mb-8">
+              <div class="flex items-center mb-4">
+                <i class="fas {{ $project.icon }} text-4xl text-primary dark:text-darkmode-primary mr-4"></i>
+                <div>
+                  <h1 class="h2 mb-2">{{ $project.title }}</h1>
+                  <p class="text-lg text-text-light dark:text-darkmode-text-light">{{ $project.shortDescription }}</p>
+                </div>
+              </div>
+              
+              <!-- Project Status and Info -->
+              <div class="flex flex-wrap gap-4 mb-6">
+                <div class="flex items-center">
+                  <i class="fas fa-play-circle mr-2 text-primary dark:text-darkmode-primary"></i>
+                  <span class="capitalize {{ if eq $project.status "active" }}text-green-600 dark:text-green-400{{ end }}">
+                    {{ $project.status }}
+                  </span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-calendar mr-2 text-primary dark:text-darkmode-primary"></i>
+                  <span>Started: {{ dateFormat "January 2006" $project.startDate }}</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-users mr-2 text-primary dark:text-darkmode-primary"></i>
+                  <span>{{ len $project.team }} Team Members</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Main Content -->
+          <div class="col-12 lg:col-8 mb-8">
+            <!-- Description -->
+            <div class="content mb-8">
+              <h2 class="h3 mb-4">Project Overview</h2>
+              <p>{{ $project.description }}</p>
+            </div>
+
+            <!-- Technologies -->
+            <div class="mb-8">
+              <h3 class="h4 mb-4">Technologies & Methods</h3>
+              <div class="flex flex-wrap gap-2">
+                {{ range $project.technologies }}
+                  <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary px-3 py-1 rounded">
+                    {{ . }}
+                  </span>
+                {{ end }}
+              </div>
+            </div>
+
+            <!-- Applications -->
+            <div class="mb-8">
+              <h3 class="h4 mb-4">Applications</h3>
+              <ul class="list-disc pl-6">
+                {{ range $project.applications }}
+                  <li class="mb-2">{{ . }}</li>
+                {{ end }}
+              </ul>
+            </div>
+
+            <!-- Related Papers -->
+            {{ if $project.paperIds }}
+              <div class="mb-8">
+                <h3 class="h4 mb-4">Related Publications</h3>
+                <div class="space-y-4">
+                  {{ range $project.paperIds }}
+                    {{ $paper := index (where site.Data.papers "id" .) 0 }}
+                    {{ if $paper }}
+                      <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
+                        <h4 class="h6 mb-2">
+                          <a href="{{ `/papers/` | relLangURL }}{{ $paper.id }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                            {{ $paper.title }}
+                          </a>
+                        </h4>
+                        <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
+                          {{ delimit $paper.authors ", " }} ({{ dateFormat "2006" $paper.publishedDate }})
+                        </p>
+                        <p class="text-sm">{{ truncate 200 $paper.abstract }}</p>
+                      </div>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+
+            <!-- Related Datasets -->
+            {{ if $project.datasetIds }}
+              <div class="mb-8">
+                <h3 class="h4 mb-4">Related Datasets</h3>
+                <div class="space-y-4">
+                  {{ range $project.datasetIds }}
+                    {{ $dataset := index (where site.Data.datasets "id" .) 0 }}
+                    {{ if $dataset }}
+                      <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
+                        <h4 class="h6 mb-2">
+                          <a href="{{ `/datasets/` | relLangURL }}{{ $dataset.id }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                            {{ $dataset.title }}
+                          </a>
+                        </h4>
+                        <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
+                          Published: {{ dateFormat "January 2, 2006" $dataset.publishedDate }} | Size: {{ $dataset.size }}
+                        </p>
+                        <p class="text-sm">{{ truncate 200 $dataset.description }}</p>
+                      </div>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-12 lg:col-4">
+            <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 sticky top-4">
+              <!-- Project Stats -->
+              <h3 class="h5 mb-4">Project Statistics</h3>
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between">
+                  <span>Publications:</span>
+                  <span class="font-semibold">{{ $project.publications }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Datasets:</span>
+                  <span class="font-semibold">{{ $project.datasets }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Team Size:</span>
+                  <span class="font-semibold">{{ len $project.team }}</span>
+                </div>
+              </div>
+
+              <!-- Team -->
+              <h4 class="h6 mb-3">Research Team</h4>
+              <ul class="text-sm space-y-1 mb-6">
+                {{ range $project.team }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+
+              <!-- Funding -->
+              {{ if $project.funding }}
+                <h4 class="h6 mb-3">Funding</h4>
+                <p class="text-sm text-text-light dark:text-darkmode-text-light mb-6">{{ $project.funding }}</p>
+              {{ end }}
+
+              <!-- Quick Actions -->
+              <div class="space-y-2">
+                <a href="{{ `/papers/` | relLangURL }}" class="btn btn-outline-primary btn-sm w-full">
+                  <i class="fas fa-file-alt mr-2"></i>
+                  {{ if eq site.Language.Lang "ku" }}مقاڵەکان{{ else }}View All Papers{{ end }}
+                </a>
+                <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-outline-primary btn-sm w-full">
+                  <i class="fas fa-database mr-2"></i>
+                  {{ if eq site.Language.Lang "ku" }}داتاسێتەکان{{ else }}View All Datasets{{ end }}
+                </a>
+                <a href="{{ `/organizations/` | relLangURL }}" class="btn btn-outline-primary btn-sm w-full">
+                  <i class="fas fa-building mr-2"></i>
+                  {{ if eq site.Language.Lang "ku" }}ڕێکخراوەکان{{ else }}Organizations{{ end }}
+                </a>
+                <a href="{{ `/projects/` | relLangURL }}" class="btn btn-outline-primary btn-sm w-full">
+                  <i class="fas fa-arrow-left mr-2"></i>
+                  {{ if eq site.Language.Lang "ku" }}گەڕان بۆ پڕۆژەکان{{ else }}Back to Projects{{ end }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ else }}
+    <section class="section-sm">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1 class="h2 mb-4">Project Not Found</h1>
+            <p class="mb-6">The requested project could not be found.</p>
+            <a href="{{ `/projects/` | relLangURL }}" class="btn btn-primary">
+              <i class="fas fa-arrow-left mr-2"></i>
+              Back to Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
