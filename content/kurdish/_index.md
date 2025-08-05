@@ -33,7 +33,7 @@ features:
     button:
       enable: true
       label: "پڕۆژەی زیاتر"
-      link: "/projects"
+      link: "/ku/projects"
 
   - title: "ستانداردکردنی دەستەواژە زانستییەکان"
     image: "/images/service-2.png"

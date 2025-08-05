@@ -35,15 +35,21 @@
               <!-- Project Stats -->
               <div class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
                 <div class="flex justify-between items-center mb-2">
-                  <span><i class="fas fa-file-alt mr-1"></i> Papers:</span>
+                  <span><i class="fas fa-file-alt mr-1"></i> 
+                    {{ if eq site.Language.Lang "ku" }}وتارەکان:{{ else }}Papers:{{ end }}
+                  </span>
                   <span>{{ .publications }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-2">
-                  <span><i class="fas fa-database mr-1"></i> Datasets:</span>
+                  <span><i class="fas fa-database mr-1"></i> 
+                    {{ if eq site.Language.Lang "ku" }}داتاسێتەکان:{{ else }}Datasets:{{ end }}
+                  </span>
                   <span>{{ .datasets }}</span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span><i class="fas fa-play-circle mr-1"></i> Status:</span>
+                  <span><i class="fas fa-play-circle mr-1"></i> 
+                    {{ if eq site.Language.Lang "ku" }}دۆخ:{{ else }}Status:{{ end }}
+                  </span>
                   <span class="capitalize 
                     {{ if eq .status "active" }}text-green-600 dark:text-green-400{{ end }}
                     {{ if eq .status "completed" }}text-blue-600 dark:text-blue-400{{ end }}
@@ -55,7 +61,9 @@
               
               <!-- Technologies -->
               <div class="mb-4">
-                <p class="text-xs text-text-light dark:text-darkmode-text-light mb-2">Technologies:</p>
+                <p class="text-xs text-text-light dark:text-darkmode-text-light mb-2">
+                  {{ if eq site.Language.Lang "ku" }}تەکنەلۆجیەکان:{{ else }}Technologies:{{ end }}
+                </p>
                 <div class="flex flex-wrap gap-1">
                   {{ range (first 3 .technologies) }}
                     <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-xs px-2 py-1 rounded">
@@ -63,7 +71,9 @@
                     </span>
                   {{ end }}
                   {{ if gt (len .technologies) 3 }}
-                    <span class="text-xs text-text-light dark:text-darkmode-text-light">+{{ sub (len .technologies) 3 }} more</span>
+                    <span class="text-xs text-text-light dark:text-darkmode-text-light">
+                      {{ if eq site.Language.Lang "ku" }}+{{ sub (len .technologies) 3 }} زیاتر{{ else }}+{{ sub (len .technologies) 3 }} more{{ end }}
+                    </span>
                   {{ end }}
                 </div>
               </div>
@@ -72,7 +82,7 @@
               <div class="mt-auto">
                 <a href="{{ `/projects/` | relLangURL }}{{ .id }}" 
                    class="btn btn-outline-primary btn-sm w-full">
-                  View Details
+                  {{ if eq site.Language.Lang "ku" }}بینینی وردەکارییەکان{{ else }}View Details{{ end }}
                   <i class="fas fa-arrow-right ml-2"></i>
                 </a>
               </div>
@@ -85,16 +95,20 @@
       <div class="row mt-16">
         <div class="col-12">
           <div class="bg-gradient rounded-lg p-8 text-center">
-            <h2 class="h3 mb-4">Explore Our Research</h2>
-            <p class="mb-6">Discover our publications, datasets, and ongoing research contributions to Kurdish language technology.</p>
+            <h2 class="h3 mb-4">
+              {{ if eq site.Language.Lang "ku" }}توێژینەوەکانی ئێمە بگەڕێ{{ else }}Explore Our Research{{ end }}
+            </h2>
+            <p class="mb-6">
+              {{ if eq site.Language.Lang "ku" }}بڵاوکراوەکان، داتاسێتەکان، و بەشدارییەکانی توێژینەوەی بەردەواممان لە تەکنەلۆژیای زمانی کوردی ببینە.{{ else }}Discover our publications, datasets, and ongoing research contributions to Kurdish language technology.{{ end }}
+            </p>
             <div class="flex flex-wrap justify-center gap-4">
               <a href="{{ `/papers/` | relLangURL }}" class="btn btn-primary">
                 <i class="fas fa-file-alt mr-2"></i>
-                Browse Papers
+                {{ if eq site.Language.Lang "ku" }}گەڕان لە وتارەکان{{ else }}Browse Papers{{ end }}
               </a>
               <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-outline-primary">
                 <i class="fas fa-database mr-2"></i>
-                Explore Datasets
+                {{ if eq site.Language.Lang "ku" }}گەڕان لە داتاسێتەکان{{ else }}Explore Datasets{{ end }}
               </a>
             </div>
           </div>
