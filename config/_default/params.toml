@@ -34,6 +34,13 @@ copyright = ""
 logo_text = "كايلاب"
 copyright = ""
 
+# Kurdish-specific metadata for social media
+[ku.metadata]
+keywords = ["تەکنەلۆژیای زمانی کوردی", "زیرەکی دەستکرد", "فێربوونی ئامێر", "پرۆسێسکردنی زمانی سروشتی", "NLP کوردی", "پاراستنی زمان", "مرۆڤایەتی دیجیتاڵی", "زمانناسی کۆمپیوتەری", "ناسینەوەی دەنگ", "وەرگێڕانی ئامێری"]
+description = "کایلاب دەستپێکێکی توێژینەوەی پێشەنگە کە تایبەتە بە پێشخستنی زمانی کوردی لە سەردەمی دیجیتاڵدا لە ڕێگەی تەکنەلۆجیای زیرەکی دەستکرد و فێربوونی ئامێرەوە."
+author = "کایلاب - تاقیگەی زیرەکی دەستکردی کوردی"
+site_name = "کایلاب - تاقیگەی زیرەکی دەستکردی کوردی"
+
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
 [preloader]
@@ -67,11 +74,13 @@ content = "You must replace the **baseURL** in **hugo.toml** file when deploying
 # seo meta data for OpenGraph / Twitter Card
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
-keywords = ["Boilerplate", "Hugo"]
-description = "Hugo & Tailwindcss Starter"
-author = "zeon.studio"
-twitter = "zeon_studio"
+keywords = ["Kurdish Language Technology", "AI", "Machine Learning", "Natural Language Processing", "Kurdish NLP", "Language Preservation", "Digital Humanities", "Computational Linguistics", "Speech Recognition", "Machine Translation"]
+description = "KaiLab is a pioneering research initiative dedicated to advancing the Kurdish language in the digital age through artificial intelligence and machine learning technologies."
+author = "KaiLab - Kurdish AI Laboratory"
+twitter = "kailab_kurdish"
+facebook = "kailab.kurdish"
 image = "images/og-image.png"
+site_name = "KaiLab - Kurdish AI Laboratory"
 
 
 # site verifications
