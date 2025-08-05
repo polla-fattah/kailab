@@ -1,13 +1,68 @@
 {{ define "main" }}
   {{ partial "page-header" . }}
 
-
   <section class="section">
     <div class="container">
       <div class="row">
-        {{ range .RegularPages }}
-          <div class="md:col-6 lg:col-4 mb-14">
-            {{ partial "components/author-card" . }}
+        <div class="col-12">
+          <h1 class="h2 mb-6">{{ .Title }}</h1>
+          <div class="content mb-12">{{ .Content }}</div>
+        </div>
+      </div>
+
+      <!-- Load authors data -->
+      {{ $authors := site.Data.authors }}
+      
+      <!-- Authors Grid -->
+      <div class="row gy-4">
+        {{ range $authors }}
+          <div class="col-12 md:col-6 lg:col-4">
+            <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col">
+              <!-- Author Avatar -->
+              <div class="mb-4 text-center">
+                {{ $avatar := "/images/avatar.png" }}
+                {{ partial "image" (dict "Src" $avatar "Size" "120x120" "Class" "rounded-full mx-auto" "Alt" (index .names site.Language.Lang)) }}
+              </div>
+              
+              <!-- Author Name -->
+              <h3 class="h5 mb-3 text-center">
+                {{ $title := index .titles site.Language.Lang }}
+                {{ $name := index .names site.Language.Lang }}
+                {{ $title }} {{ $name }}
+              </h3>
+              
+              <!-- Author Email -->
+              {{ with .email }}
+                <p class="text-text-light dark:text-darkmode-text-light text-sm mb-4 text-center">
+                  <i class="fas fa-envelope mr-2"></i>
+                  <a href="mailto:{{ . }}" class="hover:text-primary dark:hover:text-darkmode-primary">{{ . }}</a>
+                </p>
+              {{ end }}
+              
+              <!-- Author Description -->
+              <div class="mb-4 flex-grow">
+                <p class="text-text-light dark:text-darkmode-text-light text-sm text-center">
+                  {{ if eq site.Language.Lang "ku" }}
+                    بەشداربووی تیمی توێژینەوەی کایلاب و پسپۆڕ لە بواری تەکنەلۆژیای زمانی کوردی.
+                  {{ else }}
+                    Research team member at KaiLab, specializing in Kurdish language technology and computational linguistics.
+                  {{ end }}
+                </p>
+              </div>
+              
+              <!-- View Details Button -->
+              <div class="mt-auto text-center">
+                <a href="{{ `/authors/` | relLangURL }}{{ .id }}" 
+                   class="btn btn-outline-primary btn-sm w-full">
+                  {{ if eq site.Language.Lang "ku" }}
+                    بینینی پڕۆفایل
+                  {{ else }}
+                    View Profile
+                  {{ end }}
+                  <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            </div>
           </div>
         {{ end }}
       </div>

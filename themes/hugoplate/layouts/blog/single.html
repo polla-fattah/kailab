@@ -14,11 +14,33 @@
           </h1>
           <ul class="mb-4">
             <li class="mr-4 inline-block">
-              <a
-                href="{{ `authors/` | relLangURL }}{{ .Params.contributors | urlize }}/">
-                <i class="fa-regular fa-circle-user mr-2"></i
-                >{{ .Params.contributors }}
-              </a>
+              {{ $contributorId := .Params.contributors }}
+              {{ $authorFound := false }}
+              {{ $displayName := $contributorId }}
+              
+              <!-- Check if contributor exists in authors.json database -->
+              {{ range site.Data.authors }}
+                {{ if eq .id $contributorId }}
+                  {{ $lang := site.Language.Lang }}
+                  {{ $name := index .names $lang | default .names.en }}
+                  {{ $title := index .titles $lang | default .titles.en }}
+                  {{ $displayName = printf "%s %s" $title $name }}
+                  {{ $authorFound = true }}
+                {{ end }}
+              {{ end }}
+              
+              {{ if $authorFound }}
+                <a href="{{ `authors/` | relLangURL }}" class="hover:text-primary dark:hover:text-darkmode-primary">
+                  <i class="fa-regular fa-circle-user mr-2"></i>
+                  {{ $displayName }}
+                </a>
+              {{ else }}
+                <!-- Author not in database - show as plain text -->
+                <span class="text-text-light dark:text-darkmode-text-light">
+                  <i class="fa-regular fa-circle-user mr-2"></i>
+                  {{ $contributorId }}
+                </span>
+              {{ end }}
             </li>
             {{ $categories:= .Params.categories }}
             {{ if $categories }}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "ahmad-kurdish",
+    "names": {
+      "en": "Ahmad Kurdish",
+      "ku": "ئەحمەد کوردی"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "ahmad.kurdish@kailab.org"
+  },
+  {
+    "id": "sara-ahmed",
+    "names": {
+      "en": "Sara Ahmed",
+      "ku": "سارا ئەحمەد"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "sara.ahmed@kailab.org"
+  },
+  {
+    "id": "fatima-hassan",
+    "names": {
+      "en": "Fatima Hassan",
+      "ku": "فاتیمە حەسەن"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "fatima.hassan@kailab.org"
+  },
+  {
+    "id": "karim-mohammad",
+    "names": {
+      "en": "Karim Mohammad",
+      "ku": "کەریم محەمەد"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "karim.mohammad@kailab.org"
+  },
+  {
+    "id": "mohammad-ali",
+    "names": {
+      "en": "Mohammad Ali",
+      "ku": "محەمەد عەلی"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "mohammad.ali@kailab.org"
+  },
+  {
+    "id": "zainab-hussein",
+    "names": {
+      "en": "Zainab Hussein",
+      "ku": "زەینەب حوسێن"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "zainab.hussein@kailab.org"
+  },
+  {
+    "id": "john-doe",
+    "names": {
+      "en": "John Doe",
+      "ku": "جۆن دۆ"
+    },
+    "titles": {
+      "en": "Dr.",
+      "ku": "د."
+    },
+    "email": "john.doe@kailab.org"
+  }
+]

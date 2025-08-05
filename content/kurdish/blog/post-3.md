@@ -5,7 +5,7 @@ description: "ئەمە وەسفی مێتا"
 date: 2022-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["نەرمەفەر"]
-contributors: "John Doe"
+contributors: "zainab-hussein"
 tags: ["نەرمەفەر", "tailwind"]
 draft: false
 ---

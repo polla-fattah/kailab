@@ -8,6 +8,16 @@ banner:
     label: "Contributors"
     link: "/authors"
 
+# Recent Blogs
+recent_blogs:
+  enable: true
+  title: "Latest Research & Insights"
+  subtitle: "Stay updated with our latest discoveries and advancements in Kurdish language technology"
+  show_more:
+    enable: true
+    label: "View All Articles"
+    link: "/blog"
+
 # Features
 features:
   - title: "AI-Powered Language Technologies"
@@ -50,4 +60,13 @@ features:
       enable: true
       label: "Browse Publications"
       link: "/papers"
+
+# Datasets Section
+datasets:
+  enable: true
+  show_more:
+    enable: true
+    label: "Browse All Datasets"
+    link: "/datasets"
+  featured_datasets: [1, 2, 3] # Show these dataset IDs
 ---

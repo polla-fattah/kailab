@@ -66,6 +66,78 @@
   {{ end }}
   <!-- /Banner -->
 
+  <!-- Recent Blogs -->
+  {{ with .Params.recent_blogs }}
+    {{ if .enable }}
+      <section class="section-sm bg-gradient">
+        <div class="container">
+          <div class="row">
+            <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
+              <h2 class="mb-4">{{ .title | markdownify }}</h2>
+              <p>{{ .subtitle | markdownify }}</p>
+            </div>
+          </div>
+          
+          <div class="row gy-4">
+            <!-- Get recent blog posts -->
+            {{ $blogs := first 2 (where site.RegularPages "Section" "blog") }}
+            {{ range $blogs }}
+              <div class="col-12 md:col-6">
+                <article class="bg-body dark:bg-darkmode-body rounded-lg p-6 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+                  {{ with .Params.image }}
+                    <div class="mb-4">
+                      {{ partial "image" (dict "Src" . "Context" $.Page "Alt" $.Title "Class" "w-full h-48 object-cover rounded" "Size" "400x200") }}
+                    </div>
+                  {{ end }}
+                  
+                  <div class="flex-grow">
+                    <h3 class="h5 mb-3">
+                      <a href="{{ .RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                        {{ .Title }}
+                      </a>
+                    </h3>
+                    
+                    <div class="text-text-light dark:text-darkmode-text-light text-sm mb-3">
+                      <span class="mr-4">
+                        <i class="fa-regular fa-calendar mr-1"></i>
+                        {{ .PublishDate.Format "Jan 2, 2006" }}
+                      </span>
+                      {{ with .Params.contributors }}
+                        <span>
+                          <i class="fa-regular fa-user mr-1"></i>
+                          {{ . }}
+                        </span>
+                      {{ end }}
+                    </div>
+                    
+                    <p class="text-sm mb-4">{{ .Summary | plainify | truncate 120 }}</p>
+                  </div>
+                  
+                  <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm mt-auto">
+                    {{ T "read_more" }}
+                    <i class="fa fa-arrow-right pl-1"></i>
+                  </a>
+                </article>
+              </div>
+            {{ end }}
+          </div>
+          
+          {{ with .show_more }}
+            {{ if .enable }}
+              <div class="text-center mt-8">
+                <a href="{{ .link | relLangURL }}" class="btn btn-primary">
+                  {{ .label }}
+                  <i class="fa fa-arrow-right pl-2"></i>
+                </a>
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
+  <!-- /Recent Blogs -->
+
   <!-- Features -->
   {{ range $i, $e:= .Params.features }}
     <section class="section-sm {{ if (modBool $i 2) }}bg-gradient{{ end }}">
@@ -109,6 +181,101 @@
     </section>
   {{ end }}
   <!-- /Features -->
+
+  <!-- Datasets -->
+  {{ with .Params.datasets }}
+    {{ if .enable }}
+      <section class="section-sm" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="container">
+          <!-- Load datasets based on language -->
+          {{ $datasets := site.Data.datasets }}
+          {{ if eq site.Language.Lang "ku" }}
+            {{ $datasets = site.Data.datasets_ku }}
+          {{ end }}
+          
+          <!-- Show featured datasets -->
+          {{ $featuredDatasets := .featured_datasets | default (slice 1 2 3) }}
+          {{ range $featuredDatasets }}
+            {{ $datasetId := . }}
+            {{ range $datasets }}
+              {{ if eq .id $datasetId }}
+                <div class="col-12 md:col-6 lg:col-4">
+                  <article class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <header class="mb-4">
+                      <h3 class="h5 mb-3">
+                        <a href="{{ `/datasets/` | relLangURL }}{{ .id }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                          {{ .title }}
+                        </a>
+                      </h3>
+                      
+                      <div class="text-text-light dark:text-darkmode-text-light text-sm mb-3">
+                        <div class="flex flex-wrap gap-3 mb-2">
+                          <span>
+                            <i class="fas fa-calendar mr-1"></i>
+                            {{ dateFormat "Jan 2006" .publishedDate }}
+                          </span>
+                          <span>
+                            <i class="fas fa-hdd mr-1"></i>
+                            {{ .size }}
+                          </span>
+                        </div>
+                        <div class="flex flex-wrap gap-1 mb-2">
+                          {{ range first 2 .format }}
+                            <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-xs px-2 py-1 rounded">
+                              {{ . }}
+                            </span>
+                          {{ end }}
+                        </div>
+                      </div>
+                    </header>
+                    
+                    <div class="mb-4 flex-grow">
+                      <p class="text-sm">{{ truncate 150 .description }}</p>
+                    </div>
+                    
+                    {{ if .languages }}
+                      <div class="mb-4">
+                        <div class="flex flex-wrap gap-1">
+                          {{ range first 3 .languages }}
+                            <span class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-xs px-2 py-1 rounded">
+                              {{ . }}
+                            </span>
+                          {{ end }}
+                        </div>
+                      </div>
+                    {{ end }}
+                    
+                    <footer class="mt-auto">
+                      <a href="{{ `/datasets/` | relLangURL }}{{ .id }}" class="btn btn-outline-primary btn-sm w-full">
+                        <i class="fas fa-eye mr-1"></i>
+                        View Dataset
+                      </a>
+                    </footer>
+                  </article>
+                </div>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          
+          {{ with .show_more }}
+            {{ if .enable }}
+              <div class="text-center mt-12">
+                <div class="bg-gradient rounded-lg p-8">
+                  <h3 class="h4 mb-4">Explore Our Complete Dataset Collection</h3>
+                  <p class="mb-6">Discover comprehensive datasets spanning multiple domains of Kurdish language research</p>
+                  <a href="{{ .link | relLangURL }}" class="btn btn-primary">
+                    {{ .label }}
+                    <i class="fa fa-arrow-right pl-2"></i>
+                  </a>
+                </div>
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
+  <!-- /Datasets -->
 
   <!-- Testimonials -->
   {{ with site.GetPage "sections/testimonial" }}

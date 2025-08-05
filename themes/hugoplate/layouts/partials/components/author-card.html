@@ -11,7 +11,14 @@
       src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=128&pg&d=identicon" />
   {{ end }}
   <h4 class="mb-3">
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <a href="{{ .RelPermalink }}">
+      {{ if .Params.names }}
+        {{ $lang := site.Language.Lang }}
+        {{ index .Params.names $lang | default .Title }}
+      {{ else }}
+        {{ .Title }}
+      {{ end }}
+    </a>
   </h4>
   <p class="mb-4">
     {{ .Summary | plainify }}

@@ -658,4 +658,153 @@
   border-bottom-right-radius: 0 !important;
   border-top-left-radius: 0.375rem !important;
   border-bottom-left-radius: 0.375rem !important;
+}
+
+/* RTL Authors Page - Force center alignment for author cards */
+[dir="rtl"] .authors-page article,
+[dir="rtl"] .authors-page .text-center {
+  text-align: center !important;
+}
+
+[dir="rtl"] .authors-page h3.text-center {
+  text-align: center !important;
+}
+
+[dir="rtl"] .authors-page p.text-center {
+  text-align: center !important;
+}
+
+[dir="rtl"] .authors-page .btn {
+  text-align: center !important;
+}
+
+[dir="rtl"] .authors-page .rounded-full {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* RTL Author Single Page - Force center alignment for author profile */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto {
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .rounded-full {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+
+/* RTL Author Single Page - Force center alignment for avatar image specifically */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .img.rounded-full {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 {
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 .img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+
+/* RTL Author Single Page - ULTRA SPECIFIC avatar centering */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 img.rounded-full {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 img.img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* RTL Author Single Page - Force center for any image in the profile */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* RTL Author Single Page - Override any conflicting styles */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 > * {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* RTL Author Single Page - NUCLEAR OPTION - Force center everything */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 img {
+  margin: 0 auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 .rounded-full {
+  margin: 0 auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* RTL Author Single Page - Target the image partial specifically */
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 .img {
+  margin: 0 auto !important;
+  display: block !important;
+  text-align: center !important;
+  float: none !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto h1.h3 {
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto p {
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .btn {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: inline-block !important;
 } 

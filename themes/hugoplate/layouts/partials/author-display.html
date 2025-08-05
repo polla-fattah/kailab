@@ -1,0 +1,43 @@
+{{/*
+  Author Display Partial - Displays author names ONLY from authors.json database
+  Usage: {{ partial "author-display.html" (dict "Authors" $authors "Context" .) }}
+  
+  Parameters:
+  - Authors: Array of author IDs or names
+  - Context: Current page context for language detection
+  - ShowTitle: (optional) Whether to show titles like "Dr." (default: true)
+  - Separator: (optional) Separator between authors (default: ", ")
+  
+  NOTE: Only authors that exist in data/authors.json will be displayed/linked
+*/}}
+
+{{ $authors := .Authors }}
+{{ $context := .Context }}
+{{ $showTitle := .ShowTitle | default true }}
+{{ $separator := .Separator | default ", " }}
+{{ $lang := $context.Language.Lang | default "en" }}
+
+{{ $authorList := slice }}
+
+{{ range $authors }}
+  {{ $authorName := . }}
+  {{ $found := false }}
+  
+  <!-- Only check authors.json database -->
+  {{ range site.Data.authors }}
+    {{ if eq .id $authorName }}
+      {{ $name := index .names $lang | default .names.en }}
+      {{ $displayName := $name }}
+      {{ if and $showTitle .titles }}
+        {{ $title := index .titles $lang | default .titles.en }}
+        {{ $displayName = printf "%s %s" $title $name }}
+      {{ end }}
+      {{ $authorList = $authorList | append $displayName }}
+      {{ $found = true }}
+    {{ end }}
+  {{ end }}
+  
+  <!-- If author not in database, skip them (don't display) -->
+{{ end }}
+
+{{ delimit $authorList $separator }}

@@ -22,8 +22,12 @@
                 
                 <!-- Authors -->
                 <div class="mb-3">
-                  <h2 class="h5 text-text-light dark:text-darkmode-text-light mb-2">Authors</h2>
-                  <p class="text-lg">{{ delimit $paper.authors ", " }}</p>
+                  <h2 class="h5 text-text-light dark:text-darkmode-text-light mb-2">
+                    {{ if eq site.Language.Lang "ku" }}نووسەران{{ else }}Authors{{ end }}
+                  </h2>
+                  <p class="text-lg">
+                    {{ partial "author-display.html" (dict "Authors" $paper.authors "Context" .) }}
+                  </p>
                 </div>
                 
                 <!-- Publication Details -->

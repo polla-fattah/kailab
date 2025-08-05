@@ -1,0 +1,20 @@
+{{/*
+  Author Name Partial - Returns language-appropriate author name
+  Usage: {{ partial "author-name.html" (dict "Author" $author "Context" .) }}
+  
+  Parameters:
+  - Author: The author page object or author data
+  - Context: Current page context for language detection
+*/}}
+
+{{ $author := .Author }}
+{{ $context := .Context }}
+{{ $lang := $context.Language.Lang | default "en" }}
+
+{{ if $author.Params.names }}
+  {{ index $author.Params.names $lang | default $author.Title }}
+{{ else if $author.names }}
+  {{ index $author.names $lang | default ($author.name | default $author.title) }}
+{{ else }}
+  {{ $author.Title | default $author.name | default $author.title }}
+{{ end }}

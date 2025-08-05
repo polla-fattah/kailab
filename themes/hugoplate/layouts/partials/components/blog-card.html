@@ -1,27 +1,51 @@
-<div class="bg-body dark:bg-darkmode-body">
+<div class="bg-light dark:bg-[#333333] rounded-lg p-6 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
   {{ $image:= .Params.image }}
   {{ if $image }}
     {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "mb-6 w-full rounded") }}
   {{ end }}
-  <h4 class="mb-3">
-    <a href="{{ .RelPermalink }}">
+  <h6 class="mb-3">
+    <a href="{{ .RelPermalink }}" class="text-text-dark dark:text-darkmode-text-dark hover:text-primary dark:hover:text-primary">
       {{ .Title }}
     </a>
-  </h4>
+  </h6>
   {{ $categories:= .Params.categories }}
   {{ if $categories }}
     <ul class="mb-4">
       <li class="mr-4 inline-block">
-        <a href="{{ `authors/` | relLangURL }}{{ .Params.contributors | urlize }}/">
-          <i class="fa-regular fa-circle-user mr-2"></i>{{ .Params.contributors }}
-        </a>
+        {{ $contributorId := .Params.contributors }}
+        {{ $authorFound := false }}
+        {{ $displayName := $contributorId }}
+        
+        <!-- Check if contributor exists in authors.json database -->
+        {{ range site.Data.authors }}
+          {{ if eq .id $contributorId }}
+            {{ $lang := site.Language.Lang }}
+            {{ $name := index .names $lang | default .names.en }}
+            {{ $title := index .titles $lang | default .titles.en }}
+            {{ $displayName = printf "%s %s" $title $name }}
+            {{ $authorFound = true }}
+          {{ end }}
+        {{ end }}
+        
+        {{ if $authorFound }}
+          <a href="{{ `authors/` | relLangURL }}" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-primary">
+            <i class="fa-regular fa-circle-user mr-2"></i>
+            {{ $displayName }}
+          </a>
+        {{ else }}
+          <!-- Author not in database - show as plain text -->
+          <span class="text-text-light dark:text-darkmode-text-light">
+            <i class="fa-regular fa-circle-user mr-2"></i>
+            {{ $contributorId }}
+          </span>
+        {{ end }}
       </li>
       <li class="mr-4 inline-block">
-        <i class="fa-regular fa-folder mr-1"></i>
+        <i class="fa-regular fa-folder mr-1 text-text-light dark:text-darkmode-text-light"></i>
         {{ range $i,$p:= $categories }}
           <a
             href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/"
-            class="ms-1"
+            class="ms-1 text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-primary"
             >{{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}
               {{ "," }}
             {{ end }}
@@ -30,7 +54,6 @@
       </li>
     </ul>
   {{ end }}
-  <p class="mb-6">{{ .Summary | plainify }}</p>
   <a class="btn btn-outline-primary btn-sm" href="{{ .RelPermalink }}">
     {{ T "read_more" }}
   </a>

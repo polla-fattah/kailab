@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Deep Learning Approaches for Kurdish Optical Character Recognition",
-    "authors": ["Dr. Aram Mahmood", "Prof. Saman Ali", "Dr. Rojin Hassan"],
+    "authors": ["ahmad-kurdish", "sara-ahmed", "fatima-hassan"],
     "abstract": "This paper presents a comprehensive study on applying deep learning techniques to Kurdish OCR, addressing unique challenges in Kurdish script recognition including diacritical marks and font variations. Our CNN-based approach achieves 97.2% accuracy on historical Kurdish manuscripts.",
     "url": "https://doi.org/10.1000/ocr-kurdish-2023",
     "datasets": [1, 2],
@@ -20,7 +20,7 @@
   {
     "id": 2,
     "title": "Neural Machine Translation for Kurdish-English Language Pairs",
-    "authors": ["Dr. Nizar Salim", "Prof. Layla Rashid"],
+    "authors": ["karim-mohammad", "zainab-hussein"],
     "abstract": "We present a transformer-based neural machine translation system specifically designed for Kurdish-English translation, incorporating morphological awareness and handling dialectal variations across Sorani and Kurmanji.",
     "url": "https://doi.org/10.1000/nmt-kurdish-2023",
     "datasets": [3, 4],
@@ -38,7 +38,7 @@
   {
     "id": 3,
     "title": "Automatic Speech Recognition for Kurdish Dialects",
-    "authors": ["Dr. Bryar Kareem", "Prof. Rebwar Ahmed", "Dr. Soma Jamal"],
+    "authors": ["mohammad-ali", "john-doe", "sara-ahmed"],
     "abstract": "This research develops the first comprehensive ASR system for Kurdish, supporting both Sorani and Kurmanji dialects with domain adaptation techniques. Achieved 89.3% word accuracy on conversational speech.",
     "url": "https://doi.org/10.1000/asr-kurdish-2023",
     "datasets": [5, 6],
@@ -55,7 +55,7 @@
   {
     "id": 4,
     "title": "Text-to-Speech Synthesis for Kurdish Language",
-    "authors": ["Dr. Kovan Salar", "Prof. Dler Hama"],
+    "authors": ["fatima-hassan", "ahmad-kurdish"],
     "abstract": "Development of the first high-quality TTS system for Kurdish using WaveNet architecture, addressing prosodic patterns and phonetic characteristics unique to Kurdish phonology.",
     "url": "https://doi.org/10.1000/tts-kurdish-2023",
     "datasets": [6, 7],
@@ -72,7 +72,7 @@
   {
     "id": 5,
     "title": "Kurdish Spell Checking Using Morphological Analysis",
-    "authors": ["Dr. Shwan Dilshad", "Prof. Nawroz Tahir"],
+    "authors": ["karim-mohammad", "john-doe"],
     "abstract": "A novel approach to Kurdish spell checking that leverages morphological decomposition and statistical language modeling to handle the rich inflectional morphology of Kurdish.",
     "url": "https://doi.org/10.1000/spell-kurdish-2023",
     "datasets": [8, 9],
@@ -90,7 +90,7 @@
   {
     "id": 6,
     "title": "Large-Scale Kurdish Text Corpus Creation and Analysis",
-    "authors": ["Dr. Zhyan Omar", "Prof. Kardo Hassan", "Dr. Aso Ali"],
+    "authors": ["zainab-hussein", "mohammad-ali", "sara-ahmed"],
     "abstract": "Comprehensive methodology for creating and analyzing a 50-million-word Kurdish corpus covering multiple domains and dialects, with automated quality assessment and linguistic annotation.",
     "url": "https://doi.org/10.1000/corpus-kurdish-2023",
     "datasets": [2, 8, 10],
@@ -108,7 +108,7 @@
   {
     "id": 7,
     "title": "Comprehensive Kurdish Digital Dictionary with Semantic Relations",
-    "authors": ["Dr. Renas Jamal", "Prof. Hersh Saleh"],
+    "authors": ["ahmad-kurdish", "fatima-hassan"],
     "abstract": "Development of a comprehensive digital dictionary for Kurdish with 150,000 entries, including semantic relationships, etymology, and cross-dialectal variations using lexicographic principles.",
     "url": "https://doi.org/10.1000/dict-kurdish-2023",
     "datasets": [11, 12],
@@ -125,7 +125,7 @@
   {
     "id": 8,
     "title": "Automatic Text Summarization for Kurdish News Articles",
-    "authors": ["Dr. Bayan Aziz", "Prof. Chiman Kareem"],
+    "authors": ["sara-ahmed", "zainab-hussein"],
     "abstract": "Extractive and abstractive summarization techniques adapted for Kurdish text, handling discourse markers and cultural context specific to Kurdish journalism and formal writing.",
     "url": "https://doi.org/10.1000/summ-kurdish-2023",
     "datasets": [10, 13],
@@ -143,7 +143,7 @@
   {
     "id": 9,
     "title": "Systematic Kurdish Scientific Terminology Standardization",
-    "authors": ["Dr. Aras Mohammed", "Prof. Galawezh Ahmed", "Dr. Sardar Karim", "Prof. Bangin Hassan"],
+    "authors": ["mohammad-ali", "sara-ahmed", "karim-mohammad", "john-doe"],
     "abstract": "A comprehensive framework for standardizing Kurdish scientific terminology across multiple domains, establishing consensus-building processes and creating authoritative terminology databases for academic and professional use.",
     "url": "https://doi.org/10.1000/term-standard-kurdish-2023",
     "datasets": [14, 15],

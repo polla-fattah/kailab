@@ -8,6 +8,16 @@ banner:
     label: "بەشداربووان"
     link: "/authors"
 
+# Recent Blogs
+recent_blogs:
+  enable: true
+  title: "کۆتا توێژینەوە و تێگەیشتنەکان"
+  subtitle: "لەگەڵ کۆتا دۆزینەوە و پێشکەوتنەکانمان لە تەکنەلۆژیای زمانی کوردیدا نوێ بمێننەوە"
+  show_more:
+    enable: true
+    label: "بینینی هەموو وتارەکان"
+    link: "/blog"
+
 # Features
 features:
   - title: "تەکنەلۆجیای زمانی بە زیرەکی دەستکرد"
@@ -50,4 +60,13 @@ features:
       enable: true
       label: "گەڕان لە بڵاوکراوەکان"
       link: "/papers"
+
+# Datasets Section
+datasets:
+  enable: true
+  show_more:
+    enable: true
+    label: "گەڕان لە هەموو داتاسێتەکان"
+    link: "/datasets"
+  featured_datasets: [1, 2, 3] # Show these dataset IDs
 --- 
