@@ -19,6 +19,8 @@
       <div class="col-12">
         <!-- Load datasets from content files -->
         {{ $datasets := where site.RegularPages "Section" "datasets" }}
+        {{ $papers := where site.RegularPages "Section" "papers" }}
+        {{ $projects := where site.RegularPages "Section" "projects" }}
         {{ if eq site.Language.Lang "ku" }}
           {{ $datasets = where site.RegularPages "Section" "datasets" }}
         {{ end }}
@@ -128,17 +130,15 @@
               <h3 class="h4 mb-4 text-center">Statistics</h3>
               <div class="flex flex-wrap justify-center gap-8 text-center">
                 <div class="flex-1 min-w-0">
-                  <h3 class="h2 text-primary">{{ len $datasets }}</h3>
+                  <h3 class="h2 text-primary dark:text-darkmode-primary">{{ len $datasets }}</h3>
                   <p class="text-text-light dark:text-darkmode-text-light mb-0">Total Datasets</p>
                 </div>
                 <div class="flex-1 min-w-0">
-                  {{ $papers := where site.RegularPages "Section" "papers" }}
-                  <h3 class="h2 text-primary">{{ len $papers }}</h3>
-                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Related Papers</p>
+                  <h3 class="h2 text-primary dark:text-darkmode-primary">{{ len $papers }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Papers</p>
                 </div>
                 <div class="flex-1 min-w-0">
-                  {{ $projects := where site.RegularPages "Section" "projects" }}
-                  <h3 class="h2 text-primary">{{ len $projects }}</h3>
+                  <h3 class="h2 text-primary dark:text-darkmode-primary">{{ len $projects }}</h3>
                   <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Projects</p>
                 </div>
               </div>

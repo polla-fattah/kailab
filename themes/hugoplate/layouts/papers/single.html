@@ -20,7 +20,10 @@
                     {{ if eq site.Language.Lang "ku" }}نووسەران{{ else }}Authors{{ end }}
                   </h2>
                   <p class="text-lg">
-                    {{ partial "author-display.html" (dict "Authors" $paper.Params.authors "Context" .) }}
+                    {{ range $index, $authorId := $paper.Params.authors }}
+                      {{ if gt $index 0 }}, {{ end }}
+                      {{ partial "author-display.html" $authorId }}
+                    {{ end }}
                   </p>
                 </div>
                 
@@ -44,7 +47,7 @@
 
                 <!-- Project Association -->
                 {{ if $paper.Params.projectId }}
-                  {{ $projectPage := where $.Site.RegularPages "Type" "projects" }}
+                  {{ $projectPage := where $.Site.RegularPages "Section" "projects" }}
                   {{ $project := where $projectPage "File.BaseFileName" $paper.Params.projectId }}
                   {{ if $project }}
                     {{ $project = index $project 0 }}
@@ -52,7 +55,7 @@
                       <a href="{{ $project.RelPermalink }}" 
                          class="inline-flex items-center text-primary dark:text-darkmode-primary hover:underline">
                         <i class="fas {{ $project.Params.icon }} mr-2"></i>
-                        <span>Part of {{ $project.Title }} Project</span>
+                        <span>{{ if eq site.Language.Lang "ku" }}بەشێک لە{{ else }}Part of{{ end }} {{ $project.Title }} {{ if eq site.Language.Lang "ku" }}پڕۆژە{{ else }}Project{{ end }}</span>
                       </a>
                     </div>
                   {{ end }}
@@ -61,11 +64,13 @@
                 <!-- Organization Associations -->
                 {{ if $paper.Params.organizationIds }}
                   <div class="mb-4">
-                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Collaborating Organizations:</span>
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">
+                      {{ if eq site.Language.Lang "ku" }}ڕێکخراوە هاوکارەکان:{{ else }}Collaborating Organizations:{{ end }}
+                    </span>
                     <div class="inline-flex flex-wrap gap-2 mt-2">
                       {{ range $paper.Params.organizationIds }}
                         <!-- Load organizations from content files -->
-                        {{ $organizations := where site.RegularPages "Type" "organizations" }}
+                        {{ $organizations := where site.RegularPages "Section" "organizations" }}
                         {{ $org := where $organizations "File.BaseFileName" . }}
                         {{ if $org }}
                           {{ $org = index $org 0 }}
@@ -88,14 +93,18 @@
           <div class="col-12 lg:col-8 mb-8">
             <!-- Abstract -->
             <div class="content mb-8">
-              <h2 class="h3 mb-4">Abstract</h2>
+              <h2 class="h3 mb-4">
+                {{ if eq site.Language.Lang "ku" }}پوختە{{ else }}Abstract{{ end }}
+              </h2>
               <p class="text-justify">{{ $paper.Params.abstract }}</p>
             </div>
 
             <!-- Keywords -->
             {{ if $paper.Params.keywords }}
               <div class="mb-8">
-                <h3 class="h4 mb-4">Keywords</h3>
+                <h3 class="h4 mb-4">
+                  {{ if eq site.Language.Lang "ku" }}وشە گرنگەکان{{ else }}Keywords{{ end }}
+                </h3>
                 <div class="flex flex-wrap gap-2">
                   {{ range $paper.Params.keywords }}
                     <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary px-3 py-1 rounded">
@@ -109,10 +118,12 @@
             <!-- Related Datasets -->
             {{ if $paper.Params.datasetIds }}
               <div class="mb-8">
-                <h3 class="h4 mb-4">Related Datasets</h3>
+                <h3 class="h4 mb-4">
+                  {{ if eq site.Language.Lang "ku" }}داتاسێتە پەیوەندیدارەکان{{ else }}Related Datasets{{ end }}
+                </h3>
                 <div class="space-y-4">
                   {{ range $paper.Params.datasetIds }}
-                    {{ $datasetPage := where $.Site.RegularPages "Type" "datasets" }}
+                    {{ $datasetPage := where $.Site.RegularPages "Section" "datasets" }}
                     {{ $dataset := where $datasetPage "File.BaseFileName" . }}
                     {{ if $dataset }}
                       {{ $dataset = index $dataset 0 }}
@@ -142,7 +153,7 @@
                           <a href="{{ $dataset.Params.githubUrl }}" target="_blank" rel="noopener" 
                              class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-download mr-1"></i>
-                            Access Dataset
+                            {{ if eq site.Language.Lang "ku" }}دەستگە بە داتاسێت{{ else }}Access Dataset{{ end }}
                           </a>
                         </div>
                       </div>
@@ -154,13 +165,15 @@
 
             <!-- Citation -->
             <div class="mb-8">
-              <h3 class="h4 mb-4">Citation</h3>
+              <h3 class="h4 mb-4">
+                {{ if eq site.Language.Lang "ku" }}نووسراوە{{ else }}Citation{{ end }}
+              </h3>
               <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                 <p class="text-sm font-mono">{{ $paper.Params.citation }}</p>
                 <button onclick="navigator.clipboard.writeText('{{ $paper.Params.citation }}')" 
                         class="btn btn-outline-primary btn-sm mt-3">
                   <i class="fas fa-copy mr-1"></i>
-                  Copy Citation
+                  {{ if eq site.Language.Lang "ku" }}کۆپی نووسراوە{{ else }}Copy Citation{{ end }}
                 </button>
               </div>
             </div>
@@ -170,7 +183,9 @@
           <div class="col-12 lg:col-4">
             <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 sticky top-4">
               <!-- Quick Facts -->
-              <h3 class="h5 mb-4">Publication Details</h3>
+              <h3 class="h5 mb-4">
+                {{ if eq site.Language.Lang "ku" }}وردەکاری بڵاوکراوە{{ else }}Publication Details{{ end }}
+              </h3>
               <div class="space-y-3 mb-6">
                 {{ if $paper.Params.doi }}
                   <div>
@@ -182,13 +197,17 @@
                   </div>
                 {{ end }}
                 <div>
-                  <span class="font-semibold text-sm block">Authors</span>
-                  <span class="text-sm">{{ len $paper.Params.authors }} author{{ if gt (len $paper.Params.authors) 1 }}s{{ end }}</span>
+                  <span class="font-semibold text-sm block">
+                    {{ if eq site.Language.Lang "ku" }}نووسەران{{ else }}Authors{{ end }}
+                  </span>
+                  <span class="text-sm">{{ len $paper.Params.authors }} {{ if eq site.Language.Lang "ku" }}نووسەر{{ else }}author{{ if gt (len $paper.Params.authors) 1 }}s{{ end }}{{ end }}</span>
                 </div>
                 {{ if $paper.Params.datasetIds }}
                   <div>
-                    <span class="font-semibold text-sm block">Datasets</span>
-                    <span class="text-sm">{{ len $paper.Params.datasetIds }} dataset{{ if gt (len $paper.Params.datasetIds) 1 }}s{{ end }}</span>
+                    <span class="font-semibold text-sm block">
+                      {{ if eq site.Language.Lang "ku" }}داتاسێتەکان{{ else }}Datasets{{ end }}
+                    </span>
+                    <span class="text-sm">{{ len $paper.Params.datasetIds }} {{ if eq site.Language.Lang "ku" }}داتاسێت{{ else }}dataset{{ if gt (len $paper.Params.datasetIds) 1 }}s{{ end }}{{ end }}</span>
                   </div>
                 {{ end }}
               </div>
@@ -199,11 +218,11 @@
                   <a href="{{ $paper.Params.doiUrl }}" target="_blank" rel="noopener" 
                      class="btn btn-primary w-full">
                     <i class="fas fa-external-link-alt mr-2"></i>
-                    Read Full Paper
+                    {{ if eq site.Language.Lang "ku" }}خوێندنەوەی تەواوی وتار{{ else }}Read Full Paper{{ end }}
                   </a>
                 {{ end }}
                 {{ if $paper.Params.projectId }}
-                  {{ $projectPage := where $.Site.RegularPages "Type" "projects" }}
+                  {{ $projectPage := where $.Site.RegularPages "Section" "projects" }}
                   {{ $project := where $projectPage "File.BaseFileName" $paper.Params.projectId }}
                   {{ if $project }}
                     {{ $project = index $project 0 }}
@@ -217,7 +236,7 @@
                 <a href="{{ `/papers/` | relLangURL }}" 
                    class="btn btn-outline-primary w-full">
                   <i class="fas fa-arrow-left mr-2"></i>
-                  Back to Papers
+                  {{ if eq site.Language.Lang "ku" }}گەڕان بۆ وتارەکان{{ else }}Back to Papers{{ end }}
                 </a>
               </div>
             </div>
@@ -230,11 +249,15 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-            <h1 class="h2 mb-4">Paper Not Found</h1>
-            <p class="mb-6">The requested research paper could not be found.</p>
+            <h1 class="h2 mb-4">
+              {{ if eq site.Language.Lang "ku" }}وتار نەدۆزرایەوە{{ else }}Paper Not Found{{ end }}
+            </h1>
+            <p class="mb-6">
+              {{ if eq site.Language.Lang "ku" }}وتاری داواکراو نەدۆزرایەوە.{{ else }}The requested research paper could not be found.{{ end }}
+            </p>
             <a href="{{ `/papers/` | relLangURL }}" class="btn btn-primary">
               <i class="fas fa-arrow-left mr-2"></i>
-              Back to Papers
+              {{ if eq site.Language.Lang "ku" }}گەڕان بۆ وتارەکان{{ else }}Back to Papers{{ end }}
             </a>
           </div>
         </div>

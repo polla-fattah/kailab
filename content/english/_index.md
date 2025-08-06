@@ -69,4 +69,14 @@ datasets:
     label: "Browse All Datasets"
     link: "/datasets"
   featured_datasets: [1, 2, 3] # Show these dataset IDs
+
+# Organizations Section
+organizations:
+  enable: true
+  title: "Collaborating Organizations"
+  description: "We work with leading institutions and organizations to advance Kurdish language technology research and development."
+  organizations_link:
+    enable: true
+    label: "View All Organizations"
+    link: "/organizations"
 ---

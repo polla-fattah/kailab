@@ -9,7 +9,7 @@ paperIds: [1]
 datasetIds: [1, 2]
 technologies: ["Deep Learning", "CNN", "Computer Vision", "Image Processing"]
 applications: ["Historical Document Preservation", "Digital Archives", "Text Digitization"]
-team: ["Dr. Aram Mahmood", "Prof. Saman Ali", "Dr. Rojin Hassan"]
+team: ["john-doe", "karim-mohammad", "mohammad-ali"]
 funding: "Kurdistan Regional Government Research Grant"
 publications: 1
 datasets: 2

@@ -9,7 +9,7 @@ paperIds: [7]
 datasetIds: [11, 12]
 technologies: ["Lexicography", "Semantic Networks", "Database Design", "Information Retrieval"]
 applications: ["Language Learning", "Translation Support", "Linguistic Research"]
-team: ["Dr. Renas Jamal", "Prof. Hersh Saleh"]
+team: ["fatima-hassan", "sara-ahmed"]
 funding: "Digital Lexicography International Collaboration"
 publications: 1
 datasets: 2

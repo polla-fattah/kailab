@@ -69,7 +69,7 @@
                     <div class="inline-flex flex-wrap gap-2 mt-2">
                       {{ range $dataset.Params.organizationIds }}
                         <!-- Load organizations from content files -->
-                        {{ $organizations := where site.RegularPages "Type" "organizations" }}
+                        {{ $organizations := where site.RegularPages "Section" "organizations" }}
                         {{ $org := where $organizations "File.BaseFileName" . }}
                         {{ if $org }}
                           {{ $org = index $org 0 }}
@@ -108,7 +108,7 @@
 
             <!-- Main Paper -->
             {{ if $dataset.Params.mainPaperId }}
-              {{ $mainPaperPage := where $.Site.RegularPages "Type" "papers" }}
+              {{ $mainPaperPage := where $.Site.RegularPages "Section" "papers" }}
               {{ $mainPaper := where $mainPaperPage "File.BaseFileName" $dataset.Params.mainPaperId }}
               {{ if $mainPaper }}
                 {{ $mainPaper = index $mainPaper 0 }}
@@ -122,7 +122,10 @@
                       </a>
                     </h4>
                     <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                      {{ delimit $mainPaper.Params.authors ", " }} ({{ dateFormat "2006" $mainPaper.Params.publishedDate }})
+                      {{ range $index, $authorId := $mainPaper.Params.authors }}
+                        {{ if gt $index 0 }}, {{ end }}
+                        {{ partial "author-display.html" $authorId }}
+                      {{ end }} ({{ dateFormat "2006" $mainPaper.Params.publishedDate }})
                     </p>
                     <p class="text-sm">{{ truncate 200 $mainPaper.Params.abstract }}</p>
                   </div>
@@ -137,7 +140,7 @@
                 <div class="space-y-4">
                   {{ range $dataset.Params.paperIds }}
                     {{ if ne . $dataset.Params.mainPaperId }}
-                      {{ $paperPage := where $.Site.RegularPages "Type" "papers" }}
+                      {{ $paperPage := where $.Site.RegularPages "Section" "papers" }}
                       {{ $paper := where $paperPage "File.BaseFileName" . }}
                       {{ if $paper }}
                         {{ $paper = index $paper 0 }}
@@ -149,7 +152,10 @@
                             </a>
                           </h4>
                           <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                            {{ delimit $paper.Params.authors ", " }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
+                            {{ range $index, $authorId := $paper.Params.authors }}
+                              {{ if gt $index 0 }}, {{ end }}
+                              {{ partial "author-display.html" $authorId }}
+                            {{ end }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
                           </p>
                           <p class="text-sm">{{ truncate 150 $paper.Params.abstract }}</p>
                         </div>
@@ -218,7 +224,7 @@
               <!-- Quick Actions -->
               <div class="space-y-2">
                 {{ if $dataset.Params.mainPaperId }}
-                  {{ $mainPaperPage := where $.Site.RegularPages "Type" "papers" }}
+                  {{ $mainPaperPage := where $.Site.RegularPages "Section" "papers" }}
                   {{ $mainPaper := where $mainPaperPage "File.BaseFileName" $dataset.Params.mainPaperId }}
                   {{ if $mainPaper }}
                     {{ $mainPaper = index $mainPaper 0 }}

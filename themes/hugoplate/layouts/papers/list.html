@@ -19,6 +19,8 @@
       <div class="col-12">
         <!-- Load papers from content files -->
         {{ $papers := where site.RegularPages "Section" "papers" }}
+        {{ $datasets := where site.RegularPages "Section" "datasets" }}
+        {{ $projects := where site.RegularPages "Section" "projects" }}
         {{ if eq site.Language.Lang "ku" }}
           {{ $papers = where site.RegularPages "Section" "papers" }}
         {{ end }}
@@ -41,7 +43,10 @@
                   <div class="text-text-light dark:text-darkmode-text-light mb-3">
                     <p class="mb-1">
                       <i class="fas fa-users mr-2"></i>
-                      {{ delimit .Params.authors ", " }}
+                      {{ range $index, $authorId := .Params.authors }}
+                        {{ if gt $index 0 }}, {{ end }}
+                        {{ partial "author-display.html" $authorId }}
+                      {{ end }}
                     </p>
                     <p class="mb-1">
                       <i class="fas fa-journal-whills mr-2"></i>
@@ -77,7 +82,7 @@
                   <div class="flex items-center gap-4 mb-2 md:mb-0">
                     <!-- Project Link -->
                     {{ if .Params.projectId }}
-                      {{ $projectPage := where site.RegularPages "Type" "projects" }}
+                      {{ $projectPage := where site.RegularPages "Section" "projects" }}
                       {{ $project := where $projectPage "File.BaseFileName" .Params.projectId }}
                       {{ if $project }}
                         {{ $project = index $project 0 }}
@@ -93,7 +98,7 @@
                     {{ if .Params.datasetIds }}
                       <span class="text-sm text-text-light dark:text-darkmode-text-light">
                         <i class="fas fa-database mr-1"></i>
-                        {{ len .Params.datasetIds }} dataset{{ if gt (len .Params.datasetIds) 1 }}s{{ end }}
+                        {{ len .Params.datasetIds }} {{ if eq site.Language.Lang "ku" }}داتاسێت{{ else }}dataset{{ if gt (len .Params.datasetIds) 1 }}s{{ end }}{{ end }}
                       </span>
                     {{ end }}
                   </div>
@@ -103,13 +108,13 @@
                     <a href="{{ .RelPermalink }}" 
                        class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-eye mr-1"></i>
-                      View Details
+                      {{ if eq site.Language.Lang "ku" }}بینینی وردەکاری{{ else }}View Details{{ end }}
                     </a>
                     {{ if .Params.url }}
                       <a href="{{ .Params.url }}" target="_blank" rel="noopener" 
                          class="btn btn-primary btn-sm">
                         <i class="fas fa-external-link-alt mr-1"></i>
-                        Read Paper
+                        {{ if eq site.Language.Lang "ku" }}خوێندنەوەی وتار{{ else }}Read Paper{{ end }}
                       </a>
                     {{ end }}
                   </div>
@@ -123,21 +128,27 @@
         <div class="row mt-8">
           <div class="col-12">
             <div class="bg-light dark:bg-darkmode-light rounded-lg p-6">
-              <h3 class="h4 mb-4 text-center">Statistics</h3>
+              <h3 class="h4 mb-4 text-center">
+                {{ if eq site.Language.Lang "ku" }}ئامارەکان{{ else }}Statistics{{ end }}
+              </h3>
               <div class="flex flex-wrap justify-center gap-8 text-center">
                 <div class="flex-1 min-w-0">
-                  <h3 class="h2 text-primary">{{ len $papers }}</h3>
-                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Total Publications</p>
+                  <h3 class="h2 text-primary dark:text-darkmode-primary">{{ len $papers }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">
+                    {{ if eq site.Language.Lang "ku" }}کۆی بڵاوکراوەکان{{ else }}Total Publications{{ end }}
+                  </p>
                 </div>
                 <div class="flex-1 min-w-0">
-                  {{ $datasets := where site.RegularPages "Section" "datasets" }}
-                  <h3 class="h2 text-primary">{{ len $datasets }}</h3>
-                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Related Datasets</p>
+                  <h3 class="h2 text-primary dark:text-darkmode-primary">{{ len $datasets }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">
+                    {{ if eq site.Language.Lang "ku" }}داتاسێتە توێژینەوەییەکان{{ else }}Research Datasets{{ end }}
+                  </p>
                 </div>
                 <div class="flex-1 min-w-0">
-                  {{ $projects := where site.RegularPages "Section" "projects" }}
-                  <h3 class="h2 text-primary">{{ len $projects }}</h3>
-                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Projects</p>
+                  <h3 class="h2 text-primary dark:text-darkmode-primary">{{ len $projects }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">
+                    {{ if eq site.Language.Lang "ku" }}پڕۆژە توێژینەوەییەکان{{ else }}Research Projects{{ end }}
+                  </p>
                 </div>
               </div>
               
@@ -147,15 +158,15 @@
                   <div class="flex flex-wrap justify-center gap-4">
                     <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-database mr-2"></i>
-                      View All Datasets
+                      {{ if eq site.Language.Lang "ku" }}هەموو داتاسێتەکان{{ else }}View All Datasets{{ end }}
                     </a>
                     <a href="{{ `/projects/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-project-diagram mr-2"></i>
-                      View All Projects
+                      {{ if eq site.Language.Lang "ku" }}هەموو پڕۆژەکان{{ else }}View All Projects{{ end }}
                     </a>
                     <a href="{{ `/authors/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-users mr-2"></i>
-                      View All Contributors
+                      {{ if eq site.Language.Lang "ku" }}هەموو بەشداربووان{{ else }}View All Contributors{{ end }}
                     </a>
                   </div>
                 </div>

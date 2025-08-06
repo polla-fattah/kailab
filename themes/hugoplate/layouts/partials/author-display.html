@@ -32,7 +32,7 @@
 {{ end }}
 
 {{ if $authorFound }}
-  <a href="{{ `authors/` | relLangURL }}{{ $authorId }}" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-primary">
+  <a href="{{ `authors/` | relLangURL }}{{ $authorId }}" class="text-primary dark:text-darkmode-primary hover:text-primary dark:hover:text-darkmode-primary hover:underline">
     <i class="fa-regular fa-circle-user mr-2"></i>
     {{ $displayName }}
   </a>

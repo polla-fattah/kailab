@@ -6,7 +6,8 @@
     <div class="container">
       <div class="row">
         <div class="md:col-10 lg:col-6 mx-auto">
-          <form action="{{ site.Params.contact_form_action }}" method="POST">
+          <form action="/" method="POST" data-netlify="true" name="contact">
+            <input type="hidden" name="form-name" value="contact" />
             <div class="mb-6">
               <label for="name" class="form-label">
                 {{ if eq site.Language.Lang "ku" }}
@@ -20,7 +21,8 @@
                 name="name"
                 class="form-input"
                 placeholder="{{ if eq site.Language.Lang "ku" }}ناوی تەواو{{ else }}John Doe{{ end }}"
-                type="text" />
+                type="text"
+                required />
             </div>
             <div class="mb-6">
               <label for="email" class="form-label">
@@ -35,7 +37,8 @@
                 name="email"
                 class="form-input"
                 placeholder="{{ if eq site.Language.Lang "ku" }}example@email.com{{ else }}john.doe@email.com{{ end }}"
-                type="email" />
+                type="email"
+                required />
             </div>
             <div class="mb-6">
               <label for="message" class="form-label">
@@ -50,7 +53,8 @@
                 name="message"
                 class="form-input"
                 placeholder="{{ if eq site.Language.Lang "ku" }}پەیامەکە لێرە بنووسە...{{ else }}Message goes here...{{ end }}"
-                rows="8"></textarea>
+                rows="8"
+                required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">
               {{ if eq site.Language.Lang "ku" }}ناردن{{ else }}Submit{{ end }}

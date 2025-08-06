@@ -9,7 +9,7 @@ paperIds: [2]
 datasetIds: [3, 4]
 technologies: ["Transformer", "Neural Networks", "Morphological Analysis", "Attention Mechanisms"]
 applications: ["Cross-cultural Communication", "Content Localization", "Academic Translation"]
-team: ["Dr. Nizar Salim", "Prof. Layla Rashid"]
+team: ["fatima-hassan", "sara-ahmed"]
 funding: "European Union Horizon Research Grant"
 publications: 1
 datasets: 2

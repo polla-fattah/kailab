@@ -3,7 +3,7 @@
   {{ $lang := site.Language.Lang }}
   
   <!-- Find organization in content files -->
-  {{ $organizations := where site.RegularPages "Type" "organizations" }}
+  {{ $organizations := where site.RegularPages "Section" "organizations" }}
   {{ $organization := where $organizations "File.BaseFileName" $organizationId }}
   
   {{ if $organization }}
@@ -74,7 +74,7 @@
                 <h3 class="h4 mb-4">Research Publications ({{ len $organization.Params.paperIds }})</h3>
                 <div class="space-y-4">
                   {{ range $organization.Params.paperIds }}
-                    {{ $papers := where site.RegularPages "Type" "papers" }}
+                    {{ $papers := where site.RegularPages "Section" "papers" }}
                     {{ $paper := where $papers "File.BaseFileName" . }}
                     {{ if $paper }}
                       {{ $paper = index $paper 0 }}
@@ -86,7 +86,10 @@
                           </a>
                         </h4>
                         <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                          {{ delimit $paper.Params.authors ", " }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
+                          {{ range $index, $authorId := $paper.Params.authors }}
+                            {{ if gt $index 0 }}, {{ end }}
+                            {{ partial "author-display.html" $authorId }}
+                          {{ end }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
                         </p>
                         <p class="text-sm">{{ truncate 200 $paper.Params.abstract }}</p>
                         <div class="mt-3 flex flex-wrap gap-2">
@@ -109,7 +112,7 @@
                 <h3 class="h4 mb-4">Research Datasets ({{ len $organization.Params.datasetIds }})</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {{ range $organization.Params.datasetIds }}
-                    {{ $datasets := where site.RegularPages "Type" "datasets" }}
+                    {{ $datasets := where site.RegularPages "Section" "datasets" }}
                     {{ $dataset := where $datasets "File.BaseFileName" . }}
                     {{ if $dataset }}
                       {{ $dataset = index $dataset 0 }}

@@ -3,7 +3,7 @@
   {{ $lang := site.Language.Lang }}
   
   <!-- Find author in content files -->
-  {{ $authors := where site.RegularPages "Type" "authors" }}
+  {{ $authors := where site.RegularPages "Section" "authors" }}
   {{ $author := where $authors "File.BaseFileName" $authorId }}
   
   {{ if $author }}
@@ -69,7 +69,7 @@
         <div class="row justify-center">
           <div class="lg:col-10">
             <!-- Related Papers -->
-            {{ $papers := where site.RegularPages "Type" "papers" }}
+            {{ $papers := where site.RegularPages "Section" "papers" }}
             {{ $authorPapers := slice }}
             {{ range $papers }}
               {{ $currentPaper := . }}
@@ -109,6 +109,58 @@
               </div>
             {{ end }}
             
+            <!-- Related Projects -->
+            {{ $projects := where site.RegularPages "Section" "projects" }}
+            {{ $authorProjects := slice }}
+            {{ range $projects }}
+              {{ $currentProject := . }}
+              {{ range .Params.team }}
+                {{ if eq . $authorId }}
+                  {{ $authorProjects = $authorProjects | append $currentProject }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+            
+            {{ if $authorProjects }}
+              <div class="mb-8">
+                <h3 class="h5 mb-4">
+                  {{ if eq $lang "ku" }}
+                    پڕۆژە پەیوەندیدارەکان
+                  {{ else }}
+                    Related Projects
+                  {{ end }}
+                </h3>
+                <div class="row gy-4">
+                  {{ range $authorProjects }}
+                    <div class="md:col-6">
+                      <article class="bg-light dark:bg-darkmode-light rounded p-4">
+                        <div class="flex items-start mb-3">
+                          <i class="fas {{ .Params.icon }} text-2xl text-primary dark:text-darkmode-primary mr-3 mt-1"></i>
+                          <div>
+                            <h4 class="h6 mb-2">
+                              <a href="{{ .RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                                {{ .Title }}
+                              </a>
+                            </h4>
+                            <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
+                              {{ .Params.shortDescription }}
+                            </p>
+                            <div class="flex items-center text-xs text-text-light dark:text-darkmode-text-light">
+                              <span class="capitalize {{ if eq .Params.status "active" }}text-green-600 dark:text-green-400{{ end }}">
+                                {{ i18n (printf "status.%s" .Params.status) | default .Params.status }}
+                              </span>
+                              <span class="mx-2">•</span>
+                              <span>{{ len .Params.team }} {{ if eq $lang "ku" }}ئەندام{{ else }}members{{ end }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+            
             <!-- Related Blog Posts -->
             {{ $authorPosts := where site.RegularPages "Params.contributors" "==" $authorId }}
             {{ if $authorPosts }}
@@ -136,7 +188,7 @@
               </div>
             {{ end }}
             
-            {{ if not (or $authorPosts $authorPapers) }}
+            {{ if not (or $authorPosts $authorPapers $authorProjects) }}
               <div class="text-center py-12">
                 <p class="text-text-light dark:text-darkmode-text-light">
                   {{ if eq $lang "ku" }}
@@ -156,6 +208,13 @@
                     وتارەکان
                   {{ else }}
                     Papers
+                  {{ end }}
+                </a>
+                <a href="{{ `projects/` | relLangURL }}" class="btn btn-outline-primary">
+                  {{ if eq $lang "ku" }}
+                    پڕۆژەکان
+                  {{ else }}
+                    Projects
                   {{ end }}
                 </a>
                 <a href="{{ `authors/` | relLangURL }}" class="btn btn-outline-primary">

@@ -79,7 +79,7 @@
                 <h3 class="h4 mb-4">{{ if eq site.Language.Lang "ku" }}بڵاوکراوە پەیوەندیدارەکان{{ else }}Related Publications{{ end }}</h3>
                 <div class="space-y-4">
                   {{ range $project.Params.paperIds }}
-                    {{ $paperPage := where site.RegularPages "Type" "papers" }}
+                    {{ $paperPage := where site.RegularPages "Section" "papers" }}
                     {{ $paper := where $paperPage "File.BaseFileName" (printf "paper-%d" .) }}
                     {{ if $paper }}
                       {{ $paper = index $paper 0 }}
@@ -90,7 +90,10 @@
                           </a>
                         </h4>
                         <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                          {{ delimit $paper.Params.authors ", " }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
+                          {{ range $index, $authorId := $paper.Params.authors }}
+                            {{ if gt $index 0 }}, {{ end }}
+                            {{ partial "author-display.html" $authorId }}
+                          {{ end }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
                         </p>
                         <p class="text-sm">{{ truncate 200 $paper.Params.abstract }}</p>
                       </div>
@@ -106,7 +109,7 @@
                 <h3 class="h4 mb-4">{{ if eq site.Language.Lang "ku" }}داتاسێتە پەیوەندیدارەکان{{ else }}Related Datasets{{ end }}</h3>
                 <div class="space-y-4">
                   {{ range $project.Params.datasetIds }}
-                    {{ $datasetPage := where site.RegularPages "Type" "datasets" }}
+                    {{ $datasetPage := where site.RegularPages "Section" "datasets" }}
                     {{ $dataset := where $datasetPage "File.BaseFileName" (printf "dataset-%d" .) }}
                     {{ if $dataset }}
                       {{ $dataset = index $dataset 0 }}
@@ -152,7 +155,18 @@
               <h4 class="h6 mb-3">{{ if eq site.Language.Lang "ku" }}تیمی توێژینەوە{{ else }}Research Team{{ end }}</h4>
               <ul class="text-sm space-y-1 mb-6">
                 {{ range $project.Params.team }}
-                  <li>{{ . }}</li>
+                  {{ $authors := where site.RegularPages "Section" "authors" }}
+                  {{ $author := where $authors "File.BaseFileName" . }}
+                  {{ if $author }}
+                    {{ $author = index $author 0 }}
+                    <li>
+                      <a href="{{ $author.RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                        {{ $author.Title }}
+                      </a>
+                    </li>
+                  {{ else }}
+                    <li>{{ . }}</li>
+                  {{ end }}
                 {{ end }}
               </ul>
 

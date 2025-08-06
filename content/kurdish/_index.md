@@ -69,4 +69,14 @@ datasets:
     label: "هەموو داتاسێتەکان"
     link: "/datasets"
   featured_datasets: [1, 2, 3] # Show these dataset IDs
+
+# Organizations Section
+organizations:
+  enable: true
+  title: "ڕێکخراوە هاوکارەکان"
+  description: "ئێمە لەگەڵ دامەزراوە و ڕێکخراوە پێشڕەوەکان کار دەکەین بۆ پێشخستنی توێژینەوەی تەکنەلۆژیای زمانی کوردی و گەشەپێدان."
+  organizations_link:
+    enable: true
+    label: "هەموو ڕێکخراوەکان"
+    link: "/ku/organizations"
 --- 

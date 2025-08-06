@@ -9,7 +9,7 @@ paperIds: [9]
 datasetIds: [14, 15]
 technologies: ["Terminology Science", "Consensus Building", "Database Systems", "Standardization Methodologies"]
 applications: ["Academic Translation", "Professional Communication", "Educational Curricula", "Technical Documentation"]
-team: ["Dr. Aras Mohammed", "Prof. Galawezh Ahmed", "Dr. Sardar Karim", "Prof. Bangin Hassan"]
+team: ["john-doe", "fatima-hassan", "karim-mohammad", "sara-ahmed"]
 funding: "UNESCO Language Preservation Initiative, Kurdistan Regional Government"
 publications: 1
 datasets: 2

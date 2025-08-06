@@ -9,7 +9,7 @@ paperIds: [3]
 datasetIds: [5, 6]
 technologies: ["Deep Neural Networks", "Acoustic Modeling", "Language Modeling", "Domain Adaptation"]
 applications: ["Voice Assistants", "Accessibility Tools", "Transcription Services"]
-team: ["Dr. Bryar Kareem", "Prof. Rebwar Ahmed", "Dr. Soma Jamal"]
+team: ["john-doe", "fatima-hassan", "sara-ahmed"]
 funding: "International Speech Technology Research Initiative"
 publications: 1
 datasets: 2

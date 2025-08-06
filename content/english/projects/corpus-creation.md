@@ -9,7 +9,7 @@ paperIds: [6]
 datasetIds: [2, 8, 10]
 technologies: ["Corpus Linguistics", "Text Mining", "Quality Assessment", "Linguistic Annotation"]
 applications: ["Language Research", "NLP Model Training", "Linguistic Analysis"]
-team: ["Dr. Zhyan Omar", "Prof. Kardo Hassan", "Dr. Aso Ali"]
+team: ["john-doe", "mohammad-ali", "karim-mohammad"]
 funding: "Kurdistan Academy of Sciences Research Grant"
 publications: 1
 datasets: 3

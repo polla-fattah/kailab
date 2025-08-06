@@ -116,9 +116,9 @@
       <section class="section-sm" style="padding-top: 2rem; padding-bottom: 2rem;">
         <div class="container">
           <!-- Load datasets from content files -->
-          {{ $datasets := where site.RegularPages "Type" "datasets" }}
+          {{ $datasets := where site.RegularPages "Section" "datasets" }}
           {{ if eq site.Language.Lang "ku" }}
-            {{ $datasets = where site.RegularPages "Type" "datasets" }}
+            {{ $datasets = where site.RegularPages "Section" "datasets" }}
           {{ end }}
           
           <!-- Show featured datasets -->
@@ -205,33 +205,38 @@
   {{ end }}
   <!-- /Datasets -->
 
-  <!-- Testimonials -->
-  {{ with site.GetPage "sections/testimonial" }}
-    {{ if .Params.enable }}
+  <!-- Organizations -->
+  {{ with .Params.organizations }}
+    {{ if .enable }}
       <section class="section">
         <div class="container">
           <div class="row">
             <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
               <h2 class="mb-4">
-                {{ .Title | markdownify }}
+                {{ .title | markdownify }}
               </h2>
               <p>
-                {{ .Params.description | markdownify }}
+                {{ .description | markdownify }}
               </p>
             </div>
             <div class="col-12">
               <div class="swiper testimonial-slider">
                 <div class="swiper-wrapper">
-                  {{ range .Params.testimonials }}
+                  <!-- Load organizations from content files -->
+                  {{ $organizations := where site.RegularPages "Section" "organizations" }}
+                  {{ range first 6 $organizations }}
                     <div class="swiper-slide">
-                      <a href="{{ `/organizations/` | relLangURL }}{{ .org_id }}" class="block h-80">
+                      <a href="{{ .RelPermalink }}" class="block h-80">
                         <div class="bg-light dark:bg-darkmode-light rounded-lg px-7 py-10 text-center hover:shadow-lg transition-shadow duration-300 h-full flex flex-col justify-center items-center">
                           <div class="mb-6">
-                            {{ partial "image" (dict "Src" .avatar "Size" "100x100" "Class" "rounded-full mx-auto" "Alt" .name) }}
+                            {{ partial "image" (dict "Src" "/images/organization-placeholder.png" "Size" "100x100" "Class" "rounded-full mx-auto" "Alt" .Title) }}
                           </div>
                           <h3 class="h5 font-primary font-semibold text-text-dark dark:text-white leading-tight">
-                            {{ .name }}
+                            {{ .Title }}
                           </h3>
+                          <p class="text-sm text-text-light dark:text-darkmode-text-light mt-2">
+                            {{ .Params.type }} • {{ .Params.location }}
+                          </p>
                         </div>
                       </a>
                     </div>
@@ -258,7 +263,7 @@
       </section>
     {{ end }}
   {{ end }}
-  <!-- /Testimonials -->
+  <!-- /Organizations -->
 
   <!-- Recent Blogs -->
   {{ with .Params.recent_blogs }}
