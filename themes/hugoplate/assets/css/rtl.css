@@ -11,9 +11,9 @@
   font-family: 'Noto Sans Kurdish', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* RTL Navigation - Fixed version */
+/* RTL Navigation - Order controlled by menu weights */
 [dir="rtl"] .navbar-nav {
-  flex-direction: row-reverse;
+  flex-direction: row !important;
 }
 
 [dir="rtl"] .dropdown-menu {
@@ -70,7 +70,7 @@
 
 /* RTL Mobile Navigation */
 [dir="rtl"] .navbar-nav.lg\:flex {
-  flex-direction: row-reverse;
+  flex-direction: row !important;
 }
 
 [dir="rtl"] .navbar-nav.lg\:flex .nav-item {
@@ -200,7 +200,7 @@
 
 /* RTL Mobile Menu */
 [dir="rtl"] .hidden.lg\:flex {
-  flex-direction: row-reverse;
+  flex-direction: row !important;
 }
 
 [dir="rtl"] .lg\:hidden {
@@ -629,11 +629,11 @@
 
 /* RTL Flex utilities */
 [dir="rtl"] .flex-row {
-  flex-direction: row-reverse !important;
+  flex-direction: row !important;
 }
 
 [dir="rtl"] .flex-row-reverse {
-  flex-direction: row !important;
+  flex-direction: row-reverse !important;
 }
 
 /* RTL Position utilities */

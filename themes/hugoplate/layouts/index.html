@@ -66,78 +66,6 @@
   {{ end }}
   <!-- /Banner -->
 
-  <!-- Recent Blogs -->
-  {{ with .Params.recent_blogs }}
-    {{ if .enable }}
-      <section class="section-sm bg-gradient">
-        <div class="container">
-          <div class="row">
-            <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
-              <h2 class="mb-4">{{ .title | markdownify }}</h2>
-              <p>{{ .subtitle | markdownify }}</p>
-            </div>
-          </div>
-          
-          <div class="row gy-4">
-            <!-- Get recent blog posts -->
-            {{ $blogs := first 2 (where site.RegularPages "Section" "blog") }}
-            {{ range $blogs }}
-              <div class="col-12 md:col-6">
-                <article class="bg-body dark:bg-darkmode-body rounded-lg p-6 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
-                  {{ with .Params.image }}
-                    <div class="mb-4">
-                      {{ partial "image" (dict "Src" . "Context" $.Page "Alt" $.Title "Class" "w-full h-48 object-cover rounded" "Size" "400x200") }}
-                    </div>
-                  {{ end }}
-                  
-                  <div class="flex-grow">
-                    <h3 class="h5 mb-3">
-                      <a href="{{ .RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
-                        {{ .Title }}
-                      </a>
-                    </h3>
-                    
-                    <div class="text-text-light dark:text-darkmode-text-light text-sm mb-3">
-                      <span class="mr-4">
-                        <i class="fa-regular fa-calendar mr-1"></i>
-                        {{ .PublishDate.Format "Jan 2, 2006" }}
-                      </span>
-                      {{ with .Params.contributors }}
-                        <span>
-                          <i class="fa-regular fa-user mr-1"></i>
-                          {{ . }}
-                        </span>
-                      {{ end }}
-                    </div>
-                    
-                    <p class="text-sm mb-4">{{ .Summary | plainify | truncate 120 }}</p>
-                  </div>
-                  
-                  <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm mt-auto">
-                    {{ T "read_more" }}
-                    <i class="fa fa-arrow-right pl-1"></i>
-                  </a>
-                </article>
-              </div>
-            {{ end }}
-          </div>
-          
-          {{ with .show_more }}
-            {{ if .enable }}
-              <div class="text-center mt-8">
-                <a href="{{ .link | relLangURL }}" class="btn btn-primary">
-                  {{ .label }}
-                  <i class="fa fa-arrow-right pl-2"></i>
-                </a>
-              </div>
-            {{ end }}
-          {{ end }}
-        </div>
-      </section>
-    {{ end }}
-  {{ end }}
-  <!-- /Recent Blogs -->
-
   <!-- Features -->
   {{ range $i, $e:= .Params.features }}
     <section class="section-sm {{ if (modBool $i 2) }}bg-gradient{{ end }}">
@@ -331,4 +259,76 @@
     {{ end }}
   {{ end }}
   <!-- /Testimonials -->
+
+  <!-- Recent Blogs -->
+  {{ with .Params.recent_blogs }}
+    {{ if .enable }}
+      <section class="section-sm bg-gradient">
+        <div class="container">
+          <div class="row">
+            <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
+              <h2 class="mb-4">{{ .title | markdownify }}</h2>
+              <p>{{ .subtitle | markdownify }}</p>
+            </div>
+          </div>
+          
+          <div class="row gy-4">
+            <!-- Get recent blog posts -->
+            {{ $blogs := first 2 (where site.RegularPages "Section" "blog") }}
+            {{ range $blogs }}
+              <div class="col-12 md:col-6">
+                <article class="bg-body dark:bg-darkmode-body rounded-lg p-6 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+                  {{ with .Params.image }}
+                    <div class="mb-4">
+                      {{ partial "image" (dict "Src" . "Context" $.Page "Alt" $.Title "Class" "w-full h-48 object-cover rounded" "Size" "400x200") }}
+                    </div>
+                  {{ end }}
+                  
+                  <div class="flex-grow">
+                    <h3 class="h5 mb-3">
+                      <a href="{{ .RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                        {{ .Title }}
+                      </a>
+                    </h3>
+                    
+                    <div class="text-text-light dark:text-darkmode-text-light text-sm mb-3">
+                      <span class="mr-4">
+                        <i class="fa-regular fa-calendar mr-1"></i>
+                        {{ .PublishDate.Format "Jan 2, 2006" }}
+                      </span>
+                      {{ with .Params.contributors }}
+                        <span>
+                          <i class="fa-regular fa-user mr-1"></i>
+                          {{ . }}
+                        </span>
+                      {{ end }}
+                    </div>
+                    
+                    <p class="text-sm mb-4">{{ .Summary | plainify | truncate 120 }}</p>
+                  </div>
+                  
+                  <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm mt-auto">
+                    {{ T "read_more" }}
+                    <i class="fa fa-arrow-right pl-1"></i>
+                  </a>
+                </article>
+              </div>
+            {{ end }}
+          </div>
+          
+          {{ with .show_more }}
+            {{ if .enable }}
+              <div class="text-center mt-8">
+                <a href="{{ .link | relLangURL }}" class="btn btn-primary">
+                  {{ .label }}
+                  <i class="fa fa-arrow-right pl-2"></i>
+                </a>
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
+  <!-- /Recent Blogs -->
 {{ end }}
