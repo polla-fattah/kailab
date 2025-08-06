@@ -1,118 +1,91 @@
 {{ define "main" }}
-  <section class="section pt-7">
-    <div class="container">
-      <div class="row justify-center">
-        <article class="lg:col-10">
-          {{ $image:= .Params.image }}
-          {{ if $image }}
-            <div class="mb-10">
-              {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "w-full rounded") }}
-            </div>
-          {{ end }}
-          <h1 class="h2 mb-4">
-            {{ .Title }}
-          </h1>
-          <ul class="mb-4">
-            <li class="mr-4 inline-block">
-              {{ $contributorId := .Params.contributors }}
-              {{ $authorFound := false }}
-              {{ $displayName := $contributorId }}
-              
-              <!-- Check if contributor exists in authors.json database -->
-              {{ range site.Data.authors }}
-                {{ if eq .id $contributorId }}
-                  {{ $lang := site.Language.Lang }}
-                  {{ $name := index .names $lang | default .names.en }}
-                  {{ $title := index .titles $lang | default .titles.en }}
-                  {{ $displayName = printf "%s %s" $title $name }}
-                  {{ $authorFound = true }}
-                {{ end }}
-              {{ end }}
-              
-              {{ if $authorFound }}
-                <a href="{{ `authors/` | relLangURL }}" class="hover:text-primary dark:hover:text-darkmode-primary">
-                  <i class="fa-regular fa-circle-user mr-2"></i>
-                  {{ $displayName }}
-                </a>
-              {{ else }}
-                <!-- Author not in database - show as plain text -->
-                <span class="text-text-light dark:text-darkmode-text-light">
-                  <i class="fa-regular fa-circle-user mr-2"></i>
-                  {{ $contributorId }}
-                </span>
-              {{ end }}
-            </li>
-            {{ $categories:= .Params.categories }}
-            {{ if $categories }}
-              <li class="mr-4 inline-block">
-                <i class="fa-regular fa-folder mr-2"></i>
-                {{ range $i,$p:= $categories }}
-                  <a
-                    href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/"
-                    class=""
-                    >{{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}
-                      {{ "," }}
-                    {{ end }}
-                  </a>
-                {{ end }}
-              </li>
-            {{ end }}
-            <li class="mr-4 inline-block">
-              <i class="fa-regular fa-clock mr-2"></i>
-              {{ time.Format ":date_long" .PublishDate }}
-            </li>
-          </ul>
-          <div class="content mb-10">
-            {{ partial "toc.html" (dict "Class" "blog" "Collapsed" false "TableOfContents" .TableOfContents ) }}
-            {{ .Content }}
-          </div>
-          <div class="row items-start justify-between">
-            {{ $tags:= .Params.tags }}
-            {{ if $tags }}
-              <div class="lg:col-6 mb-10 flex items-center lg:mb-0">
-                <h5 class="mr-3">{{ T "tags" }} :</h5>
-                <ul>
-                  {{ range $i,$p:= $tags }}
-                    <li class="inline-block">
-                      <a
-                        class="bg-light hover:bg-primary dark:bg-darkmode-light dark:hover:bg-darkmode-primary dark:hover:text-text-dark m-1 block rounded px-3 py-1 hover:text-white"
-                        href="{{ `tags/` | relLangURL }}{{ . | urlize | lower }}/">
-                        {{ . | humanize }}
-                      </a>
-                    </li>
-                  {{ end }}
-                </ul>
-              </div>
-            {{ end }}
-            <div class="lg:col-6 flex items-center lg:justify-end">
-              <h5>{{ T "share" }} :</h5>
-              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" .Title "Whatsapp" false "Telegram" false "Linkedin" false "Pinterest" false "Tumblr" false "Vk" false "Reddit" false) }}
-            </div>
-          </div>
-          <!-- comments -->
-          {{ if site.Config.Services.Disqus.Shortname }}
-            <div class="mt-20">
-              {{ template "_internal/disqus.html" . }}
-            </div>
-          {{ end }}
-        </article>
-      </div>
+  {{ partial "page-header" . }}
 
-      <!-- Related posts -->
-      {{ $related := .Site.RegularPages.Related . | first 10 }}
-      {{ $related = $related | shuffle | first 3 }}
-      {{ with $related }}
-        <div class="section pb-0">
-          <h2 class="h3 mb-12">{{ T "related_posts" }}</h2>
-          <div class="row">
-            {{ range . }}
-              <div class="lg:col-4 md:col-6 mb-14">
-                {{ partial "components/blog-card" . }}
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 lg:col-8">
+          <article class="mb-8">
+            <!-- Blog Header -->
+            <header class="mb-6">
+              <h1 class="h2 mb-4">{{ .Title }}</h1>
+              
+              <!-- Meta Information -->
+              <div class="flex flex-wrap items-center gap-4 text-sm text-text-light dark:text-darkmode-text-light mb-4">
+                <span>
+                  <i class="fa-regular fa-calendar mr-2"></i>
+                  {{ .PublishDate.Format "January 2, 2006" }}
+                </span>
+                {{ with .Params.contributors }}
+                  <span>
+                    <i class="fa-regular fa-user mr-2"></i>
+                    {{ $contributorId := . }}
+                    {{ $authorFound := false }}
+                    {{ $displayName := $contributorId }}
+                    
+                    <!-- Check if contributor exists in authors content files -->
+                    {{ $authors := where site.RegularPages "Type" "authors" }}
+                    {{ $author := where $authors "File.BaseFileName" $contributorId }}
+                    {{ if $author }}
+                      {{ $author = index $author 0 }}
+                      {{ $lang := site.Language.Lang }}
+                      {{ $name := $author.Params.name_en }}
+                      {{ $title := $author.Params.title_en }}
+                      {{ if eq $lang "ku" }}
+                        {{ $name = $author.Params.name_ku }}
+                        {{ $title = $author.Params.title_ku }}
+                      {{ end }}
+                      {{ $displayName = printf "%s %s" $title $name }}
+                      {{ $authorFound = true }}
+                    {{ end }}
+                    
+                    {{ if $authorFound }}
+                      <a href="{{ `authors/` | relLangURL }}{{ $contributorId }}" class="hover:text-primary dark:hover:text-primary">
+                        {{ $displayName }}
+                      </a>
+                    {{ else }}
+                      {{ $contributorId }}
+                    {{ end }}
+                  </span>
+                {{ end }}
+              </div>
+            </header>
+
+            <!-- Blog Content -->
+            <div class="content">
+              {{ .Content }}
+            </div>
+          </article>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-12 lg:col-4">
+          <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 sticky top-4">
+            <!-- Related Posts -->
+            {{ $relatedPosts := where site.RegularPages "Section" "blog" }}
+            {{ $relatedPosts = where $relatedPosts "File.BaseFileName" "!=" .File.BaseFileName }}
+            {{ $relatedPosts = first 3 $relatedPosts }}
+            
+            {{ if $relatedPosts }}
+              <h3 class="h5 mb-4">Related Posts</h3>
+              <div class="space-y-4">
+                {{ range $relatedPosts }}
+                  <div class="border-b border-border dark:border-darkmode-border pb-4 last:border-b-0">
+                    <h4 class="h6 mb-2">
+                      <a href="{{ .RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                        {{ .Title }}
+                      </a>
+                    </h4>
+                    <p class="text-sm text-text-light dark:text-darkmode-text-light">
+                      {{ .PublishDate.Format "Jan 2, 2006" }}
+                    </p>
+                  </div>
+                {{ end }}
               </div>
             {{ end }}
           </div>
         </div>
-      {{ end }}
+      </div>
     </div>
   </section>
 {{ end }}

@@ -2,10 +2,12 @@
   {{ $authorId := .File.BaseFileName }}
   {{ $lang := site.Language.Lang }}
   
-  <!-- Find author in database (just like papers/datasets) -->
-  {{ $author := index (where site.Data.authors "id" $authorId) 0 }}
+  <!-- Find author in content files -->
+  {{ $authors := where site.RegularPages "Type" "authors" }}
+  {{ $author := where $authors "File.BaseFileName" $authorId }}
   
   {{ if $author }}
+    {{ $author = index $author 0 }}
     <!-- Author found - display profile -->
     <section class="section-sm pb-0">
       <div class="container">
@@ -14,18 +16,22 @@
             <!-- Author Avatar -->
             <div class="mb-6" style="display: flex; justify-content: center; align-items: center; width: 100%;">
               {{ $avatar := "/images/avatar.png" }}
-              {{ partial "image" (dict "Src" $avatar "Size" "200x200" "Class" "rounded-full" "Alt" (index $author.names $lang)) }}
+              {{ partial "image" (dict "Src" $avatar "Size" "200x200" "Class" "rounded-full" "Alt" $author.Title) }}
             </div>
             
             <!-- Author Name -->
             <h1 class="h3 mb-3">
-              {{ $title := index $author.titles $lang | default $author.titles.en }}
-              {{ $name := index $author.names $lang | default $author.names.en }}
+              {{ $title := $author.Params.title_en }}
+              {{ $name := $author.Params.name_en }}
+              {{ if eq $lang "ku" }}
+                {{ $title = $author.Params.title_ku }}
+                {{ $name = $author.Params.name_ku }}
+              {{ end }}
               {{ $title }} {{ $name }}
             </h1>
             
             <!-- Author Email -->
-            {{ with $author.email }}
+            {{ with $author.Params.email }}
               <p class="text-text-light dark:text-darkmode-text-light mb-4">
                 <i class="fas fa-envelope mr-2"></i>
                 <a href="mailto:{{ . }}" class="hover:text-primary dark:hover:text-darkmode-primary">{{ . }}</a>
@@ -34,15 +40,15 @@
             
             <!-- Author Description -->
             <div class="content mb-6">
+              {{ $description := $author.Params.description }}
               {{ if eq $lang "ku" }}
-                <p>بەشداربووی تیمی توێژینەوەی کایلاب و پسپۆڕ لە بواری تەکنەلۆژیای زمانی کوردی.</p>
-              {{ else }}
-                <p>Research team member at KaiLab, specializing in Kurdish language technology and computational linguistics.</p>
+                {{ $description = $author.Params.description_ku }}
               {{ end }}
+              <p>{{ $description }}</p>
             </div>
             
             <!-- Contact Button -->
-            {{ with $author.email }}
+            {{ with $author.Params.email }}
               <a href="mailto:{{ . }}" class="btn btn-primary">
                 {{ if eq $lang "ku" }}
                   پەیوەندی
@@ -63,14 +69,11 @@
         <div class="row justify-center">
           <div class="lg:col-10">
             <!-- Related Papers -->
-            {{ $papers := site.Data.papers }}
-            {{ if eq $lang "ku" }}
-              {{ $papers = site.Data.papers_ku }}
-            {{ end }}
+            {{ $papers := where site.RegularPages "Type" "papers" }}
             {{ $authorPapers := slice }}
             {{ range $papers }}
               {{ $currentPaper := . }}
-              {{ range .authors }}
+              {{ range .Params.authors }}
                 {{ if eq . $authorId }}
                   {{ $authorPapers = $authorPapers | append $currentPaper }}
                 {{ end }}
@@ -91,14 +94,14 @@
                     <div class="md:col-6">
                       <article class="bg-light dark:bg-darkmode-light rounded p-4">
                         <h4 class="h6 mb-2">
-                          <a href="{{ `/papers/` | relLangURL }}{{ .id }}" class="text-primary dark:text-darkmode-primary hover:underline">
-                            {{ .title }}
+                          <a href="{{ .RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                            {{ .Title }}
                           </a>
                         </h4>
                         <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                          {{ dateFormat "2006" .publishedDate }} • {{ .journal }}
+                          {{ dateFormat "2006" .Params.publishedDate }} • {{ .Params.journal }}
                         </p>
-                        <p class="text-sm">{{ truncate 100 .abstract }}</p>
+                        <p class="text-sm">{{ truncate 100 .Params.abstract }}</p>
                       </article>
                     </div>
                   {{ end }}
@@ -106,32 +109,32 @@
               </div>
             {{ end }}
             
-                         <!-- Related Blog Posts -->
-             {{ $authorPosts := where site.RegularPages "Params.contributors" "==" $authorId }}
-             {{ if $authorPosts }}
-               <div class="bg-light dark:bg-darkmode-light py-8 rounded-lg">
-                 <div class="container">
-                   <div class="row justify-center">
-                     <div class="lg:col-10">
-                       <h3 class="h5 mb-4 text-text-dark dark:text-darkmode-text-dark">
-                         {{ if eq $lang "ku" }}
-                           نووسراوە پەیوەندیدارەکان
-                         {{ else }}
-                           Related Blog Posts
-                         {{ end }}
-                       </h3>
-                                               <div class="row gy-4">
-                          {{ range first 3 $authorPosts }}
-                            <div class="md:col-6 lg:col-6">
-                              {{ partial "components/blog-card" . }}
-                            </div>
-                          {{ end }}
-                        </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             {{ end }}
+            <!-- Related Blog Posts -->
+            {{ $authorPosts := where site.RegularPages "Params.contributors" "==" $authorId }}
+            {{ if $authorPosts }}
+              <div class="bg-light dark:bg-darkmode-light py-8 rounded-lg">
+                <div class="container">
+                  <div class="row justify-center">
+                    <div class="lg:col-10">
+                      <h3 class="h5 mb-4 text-text-dark dark:text-darkmode-text-dark">
+                        {{ if eq $lang "ku" }}
+                          نووسراوە پەیوەندیدارەکان
+                        {{ else }}
+                          Related Blog Posts
+                        {{ end }}
+                      </h3>
+                      <div class="row gy-4">
+                        {{ range first 3 $authorPosts }}
+                          <div class="md:col-6 lg:col-6">
+                            {{ partial "components/blog-card" . }}
+                          </div>
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{ end }}
             
             {{ if not (or $authorPosts $authorPapers) }}
               <div class="text-center py-12">

@@ -12,3 +12,10 @@ search_initial_message: شتێک بنووسە بۆ گەڕان...
 search_navigate: بۆ ڕێڕەوکردن
 search_select: بۆ هەڵبژاردن
 search_close: بۆ داخستن 
+
+# Status translations
+status:
+  active: چالاک
+  completed: تەواوکراو
+  paused: ڕاوەستاو
+  planning: پلاندانان 

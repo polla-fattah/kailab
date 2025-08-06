@@ -1,13 +1,7 @@
 {{ define "main" }}
-  {{ $paperId := .File.BaseFileName | int }}
-  <!-- Load papers data based on language -->
-  {{ $papers := site.Data.papers }}
-  {{ if eq site.Language.Lang "ku" }}
-    {{ $papers = site.Data.papers_ku }}
-  {{ end }}
-  {{ $paper := index (where $papers "id" $paperId) 0 }}
+  {{ $paper := . }}
   
-  {{ if $paper }}
+  {{ if $paper.Params }}
     <section class="section-sm">
       <div class="container">
         <div class="row">
@@ -18,7 +12,7 @@
             <!-- Paper Header -->
             <article class="mb-8">
               <header class="mb-6">
-                <h1 class="h2 mb-4">{{ $paper.title }}</h1>
+                <h1 class="h2 mb-4">{{ $paper.Title }}</h1>
                 
                 <!-- Authors -->
                 <div class="mb-3">
@@ -26,7 +20,7 @@
                     {{ if eq site.Language.Lang "ku" }}نووسەران{{ else }}Authors{{ end }}
                   </h2>
                   <p class="text-lg">
-                    {{ partial "author-display.html" (dict "Authors" $paper.authors "Context" .) }}
+                    {{ partial "author-display.html" (dict "Authors" $paper.Params.authors "Context" .) }}
                   </p>
                 </div>
                 
@@ -34,50 +28,50 @@
                 <div class="flex flex-wrap gap-4 text-text-light dark:text-darkmode-text-light mb-4">
                   <div>
                     <i class="fas fa-journal-whills mr-2"></i>
-                    {{ $paper.journal }}
+                    {{ $paper.Params.journal }}
                   </div>
-                  {{ if $paper.volume }}
-                    <div>Vol. {{ $paper.volume }}{{ if $paper.issue }}({{ $paper.issue }}){{ end }}</div>
+                  {{ if $paper.Params.volume }}
+                    <div>Vol. {{ $paper.Params.volume }}{{ if $paper.Params.issue }}({{ $paper.Params.issue }}){{ end }}</div>
                   {{ end }}
-                  {{ if $paper.pages }}
-                    <div>pp. {{ $paper.pages }}</div>
+                  {{ if $paper.Params.pages }}
+                    <div>pp. {{ $paper.Params.pages }}</div>
                   {{ end }}
                   <div>
                     <i class="fas fa-calendar mr-2"></i>
-                    {{ dateFormat "January 2, 2006" $paper.publishedDate }}
+                    {{ dateFormat "January 2, 2006" $paper.Params.publishedDate }}
                   </div>
                 </div>
 
                 <!-- Project Association -->
-                {{ if $paper.projectId }}
-                  {{ $project := index (where site.Data.projects "id" $paper.projectId) 0 }}
+                {{ if $paper.Params.projectId }}
+                  {{ $projectPage := where $.Site.RegularPages "Type" "projects" }}
+                  {{ $project := where $projectPage "File.BaseFileName" $paper.Params.projectId }}
                   {{ if $project }}
+                    {{ $project = index $project 0 }}
                     <div class="mb-4">
-                      <a href="{{ `/projects/` | relLangURL }}{{ $paper.projectId }}" 
+                      <a href="{{ $project.RelPermalink }}" 
                          class="inline-flex items-center text-primary dark:text-darkmode-primary hover:underline">
-                        <i class="fas {{ $project.icon }} mr-2"></i>
-                        <span>Part of {{ $project.title }} Project</span>
+                        <i class="fas {{ $project.Params.icon }} mr-2"></i>
+                        <span>Part of {{ $project.Title }} Project</span>
                       </a>
                     </div>
                   {{ end }}
                 {{ end }}
 
                 <!-- Organization Associations -->
-                {{ if $paper.organizationIds }}
+                {{ if $paper.Params.organizationIds }}
                   <div class="mb-4">
                     <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Collaborating Organizations:</span>
                     <div class="inline-flex flex-wrap gap-2 mt-2">
-                      {{ range $paper.organizationIds }}
-                        <!-- Load organizations data based on language -->
-                        {{ $orgs := site.Data.organizations }}
-                        {{ if eq site.Language.Lang "ku" }}
-                          {{ $orgs = site.Data.organizations_ku }}
-                        {{ end }}
-                        {{ $org := index (where $orgs "id" .) 0 }}
+                      {{ range $paper.Params.organizationIds }}
+                        <!-- Load organizations from content files -->
+                        {{ $organizations := where site.RegularPages "Type" "organizations" }}
+                        {{ $org := where $organizations "File.BaseFileName" . }}
                         {{ if $org }}
-                          <a href="{{ `/organizations/` | relLangURL }}{{ $org.id }}" 
+                          {{ $org = index $org 0 }}
+                          <a href="{{ $org.RelPermalink }}" 
                              class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-sm px-3 py-1 rounded hover:underline">
-                            {{ $org.title }}
+                            {{ $org.Title }}
                           </a>
                         {{ end }}
                       {{ end }}
@@ -95,15 +89,15 @@
             <!-- Abstract -->
             <div class="content mb-8">
               <h2 class="h3 mb-4">Abstract</h2>
-              <p class="text-justify">{{ $paper.abstract }}</p>
+              <p class="text-justify">{{ $paper.Params.abstract }}</p>
             </div>
 
             <!-- Keywords -->
-            {{ if $paper.keywords }}
+            {{ if $paper.Params.keywords }}
               <div class="mb-8">
                 <h3 class="h4 mb-4">Keywords</h3>
                 <div class="flex flex-wrap gap-2">
-                  {{ range $paper.keywords }}
+                  {{ range $paper.Params.keywords }}
                     <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary px-3 py-1 rounded">
                       {{ . }}
                     </span>
@@ -113,42 +107,39 @@
             {{ end }}
 
             <!-- Related Datasets -->
-            {{ if $paper.datasets }}
+            {{ if $paper.Params.datasetIds }}
               <div class="mb-8">
                 <h3 class="h4 mb-4">Related Datasets</h3>
                 <div class="space-y-4">
-                  {{ range $paper.datasets }}
-                    <!-- Load datasets data based on language -->
-                    {{ $dsets := site.Data.datasets }}
-                    {{ if eq site.Language.Lang "ku" }}
-                      {{ $dsets = site.Data.datasets_ku }}
-                    {{ end }}
-                    {{ $dataset := index (where $dsets "id" .) 0 }}
+                  {{ range $paper.Params.datasetIds }}
+                    {{ $datasetPage := where $.Site.RegularPages "Type" "datasets" }}
+                    {{ $dataset := where $datasetPage "File.BaseFileName" . }}
                     {{ if $dataset }}
+                      {{ $dataset = index $dataset 0 }}
                       <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                         <h4 class="h6 mb-2">
-                          <a href="{{ `/datasets/` | relLangURL }}{{ $dataset.id }}" 
+                          <a href="{{ $dataset.RelPermalink }}" 
                              class="text-primary dark:text-darkmode-primary hover:underline">
-                            {{ $dataset.title }}
+                            {{ $dataset.Title }}
                           </a>
                         </h4>
                         <div class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
                           <span class="mr-4">
                             <i class="fas fa-calendar mr-1"></i>
-                            {{ dateFormat "January 2, 2006" $dataset.publishedDate }}
+                            {{ dateFormat "January 2, 2006" $dataset.Params.publishedDate }}
                           </span>
                           <span class="mr-4">
                             <i class="fas fa-hdd mr-1"></i>
-                            {{ $dataset.size }}
+                            {{ $dataset.Params.size }}
                           </span>
                           <span>
                             <i class="fas fa-code mr-1"></i>
-                            {{ delimit $dataset.format ", " }}
+                            {{ delimit $dataset.Params.format ", " }}
                           </span>
                         </div>
-                        <p class="text-sm">{{ truncate 200 $dataset.description }}</p>
+                        <p class="text-sm">{{ truncate 200 $dataset.Params.description }}</p>
                         <div class="mt-3">
-                          <a href="{{ $dataset.url }}" target="_blank" rel="noopener" 
+                          <a href="{{ $dataset.Params.githubUrl }}" target="_blank" rel="noopener" 
                              class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-download mr-1"></i>
                             Access Dataset
@@ -165,8 +156,8 @@
             <div class="mb-8">
               <h3 class="h4 mb-4">Citation</h3>
               <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
-                <p class="text-sm font-mono">{{ $paper.citation }}</p>
-                <button onclick="navigator.clipboard.writeText('{{ $paper.citation }}')" 
+                <p class="text-sm font-mono">{{ $paper.Params.citation }}</p>
+                <button onclick="navigator.clipboard.writeText('{{ $paper.Params.citation }}')" 
                         class="btn btn-outline-primary btn-sm mt-3">
                   <i class="fas fa-copy mr-1"></i>
                   Copy Citation
@@ -181,42 +172,47 @@
               <!-- Quick Facts -->
               <h3 class="h5 mb-4">Publication Details</h3>
               <div class="space-y-3 mb-6">
-                {{ if $paper.doi }}
+                {{ if $paper.Params.doi }}
                   <div>
                     <span class="font-semibold text-sm block">DOI</span>
-                    <a href="https://doi.org/{{ $paper.doi }}" target="_blank" rel="noopener"
+                    <a href="https://doi.org/{{ $paper.Params.doi }}" target="_blank" rel="noopener"
                        class="text-sm text-primary dark:text-darkmode-primary hover:underline">
-                      {{ $paper.doi }}
+                      {{ $paper.Params.doi }}
                     </a>
                   </div>
                 {{ end }}
                 <div>
                   <span class="font-semibold text-sm block">Authors</span>
-                  <span class="text-sm">{{ len $paper.authors }} author{{ if gt (len $paper.authors) 1 }}s{{ end }}</span>
+                  <span class="text-sm">{{ len $paper.Params.authors }} author{{ if gt (len $paper.Params.authors) 1 }}s{{ end }}</span>
                 </div>
-                {{ if $paper.datasets }}
+                {{ if $paper.Params.datasetIds }}
                   <div>
                     <span class="font-semibold text-sm block">Datasets</span>
-                    <span class="text-sm">{{ len $paper.datasets }} dataset{{ if gt (len $paper.datasets) 1 }}s{{ end }}</span>
+                    <span class="text-sm">{{ len $paper.Params.datasetIds }} dataset{{ if gt (len $paper.Params.datasetIds) 1 }}s{{ end }}</span>
                   </div>
                 {{ end }}
               </div>
 
               <!-- Actions -->
               <div class="space-y-2">
-                {{ if $paper.url }}
-                  <a href="{{ $paper.url }}" target="_blank" rel="noopener" 
+                {{ if $paper.Params.doiUrl }}
+                  <a href="{{ $paper.Params.doiUrl }}" target="_blank" rel="noopener" 
                      class="btn btn-primary w-full">
                     <i class="fas fa-external-link-alt mr-2"></i>
                     Read Full Paper
                   </a>
                 {{ end }}
-                {{ if $paper.projectId }}
-                  <a href="{{ `/projects/` | relLangURL }}{{ $paper.projectId }}" 
-                     class="btn btn-outline-primary w-full">
-                    <i class="fas fa-project-diagram mr-2"></i>
-                    View Project
-                  </a>
+                {{ if $paper.Params.projectId }}
+                  {{ $projectPage := where $.Site.RegularPages "Type" "projects" }}
+                  {{ $project := where $projectPage "File.BaseFileName" $paper.Params.projectId }}
+                  {{ if $project }}
+                    {{ $project = index $project 0 }}
+                    <a href="{{ $project.RelPermalink }}" 
+                       class="btn btn-outline-primary w-full">
+                      <i class="fas fa-project-diagram mr-2"></i>
+                      {{ if eq site.Language.Lang "ku" }}بینینی پڕۆژە{{ else }}View Project{{ end }}
+                    </a>
+                  {{ end }}
                 {{ end }}
                 <a href="{{ `/papers/` | relLangURL }}" 
                    class="btn btn-outline-primary w-full">

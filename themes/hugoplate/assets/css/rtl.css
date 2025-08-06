@@ -807,4 +807,88 @@
   margin-left: auto !important;
   margin-right: auto !important;
   display: inline-block !important;
+}
+
+/* RTL Icon Spacing - Fix margin-right to margin-left for RTL */
+[dir="rtl"] .mr-1 {
+  margin-right: 0 !important;
+  margin-left: 0.25rem !important;
+}
+
+[dir="rtl"] .mr-2 {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .mr-4 {
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
+}
+
+[dir="rtl"] .mr-5 {
+  margin-right: 0 !important;
+  margin-left: 1.25rem !important;
+}
+
+/* RTL Icon Spacing - Fix margin-left to margin-right for RTL */
+[dir="rtl"] .ml-1 {
+  margin-left: 0 !important;
+  margin-right: 0.25rem !important;
+}
+
+[dir="rtl"] .ml-2 {
+  margin-left: 0 !important;
+  margin-right: 0.5rem !important;
+}
+
+[dir="rtl"] .ml-4 {
+  margin-left: 0 !important;
+  margin-right: 1rem !important;
+}
+
+[dir="rtl"] .ml-5 {
+  margin-left: 0 !important;
+  margin-right: 1.25rem !important;
+}
+
+/* RTL Icon Spacing - Fix padding-right to padding-left for RTL */
+[dir="rtl"] .pr-1 {
+  padding-right: 0 !important;
+  padding-left: 0.25rem !important;
+}
+
+[dir="rtl"] .pr-2 {
+  padding-right: 0 !important;
+  padding-left: 0.5rem !important;
+}
+
+[dir="rtl"] .pr-4 {
+  padding-right: 0 !important;
+  padding-left: 1rem !important;
+}
+
+[dir="rtl"] .pr-5 {
+  padding-right: 0 !important;
+  padding-left: 1.25rem !important;
+}
+
+/* RTL Icon Spacing - Fix padding-left to padding-right for RTL */
+[dir="rtl"] .pl-1 {
+  padding-left: 0 !important;
+  padding-right: 0.25rem !important;
+}
+
+[dir="rtl"] .pl-2 {
+  padding-left: 0 !important;
+  padding-right: 0.5rem !important;
+}
+
+[dir="rtl"] .pl-4 {
+  padding-left: 0 !important;
+  padding-right: 1rem !important;
+}
+
+[dir="rtl"] .pl-5 {
+  padding-left: 0 !important;
+  padding-right: 1.25rem !important;
 } 

@@ -1,13 +1,7 @@
 {{ define "main" }}
-  {{ $datasetId := .File.BaseFileName | int }}
-  <!-- Load datasets data based on language -->
-  {{ $datasets := site.Data.datasets }}
-  {{ if eq site.Language.Lang "ku" }}
-    {{ $datasets = site.Data.datasets_ku }}
-  {{ end }}
-  {{ $dataset := index (where $datasets "id" $datasetId) 0 }}
+  {{ $dataset := . }}
   
-  {{ if $dataset }}
+  {{ if $dataset.Params }}
     <section class="section-sm">
       <div class="container">
         <div class="row">
@@ -18,34 +12,34 @@
             <!-- Dataset Header -->
             <article class="mb-8">
               <header class="mb-6">
-                <h1 class="h2 mb-4">{{ $dataset.title }}</h1>
+                <h1 class="h2 mb-4">{{ $dataset.Title }}</h1>
                 
                 <!-- Quick Info -->
                 <div class="flex flex-wrap gap-4 text-text-light dark:text-darkmode-text-light mb-4">
                   <div>
                     <i class="fas fa-calendar mr-2"></i>
-                    Published: {{ dateFormat "January 2, 2006" $dataset.publishedDate }}
+                    Published: {{ dateFormat "January 2, 2006" $dataset.Params.publishedDate }}
                   </div>
                   <div>
                     <i class="fas fa-hdd mr-2"></i>
-                    Size: {{ $dataset.size }}
+                    Size: {{ $dataset.Params.size }}
                   </div>
                   <div>
                     <i class="fas fa-balance-scale mr-2"></i>
-                    License: {{ $dataset.license }}
+                    License: {{ $dataset.Params.license }}
                   </div>
                   <div>
                     <i class="fas fa-tag mr-2"></i>
-                    Domain: {{ $dataset.domain }}
+                    Domain: {{ $dataset.Params.domain }}
                   </div>
                 </div>
 
                 <!-- Languages -->
-                {{ if $dataset.languages }}
+                {{ if $dataset.Params.languages }}
                   <div class="mb-4">
                     <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Languages:</span>
                     <div class="inline-flex flex-wrap gap-2">
-                      {{ range $dataset.languages }}
+                      {{ range $dataset.Params.languages }}
                         <span class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-sm px-2 py-1 rounded">
                           {{ . }}
                         </span>
@@ -55,11 +49,11 @@
                 {{ end }}
 
                 <!-- Formats -->
-                {{ if $dataset.format }}
+                {{ if $dataset.Params.format }}
                   <div class="mb-4">
                     <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Formats:</span>
                     <div class="inline-flex flex-wrap gap-2">
-                      {{ range $dataset.format }}
+                      {{ range $dataset.Params.format }}
                         <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-sm px-2 py-1 rounded">
                           {{ . }}
                         </span>
@@ -69,21 +63,19 @@
                 {{ end }}
 
                 <!-- Organization Associations -->
-                {{ if $dataset.organizationIds }}
+                {{ if $dataset.Params.organizationIds }}
                   <div class="mb-4">
                     <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Contributing Organizations:</span>
                     <div class="inline-flex flex-wrap gap-2 mt-2">
-                      {{ range $dataset.organizationIds }}
-                        <!-- Load organizations data based on language -->
-                        {{ $orgs := site.Data.organizations }}
-                        {{ if eq site.Language.Lang "ku" }}
-                          {{ $orgs = site.Data.organizations_ku }}
-                        {{ end }}
-                        {{ $org := index (where $orgs "id" .) 0 }}
+                      {{ range $dataset.Params.organizationIds }}
+                        <!-- Load organizations from content files -->
+                        {{ $organizations := where site.RegularPages "Type" "organizations" }}
+                        {{ $org := where $organizations "File.BaseFileName" . }}
                         {{ if $org }}
-                          <a href="{{ `/organizations/` | relLangURL }}{{ $org.id }}" 
+                          {{ $org = index $org 0 }}
+                          <a href="{{ $org.RelPermalink }}" 
                              class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-sm px-3 py-1 rounded hover:underline">
-                            {{ $org.title }}
+                            {{ $org.Title }}
                           </a>
                         {{ end }}
                       {{ end }}
@@ -101,66 +93,65 @@
             <!-- Description -->
             <div class="content mb-8">
               <h2 class="h3 mb-4">Dataset Description</h2>
-              <p class="text-justify">{{ $dataset.description }}</p>
+                              <p class="text-justify">{{ $dataset.Params.description }}</p>
             </div>
 
             <!-- Structure -->
-            {{ if $dataset.structure }}
+            {{ if $dataset.Params.structure }}
               <div class="mb-8">
                 <h3 class="h4 mb-4">Data Structure</h3>
                 <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
-                  <p class="text-sm">{{ $dataset.structure }}</p>
+                  <p class="text-sm">{{ $dataset.Params.structure }}</p>
                 </div>
               </div>
             {{ end }}
 
             <!-- Main Paper -->
-            {{ if $dataset.mainPaper }}
-              {{ $mainPaper := index (where site.Data.papers "id" $dataset.mainPaper) 0 }}
+            {{ if $dataset.Params.mainPaperId }}
+              {{ $mainPaperPage := where $.Site.RegularPages "Type" "papers" }}
+              {{ $mainPaper := where $mainPaperPage "File.BaseFileName" $dataset.Params.mainPaperId }}
               {{ if $mainPaper }}
+                {{ $mainPaper = index $mainPaper 0 }}
                 <div class="mb-8">
                   <h3 class="h4 mb-4">Primary Publication</h3>
                   <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                     <h4 class="h6 mb-2">
-                      <a href="{{ `/papers/` | relLangURL }}{{ $mainPaper.id }}" 
+                      <a href="{{ $mainPaper.RelPermalink }}" 
                          class="text-primary dark:text-darkmode-primary hover:underline">
-                        {{ $mainPaper.title }}
+                        {{ $mainPaper.Title }}
                       </a>
                     </h4>
                     <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                      {{ delimit $mainPaper.authors ", " }} ({{ dateFormat "2006" $mainPaper.publishedDate }})
+                      {{ delimit $mainPaper.Params.authors ", " }} ({{ dateFormat "2006" $mainPaper.Params.publishedDate }})
                     </p>
-                    <p class="text-sm">{{ truncate 200 $mainPaper.abstract }}</p>
+                    <p class="text-sm">{{ truncate 200 $mainPaper.Params.abstract }}</p>
                   </div>
                 </div>
               {{ end }}
             {{ end }}
 
             <!-- Related Papers -->
-            {{ if $dataset.papers }}
+            {{ if $dataset.Params.paperIds }}
               <div class="mb-8">
                 <h3 class="h4 mb-4">Related Publications</h3>
                 <div class="space-y-4">
-                  {{ range $dataset.papers }}
-                    {{ if ne . $dataset.mainPaper }}
-                      <!-- Load papers data based on language -->
-                      {{ $paps := site.Data.papers }}
-                      {{ if eq site.Language.Lang "ku" }}
-                        {{ $paps = site.Data.papers_ku }}
-                      {{ end }}
-                      {{ $paper := index (where $paps "id" .) 0 }}
+                  {{ range $dataset.Params.paperIds }}
+                    {{ if ne . $dataset.Params.mainPaperId }}
+                      {{ $paperPage := where $.Site.RegularPages "Type" "papers" }}
+                      {{ $paper := where $paperPage "File.BaseFileName" . }}
                       {{ if $paper }}
+                        {{ $paper = index $paper 0 }}
                         <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                           <h4 class="h6 mb-2">
-                            <a href="{{ `/papers/` | relLangURL }}{{ $paper.id }}" 
+                            <a href="{{ $paper.RelPermalink }}" 
                                class="text-primary dark:text-darkmode-primary hover:underline">
-                              {{ $paper.title }}
+                              {{ $paper.Title }}
                             </a>
                           </h4>
                           <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                            {{ delimit $paper.authors ", " }} ({{ dateFormat "2006" $paper.publishedDate }})
+                            {{ delimit $paper.Params.authors ", " }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
                           </p>
-                          <p class="text-sm">{{ truncate 150 $paper.abstract }}</p>
+                          <p class="text-sm">{{ truncate 150 $paper.Params.abstract }}</p>
                         </div>
                       {{ end }}
                     {{ end }}
@@ -173,8 +164,8 @@
             <div class="mb-8">
               <h3 class="h4 mb-4">How to Cite</h3>
               <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
-                <p class="text-sm font-mono mb-3">{{ $dataset.cite }}</p>
-                <button onclick="navigator.clipboard.writeText('{{ $dataset.cite }}')" 
+                <p class="text-sm font-mono mb-3">{{ $dataset.Params.cite }}</p>
+                <button onclick="navigator.clipboard.writeText('{{ $dataset.Params.cite }}')" 
                         class="btn btn-outline-primary btn-sm">
                   <i class="fas fa-copy mr-1"></i>
                   Copy Citation
@@ -191,20 +182,20 @@
               <div class="space-y-3 mb-6">
                 <div>
                   <span class="font-semibold text-sm block">Total Size</span>
-                  <span class="text-sm">{{ $dataset.size }}</span>
+                  <span class="text-sm">{{ $dataset.Params.size }}</span>
                 </div>
                 <div>
                   <span class="font-semibold text-sm block">Languages</span>
-                  <span class="text-sm">{{ len $dataset.languages }} language{{ if gt (len $dataset.languages) 1 }}s{{ end }}</span>
+                  <span class="text-sm">{{ len $dataset.Params.languages }} language{{ if gt (len $dataset.Params.languages) 1 }}s{{ end }}</span>
                 </div>
                 <div>
                   <span class="font-semibold text-sm block">Formats</span>
-                  <span class="text-sm">{{ len $dataset.format }} format{{ if gt (len $dataset.format) 1 }}s{{ end }}</span>
+                  <span class="text-sm">{{ len $dataset.Params.format }} format{{ if gt (len $dataset.Params.format) 1 }}s{{ end }}</span>
                 </div>
-                {{ if $dataset.papers }}
+                {{ if $dataset.Params.paperIds }}
                   <div>
                     <span class="font-semibold text-sm block">Related Papers</span>
-                    <span class="text-sm">{{ len $dataset.papers }} publication{{ if gt (len $dataset.papers) 1 }}s{{ end }}</span>
+                    <span class="text-sm">{{ len $dataset.Params.paperIds }} publication{{ if gt (len $dataset.Params.paperIds) 1 }}s{{ end }}</span>
                   </div>
                 {{ end }}
               </div>
@@ -212,26 +203,31 @@
               <!-- Access -->
               <div class="mb-6">
                 <h4 class="h6 mb-3">Data Access</h4>
-                {{ if $dataset.url }}
-                  <a href="{{ $dataset.url }}" target="_blank" rel="noopener" 
+                {{ if $dataset.Params.githubUrl }}
+                  <a href="{{ $dataset.Params.githubUrl }}" target="_blank" rel="noopener" 
                      class="btn btn-primary w-full mb-3">
                     <i class="fas fa-download mr-2"></i>
                     Download Dataset
                   </a>
                 {{ end }}
                 <p class="text-xs text-text-light dark:text-darkmode-text-light">
-                  Licensed under {{ $dataset.license }}
+                  Licensed under {{ $dataset.Params.license }}
                 </p>
               </div>
 
               <!-- Quick Actions -->
               <div class="space-y-2">
-                {{ if $dataset.mainPaper }}
-                  <a href="{{ `/papers/` | relLangURL }}{{ $dataset.mainPaper }}" 
-                     class="btn btn-outline-primary btn-sm w-full">
-                    <i class="fas fa-file-alt mr-2"></i>
-                    View Main Paper
-                  </a>
+                {{ if $dataset.Params.mainPaperId }}
+                  {{ $mainPaperPage := where $.Site.RegularPages "Type" "papers" }}
+                  {{ $mainPaper := where $mainPaperPage "File.BaseFileName" $dataset.Params.mainPaperId }}
+                  {{ if $mainPaper }}
+                    {{ $mainPaper = index $mainPaper 0 }}
+                    <a href="{{ $mainPaper.RelPermalink }}" 
+                       class="btn btn-outline-primary btn-sm w-full">
+                      <i class="fas fa-file-alt mr-2"></i>
+                      View Main Paper
+                    </a>
+                  {{ end }}
                 {{ end }}
                 <a href="{{ `/datasets/` | relLangURL }}" 
                    class="btn btn-outline-primary btn-sm w-full">

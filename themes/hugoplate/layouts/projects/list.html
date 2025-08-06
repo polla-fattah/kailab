@@ -8,28 +8,23 @@
         </div>
       </div>
 
-      <!-- Load projects data based on language -->
-      {{ $projects := site.Data.projects }}
-      {{ if eq site.Language.Lang "ku" }}
-        {{ $projects = site.Data.projects_ku }}
-      {{ end }}
-      
       <!-- Projects Grid -->
       <div class="row gy-4">
-        {{ range $projects }}
+        {{ range .Site.RegularPages }}
+          {{ if eq .Type "projects" }}
           <div class="col-12 md:col-6 lg:col-4">
             <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col">
               <!-- Project Icon -->
               <div class="mb-4">
-                <i class="fas {{ .icon }} text-3xl text-primary dark:text-darkmode-primary"></i>
+                <i class="fas {{ .Params.icon }} text-3xl text-primary dark:text-darkmode-primary"></i>
               </div>
               
               <!-- Project Title -->
-              <h3 class="h5 mb-3">{{ .title }}</h3>
+              <h3 class="h5 mb-3">{{ .Title }}</h3>
               
               <!-- Short Description -->
               <p class="text-text-light dark:text-darkmode-text-light mb-4 flex-grow">
-                {{ .shortDescription }}
+                {{ .Params.shortDescription }}
               </p>
               
               <!-- Project Stats -->
@@ -38,23 +33,23 @@
                   <span><i class="fas fa-file-alt mr-1"></i> 
                     {{ if eq site.Language.Lang "ku" }}وتارەکان:{{ else }}Papers:{{ end }}
                   </span>
-                  <span>{{ .publications }}</span>
+                  <span>{{ .Params.publications }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-2">
                   <span><i class="fas fa-database mr-1"></i> 
                     {{ if eq site.Language.Lang "ku" }}داتاسێتەکان:{{ else }}Datasets:{{ end }}
                   </span>
-                  <span>{{ .datasets }}</span>
+                  <span>{{ .Params.datasets }}</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span><i class="fas fa-play-circle mr-1"></i> 
                     {{ if eq site.Language.Lang "ku" }}دۆخ:{{ else }}Status:{{ end }}
                   </span>
                   <span class="capitalize 
-                    {{ if eq .status "active" }}text-green-600 dark:text-green-400{{ end }}
-                    {{ if eq .status "completed" }}text-blue-600 dark:text-blue-400{{ end }}
-                    {{ if eq .status "planning" }}text-yellow-600 dark:text-yellow-400{{ end }}">
-                    {{ .status }}
+                    {{ if eq .Params.status "active" }}text-green-600 dark:text-green-400{{ end }}
+                    {{ if eq .Params.status "completed" }}text-blue-600 dark:text-blue-400{{ end }}
+                    {{ if eq .Params.status "planning" }}text-yellow-600 dark:text-yellow-400{{ end }}">
+                    {{ i18n (printf "status.%s" .Params.status) | default .Params.status }}
                   </span>
                 </div>
               </div>
@@ -65,14 +60,14 @@
                   {{ if eq site.Language.Lang "ku" }}تەکنەلۆجیەکان:{{ else }}Technologies:{{ end }}
                 </p>
                 <div class="flex flex-wrap gap-1">
-                  {{ range (first 3 .technologies) }}
+                  {{ range (first 3 .Params.technologies) }}
                     <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-xs px-2 py-1 rounded">
                       {{ . }}
                     </span>
                   {{ end }}
-                  {{ if gt (len .technologies) 3 }}
+                  {{ if gt (len .Params.technologies) 3 }}
                     <span class="text-xs text-text-light dark:text-darkmode-text-light">
-                      {{ if eq site.Language.Lang "ku" }}+{{ sub (len .technologies) 3 }} زیاتر{{ else }}+{{ sub (len .technologies) 3 }} more{{ end }}
+                      {{ if eq site.Language.Lang "ku" }}+{{ sub (len .Params.technologies) 3 }} زیاتر{{ else }}+{{ sub (len .Params.technologies) 3 }} more{{ end }}
                     </span>
                   {{ end }}
                 </div>
@@ -80,7 +75,7 @@
               
               <!-- View Details Button -->
               <div class="mt-auto">
-                <a href="{{ `/projects/` | relLangURL }}{{ .id }}" 
+                <a href="{{ .RelPermalink }}" 
                    class="btn btn-outline-primary btn-sm w-full">
                   {{ if eq site.Language.Lang "ku" }}بینینی وردەکارییەکان{{ else }}View Details{{ end }}
                   <i class="fas fa-arrow-right ml-2"></i>
@@ -88,6 +83,7 @@
               </div>
             </div>
           </div>
+          {{ end }}
         {{ end }}
       </div>
 

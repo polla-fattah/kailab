@@ -45,8 +45,8 @@ features:
       - "یەکگرتن لەگەڵ دامەزراوە پەروەردەییەکان"
     button:
       enable: true
-      label: "کارەکانمان بگەڕێ"
-      link: "/projects/terminology-standardization"
+      label: "کارەکانمان"
+      link: "/ku/projects/terminology-standardization"
 
   - title: "بڵاوکراوەکان"
     image: "/images/service-3.png"
@@ -58,15 +58,15 @@ features:
       - "توێژینەوەی هاوبەش لەگەڵ زانکۆکانی پێشڕەوی جیهان"
     button:
       enable: true
-      label: "گەڕان لە بڵاوکراوەکان"
-      link: "/papers"
+      label: "بڵاوکراوەکان"
+      link: "/ku/papers"
 
 # Datasets Section
 datasets:
   enable: true
   show_more:
     enable: true
-    label: "گەڕان لە هەموو داتاسێتەکان"
+    label: "هەموو داتاسێتەکان"
     link: "/datasets"
   featured_datasets: [1, 2, 3] # Show these dataset IDs
 --- 

@@ -1,22 +1,9 @@
 {{ define "main" }}
-  {{ $projectId := .File.BaseFileName }}
-  <!-- Load projects data based on language -->
-  {{ $projects := site.Data.projects }}
-  {{ if eq site.Language.Lang "ku" }}
-    {{ $projects = site.Data.projects_ku }}
-  {{ end }}
-  {{ $project := index (where $projects "id" $projectId) 0 }}
+  {{ $project := . }}
   
-  <!-- Debug info -->
-  <div style="background: red; color: white; padding: 10px; margin: 10px;">
-    Language: {{ site.Language.Lang }}<br>
-    Project ID: {{ $projectId }}<br>
-    Projects count: {{ len $projects }}<br>
-    Project found: {{ if $project }}YES{{ else }}NO{{ end }}<br>
-    Available IDs: {{ range $projects }}{{ .id }}, {{ end }}
-  </div>
+
   
-  {{ if $project }}
+  {{ if $project.Params }}
     <section class="section-sm">
       <div class="container">
         <div class="row">
@@ -27,10 +14,10 @@
             <!-- Project Header -->
             <div class="mb-8">
               <div class="flex items-center mb-4">
-                <i class="fas {{ $project.icon }} text-4xl text-primary dark:text-darkmode-primary mr-4"></i>
+                <i class="fas {{ $project.Params.icon }} text-4xl text-primary dark:text-darkmode-primary mr-4"></i>
                 <div>
-                  <h1 class="h2 mb-2">{{ $project.title }}</h1>
-                  <p class="text-lg text-text-light dark:text-darkmode-text-light">{{ $project.shortDescription }}</p>
+                  <h1 class="h2 mb-2">{{ $project.Title }}</h1>
+                  <p class="text-lg text-text-light dark:text-darkmode-text-light">{{ $project.Params.shortDescription }}</p>
                 </div>
               </div>
               
@@ -38,17 +25,17 @@
               <div class="flex flex-wrap gap-4 mb-6">
                 <div class="flex items-center">
                   <i class="fas fa-play-circle mr-2 text-primary dark:text-darkmode-primary"></i>
-                  <span class="capitalize {{ if eq $project.status "active" }}text-green-600 dark:text-green-400{{ end }}">
-                    {{ $project.status }}
+                  <span class="capitalize {{ if eq $project.Params.status "active" }}text-green-600 dark:text-green-400{{ end }}">
+                    {{ i18n (printf "status.%s" $project.Params.status) | default $project.Params.status }}
                   </span>
                 </div>
                 <div class="flex items-center">
                   <i class="fas fa-calendar mr-2 text-primary dark:text-darkmode-primary"></i>
-                  <span>{{ if eq site.Language.Lang "ku" }}دەستپێکراوە:{{ else }}Started:{{ end }} {{ dateFormat "January 2006" $project.startDate }}</span>
+                  <span>{{ if eq site.Language.Lang "ku" }}دەستپێکراوە:{{ else }}Started:{{ end }} {{ dateFormat "January 2006" $project.Params.startDate }}</span>
                 </div>
                 <div class="flex items-center">
                   <i class="fas fa-users mr-2 text-primary dark:text-darkmode-primary"></i>
-                  <span>{{ len $project.team }} {{ if eq site.Language.Lang "ku" }}ئەندامی تیم{{ else }}Team Members{{ end }}</span>
+                  <span>{{ len $project.Params.team }} {{ if eq site.Language.Lang "ku" }}ئەندامی تیم{{ else }}Team Members{{ end }}</span>
                 </div>
               </div>
             </div>
@@ -61,14 +48,14 @@
             <!-- Description -->
             <div class="content mb-8">
               <h2 class="h3 mb-4">{{ if eq site.Language.Lang "ku" }}نوێنەری پڕۆژە{{ else }}Project Overview{{ end }}</h2>
-              <p>{{ $project.description }}</p>
+              <p>{{ $project.Params.description }}</p>
             </div>
 
             <!-- Technologies -->
             <div class="mb-8">
               <h3 class="h4 mb-4">{{ if eq site.Language.Lang "ku" }}تەکنەلۆجیەکان و ڕێگەکان{{ else }}Technologies & Methods{{ end }}</h3>
               <div class="flex flex-wrap gap-2">
-                {{ range $project.technologies }}
+                {{ range $project.Params.technologies }}
                   <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary px-3 py-1 rounded">
                     {{ . }}
                   </span>
@@ -80,30 +67,32 @@
             <div class="mb-8">
               <h3 class="h4 mb-4">{{ if eq site.Language.Lang "ku" }}بەکارهێنانەکان{{ else }}Applications{{ end }}</h3>
               <ul class="list-disc pl-6">
-                {{ range $project.applications }}
+                {{ range $project.Params.applications }}
                   <li class="mb-2">{{ . }}</li>
                 {{ end }}
               </ul>
             </div>
 
             <!-- Related Papers -->
-            {{ if $project.paperIds }}
+            {{ if $project.Params.paperIds }}
               <div class="mb-8">
                 <h3 class="h4 mb-4">{{ if eq site.Language.Lang "ku" }}بڵاوکراوە پەیوەندیدارەکان{{ else }}Related Publications{{ end }}</h3>
                 <div class="space-y-4">
-                  {{ range $project.paperIds }}
-                    {{ $paper := index (where site.Data.papers "id" .) 0 }}
+                  {{ range $project.Params.paperIds }}
+                    {{ $paperPage := where site.RegularPages "Type" "papers" }}
+                    {{ $paper := where $paperPage "File.BaseFileName" (printf "paper-%d" .) }}
                     {{ if $paper }}
+                      {{ $paper = index $paper 0 }}
                       <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                         <h4 class="h6 mb-2">
-                          <a href="{{ `/papers/` | relLangURL }}{{ $paper.id }}" class="text-primary dark:text-darkmode-primary hover:underline">
-                            {{ $paper.title }}
+                          <a href="{{ $paper.RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                            {{ $paper.Title }}
                           </a>
                         </h4>
                         <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                          {{ delimit $paper.authors ", " }} ({{ dateFormat "2006" $paper.publishedDate }})
+                          {{ delimit $paper.Params.authors ", " }} ({{ dateFormat "2006" $paper.Params.publishedDate }})
                         </p>
-                        <p class="text-sm">{{ truncate 200 $paper.abstract }}</p>
+                        <p class="text-sm">{{ truncate 200 $paper.Params.abstract }}</p>
                       </div>
                     {{ end }}
                   {{ end }}
@@ -112,23 +101,25 @@
             {{ end }}
 
             <!-- Related Datasets -->
-            {{ if $project.datasetIds }}
+            {{ if $project.Params.datasetIds }}
               <div class="mb-8">
                 <h3 class="h4 mb-4">{{ if eq site.Language.Lang "ku" }}داتاسێتە پەیوەندیدارەکان{{ else }}Related Datasets{{ end }}</h3>
                 <div class="space-y-4">
-                  {{ range $project.datasetIds }}
-                    {{ $dataset := index (where site.Data.datasets "id" .) 0 }}
+                  {{ range $project.Params.datasetIds }}
+                    {{ $datasetPage := where site.RegularPages "Type" "datasets" }}
+                    {{ $dataset := where $datasetPage "File.BaseFileName" (printf "dataset-%d" .) }}
                     {{ if $dataset }}
+                      {{ $dataset = index $dataset 0 }}
                       <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                         <h4 class="h6 mb-2">
-                          <a href="{{ `/datasets/` | relLangURL }}{{ $dataset.id }}" class="text-primary dark:text-darkmode-primary hover:underline">
-                            {{ $dataset.title }}
+                          <a href="{{ $dataset.RelPermalink }}" class="text-primary dark:text-darkmode-primary hover:underline">
+                            {{ $dataset.Title }}
                           </a>
                         </h4>
                         <p class="text-sm text-text-light dark:text-darkmode-text-light mb-2">
-                          {{ if eq site.Language.Lang "ku" }}بڵاوکراوە:{{ else }}Published:{{ end }} {{ dateFormat "January 2, 2006" $dataset.publishedDate }} | {{ if eq site.Language.Lang "ku" }}قەبارە:{{ else }}Size:{{ end }} {{ $dataset.size }}
+                          {{ if eq site.Language.Lang "ku" }}بڵاوکراوە:{{ else }}Published:{{ end }} {{ dateFormat "January 2, 2006" $dataset.Params.publishedDate }} | {{ if eq site.Language.Lang "ku" }}قەبارە:{{ else }}Size:{{ end }} {{ $dataset.Params.size }}
                         </p>
-                        <p class="text-sm">{{ truncate 200 $dataset.description }}</p>
+                        <p class="text-sm">{{ truncate 200 $dataset.Params.description }}</p>
                       </div>
                     {{ end }}
                   {{ end }}
@@ -145,30 +136,30 @@
               <div class="space-y-3 mb-6">
                 <div class="flex justify-between">
                   <span>{{ if eq site.Language.Lang "ku" }}بڵاوکراوەکان:{{ else }}Publications:{{ end }}</span>
-                  <span class="font-semibold">{{ $project.publications }}</span>
+                  <span class="font-semibold">{{ $project.Params.publications }}</span>
                 </div>
                 <div class="flex justify-between">
                   <span>{{ if eq site.Language.Lang "ku" }}داتاسێتەکان:{{ else }}Datasets:{{ end }}</span>
-                  <span class="font-semibold">{{ $project.datasets }}</span>
+                  <span class="font-semibold">{{ $project.Params.datasets }}</span>
                 </div>
                 <div class="flex justify-between">
                   <span>{{ if eq site.Language.Lang "ku" }}قەبارەی تیم:{{ else }}Team Size:{{ end }}</span>
-                  <span class="font-semibold">{{ len $project.team }}</span>
+                  <span class="font-semibold">{{ len $project.Params.team }}</span>
                 </div>
               </div>
 
               <!-- Team -->
               <h4 class="h6 mb-3">{{ if eq site.Language.Lang "ku" }}تیمی توێژینەوە{{ else }}Research Team{{ end }}</h4>
               <ul class="text-sm space-y-1 mb-6">
-                {{ range $project.team }}
+                {{ range $project.Params.team }}
                   <li>{{ . }}</li>
                 {{ end }}
               </ul>
 
               <!-- Funding -->
-              {{ if $project.funding }}
+              {{ if $project.Params.funding }}
                 <h4 class="h6 mb-3">{{ if eq site.Language.Lang "ku" }}دەرماڵە{{ else }}Funding{{ end }}</h4>
-                <p class="text-sm text-text-light dark:text-darkmode-text-light mb-6">{{ $project.funding }}</p>
+                <p class="text-sm text-text-light dark:text-darkmode-text-light mb-6">{{ $project.Params.funding }}</p>
               {{ end }}
 
               <!-- Quick Actions -->
