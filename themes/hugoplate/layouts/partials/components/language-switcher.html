@@ -13,23 +13,21 @@
   {{ $pageTranslations.Set .Language.Lang .Permalink }}
 {{ end }}
 
-<select class="{{ $class }}" onchange="location = this.value">
+<div class="language-switcher">
   {{ range site.Languages }}
-    {{/* Fill the dropdown with all known languages */}}
-    {{ $link := $pageTranslations.Get .Lang }}
-    {{ if $link }}
-      <option
-        id="{{ .Lang }}"
-        value="{{ $link }}"
-      {{ if eq .Lang $pageLang }}
-        selected
+    {{ $targetLang := .Lang }}
+    {{ $targetURL := $pageTranslations.Get $targetLang }}
+    {{ if ne $pageLang $targetLang }}
+      {{ if eq $pageLang "en" }}
+        <a href="{{ $targetURL }}" class="language-btn language-btn-kurdish">
+          <span class="kurdish-text">کوردی</span>
+        </a>
+      {{ else if eq $pageLang "ku" }}
+        <a href="{{ $targetURL }}" class="language-btn language-btn-english">
+          <span class="english-text">English</span>
+        </a>
       {{ end }}
-        >
-        {{ .LanguageName }}
-      </option>
-    {{ else }}
-      {{/* if we can't safely redirect the user to the translated page or at least to translated home, discard the language from options */}}
     {{ end }}
   {{ end }}
-</select>
+</div>
 {{ end }}

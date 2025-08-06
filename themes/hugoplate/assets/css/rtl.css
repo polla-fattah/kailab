@@ -397,10 +397,23 @@
 
 [dir="rtl"] .content blockquote {
   text-align: right !important;
-  border-right: 4px solid #e2e8f0 !important;
-  border-left: none !important;
-  padding-right: 1rem !important;
-  padding-left: 0 !important;
+}
+
+/* RTL Language Switcher - Additional RTL-specific adjustments */
+[dir="rtl"] .language-switcher {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .language-btn {
+  text-align: center !important;
+  direction: rtl !important;
+  font-family: 'Noto Sans Kurdish', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* RTL Language Switcher - Ensure proper spacing in header */
+[dir="rtl"] .order-1.ml-auto.flex.items-center.md\:order-2.lg\:ml-0 .language-switcher {
+  margin-left: 0 !important;
+  margin-right: 1.25rem !important;
 }
 
 /* RTL Contact Form */
