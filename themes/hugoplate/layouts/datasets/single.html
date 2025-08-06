@@ -18,26 +18,28 @@
                 <div class="flex flex-wrap gap-4 text-text-light dark:text-darkmode-text-light mb-4">
                   <div>
                     <i class="fas fa-calendar mr-2"></i>
-                    Published: {{ dateFormat "January 2, 2006" $dataset.Params.publishedDate }}
+                    {{ if eq site.Language.Lang "ku" }}بڵاوکراوە:{{ else }}Published:{{ end }} {{ dateFormat "January 2, 2006" $dataset.Params.publishedDate }}
                   </div>
                   <div>
                     <i class="fas fa-hdd mr-2"></i>
-                    Size: {{ $dataset.Params.size }}
+                    {{ if eq site.Language.Lang "ku" }}قەبارە:{{ else }}Size:{{ end }} {{ $dataset.Params.size }}
                   </div>
                   <div>
                     <i class="fas fa-balance-scale mr-2"></i>
-                    License: {{ $dataset.Params.license }}
+                    {{ if eq site.Language.Lang "ku" }}مۆڵەت:{{ else }}License:{{ end }} {{ $dataset.Params.license }}
                   </div>
                   <div>
                     <i class="fas fa-tag mr-2"></i>
-                    Domain: {{ $dataset.Params.domain }}
+                    {{ if eq site.Language.Lang "ku" }}بوار:{{ else }}Domain:{{ end }} {{ $dataset.Params.domain }}
                   </div>
                 </div>
 
                 <!-- Languages -->
                 {{ if $dataset.Params.languages }}
                   <div class="mb-4">
-                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Languages:</span>
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">
+                      {{ if eq site.Language.Lang "ku" }}زمانەکان:{{ else }}Languages:{{ end }}
+                    </span>
                     <div class="inline-flex flex-wrap gap-2">
                       {{ range $dataset.Params.languages }}
                         <span class="inline-block bg-secondary/10 text-secondary dark:bg-darkmode-secondary/10 dark:text-darkmode-secondary text-sm px-2 py-1 rounded">
@@ -51,7 +53,9 @@
                 <!-- Formats -->
                 {{ if $dataset.Params.format }}
                   <div class="mb-4">
-                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Formats:</span>
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">
+                      {{ if eq site.Language.Lang "ku" }}فۆرماتەکان:{{ else }}Formats:{{ end }}
+                    </span>
                     <div class="inline-flex flex-wrap gap-2">
                       {{ range $dataset.Params.format }}
                         <span class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-sm px-2 py-1 rounded">
@@ -65,7 +69,9 @@
                 <!-- Organization Associations -->
                 {{ if $dataset.Params.organizationIds }}
                   <div class="mb-4">
-                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">Contributing Organizations:</span>
+                    <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">
+                      {{ if eq site.Language.Lang "ku" }}ڕێکخراوە بەشداربووان:{{ else }}Contributing Organizations:{{ end }}
+                    </span>
                     <div class="inline-flex flex-wrap gap-2 mt-2">
                       {{ range $dataset.Params.organizationIds }}
                         <!-- Load organizations from content files -->
@@ -92,14 +98,18 @@
           <div class="col-12 lg:col-8 mb-8">
             <!-- Description -->
             <div class="content mb-8">
-              <h2 class="h3 mb-4">Dataset Description</h2>
-                              <p class="text-justify">{{ $dataset.Params.description }}</p>
+              <h2 class="h3 mb-4">
+                {{ if eq site.Language.Lang "ku" }}وەسفی داتاسێت{{ else }}Dataset Description{{ end }}
+              </h2>
+              <p class="text-justify">{{ $dataset.Params.description }}</p>
             </div>
 
             <!-- Structure -->
             {{ if $dataset.Params.structure }}
               <div class="mb-8">
-                <h3 class="h4 mb-4">Data Structure</h3>
+                <h3 class="h4 mb-4">
+                  {{ if eq site.Language.Lang "ku" }}پێکهاتەی داتا{{ else }}Data Structure{{ end }}
+                </h3>
                 <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                   <p class="text-sm">{{ $dataset.Params.structure }}</p>
                 </div>
@@ -113,7 +123,9 @@
               {{ if $mainPaper }}
                 {{ $mainPaper = index $mainPaper 0 }}
                 <div class="mb-8">
-                  <h3 class="h4 mb-4">Primary Publication</h3>
+                  <h3 class="h4 mb-4">
+                    {{ if eq site.Language.Lang "ku" }}بڵاوکراوەی سەرەکی{{ else }}Primary Publication{{ end }}
+                  </h3>
                   <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                     <h4 class="h6 mb-2">
                       <a href="{{ $mainPaper.RelPermalink }}" 
@@ -136,7 +148,9 @@
             <!-- Related Papers -->
             {{ if $dataset.Params.paperIds }}
               <div class="mb-8">
-                <h3 class="h4 mb-4">Related Publications</h3>
+                <h3 class="h4 mb-4">
+                  {{ if eq site.Language.Lang "ku" }}بڵاوکراوە پەیوەندیدارەکان{{ else }}Related Publications{{ end }}
+                </h3>
                 <div class="space-y-4">
                   {{ range $dataset.Params.paperIds }}
                     {{ if ne . $dataset.Params.mainPaperId }}
@@ -168,13 +182,15 @@
 
             <!-- Citation -->
             <div class="mb-8">
-              <h3 class="h4 mb-4">How to Cite</h3>
+              <h3 class="h4 mb-4">
+                {{ if eq site.Language.Lang "ku" }}چۆن نووسراوە بکەین{{ else }}How to Cite{{ end }}
+              </h3>
               <div class="bg-light dark:bg-darkmode-light rounded-lg p-4">
                 <p class="text-sm font-mono mb-3">{{ $dataset.Params.cite }}</p>
                 <button onclick="navigator.clipboard.writeText('{{ $dataset.Params.cite }}')" 
                         class="btn btn-outline-primary btn-sm">
                   <i class="fas fa-copy mr-1"></i>
-                  Copy Citation
+                  {{ if eq site.Language.Lang "ku" }}کۆپی نووسراوە{{ else }}Copy Citation{{ end }}
                 </button>
               </div>
             </div>
@@ -184,40 +200,52 @@
           <div class="col-12 lg:col-4">
             <div class="bg-light dark:bg-darkmode-light rounded-lg p-6 sticky top-4">
               <!-- Quick Facts -->
-              <h3 class="h5 mb-4">Dataset Information</h3>
+              <h3 class="h5 mb-4">
+                {{ if eq site.Language.Lang "ku" }}زانیاری داتاسێت{{ else }}Dataset Information{{ end }}
+              </h3>
               <div class="space-y-3 mb-6">
                 <div>
-                  <span class="font-semibold text-sm block">Total Size</span>
+                  <span class="font-semibold text-sm block">
+                    {{ if eq site.Language.Lang "ku" }}کۆی قەبارە{{ else }}Total Size{{ end }}
+                  </span>
                   <span class="text-sm">{{ $dataset.Params.size }}</span>
                 </div>
                 <div>
-                  <span class="font-semibold text-sm block">Languages</span>
-                  <span class="text-sm">{{ len $dataset.Params.languages }} language{{ if gt (len $dataset.Params.languages) 1 }}s{{ end }}</span>
+                  <span class="font-semibold text-sm block">
+                    {{ if eq site.Language.Lang "ku" }}زمانەکان{{ else }}Languages{{ end }}
+                  </span>
+                  <span class="text-sm">{{ len $dataset.Params.languages }} {{ if eq site.Language.Lang "ku" }}زمان{{ else }}language{{ if gt (len $dataset.Params.languages) 1 }}s{{ end }}{{ end }}</span>
                 </div>
                 <div>
-                  <span class="font-semibold text-sm block">Formats</span>
-                  <span class="text-sm">{{ len $dataset.Params.format }} format{{ if gt (len $dataset.Params.format) 1 }}s{{ end }}</span>
+                  <span class="font-semibold text-sm block">
+                    {{ if eq site.Language.Lang "ku" }}فۆرماتەکان{{ else }}Formats{{ end }}
+                  </span>
+                  <span class="text-sm">{{ len $dataset.Params.format }} {{ if eq site.Language.Lang "ku" }}فۆرمات{{ else }}format{{ if gt (len $dataset.Params.format) 1 }}s{{ end }}{{ end }}</span>
                 </div>
                 {{ if $dataset.Params.paperIds }}
                   <div>
-                    <span class="font-semibold text-sm block">Related Papers</span>
-                    <span class="text-sm">{{ len $dataset.Params.paperIds }} publication{{ if gt (len $dataset.Params.paperIds) 1 }}s{{ end }}</span>
+                    <span class="font-semibold text-sm block">
+                      {{ if eq site.Language.Lang "ku" }}وتارە پەیوەندیدارەکان{{ else }}Related Papers{{ end }}
+                    </span>
+                    <span class="text-sm">{{ len $dataset.Params.paperIds }} {{ if eq site.Language.Lang "ku" }}بڵاوکراوە{{ else }}publication{{ if gt (len $dataset.Params.paperIds) 1 }}s{{ end }}{{ end }}</span>
                   </div>
                 {{ end }}
               </div>
 
               <!-- Access -->
               <div class="mb-6">
-                <h4 class="h6 mb-3">Data Access</h4>
+                <h4 class="h6 mb-3">
+                  {{ if eq site.Language.Lang "ku" }}دەستگە بە داتا{{ else }}Data Access{{ end }}
+                </h4>
                 {{ if $dataset.Params.githubUrl }}
                   <a href="{{ $dataset.Params.githubUrl }}" target="_blank" rel="noopener" 
                      class="btn btn-primary w-full mb-3">
                     <i class="fas fa-download mr-2"></i>
-                    Download Dataset
+                    {{ if eq site.Language.Lang "ku" }}داگرتنی داتاسێت{{ else }}Download Dataset{{ end }}
                   </a>
                 {{ end }}
                 <p class="text-xs text-text-light dark:text-darkmode-text-light">
-                  Licensed under {{ $dataset.Params.license }}
+                  {{ if eq site.Language.Lang "ku" }}مۆڵەت لەژێر{{ else }}Licensed under{{ end }} {{ $dataset.Params.license }}
                 </p>
               </div>
 
@@ -231,14 +259,14 @@
                     <a href="{{ $mainPaper.RelPermalink }}" 
                        class="btn btn-outline-primary btn-sm w-full">
                       <i class="fas fa-file-alt mr-2"></i>
-                      View Main Paper
+                      {{ if eq site.Language.Lang "ku" }}بینینی وتاری سەرەکی{{ else }}View Main Paper{{ end }}
                     </a>
                   {{ end }}
                 {{ end }}
                 <a href="{{ `/datasets/` | relLangURL }}" 
                    class="btn btn-outline-primary btn-sm w-full">
                   <i class="fas fa-arrow-left mr-2"></i>
-                  Back to Datasets
+                  {{ if eq site.Language.Lang "ku" }}گەڕان بۆ داتاسێتەکان{{ else }}Back to Datasets{{ end }}
                 </a>
               </div>
             </div>
@@ -251,11 +279,15 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-            <h1 class="h2 mb-4">Dataset Not Found</h1>
-            <p class="mb-6">The requested dataset could not be found.</p>
+            <h1 class="h2 mb-4">
+              {{ if eq site.Language.Lang "ku" }}داتاسێت نەدۆزرایەوە{{ else }}Dataset Not Found{{ end }}
+            </h1>
+            <p class="mb-6">
+              {{ if eq site.Language.Lang "ku" }}داتاسێتی داواکراو نەدۆزرایەوە.{{ else }}The requested dataset could not be found.{{ end }}
+            </p>
             <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-primary">
               <i class="fas fa-arrow-left mr-2"></i>
-              Back to Datasets
+              {{ if eq site.Language.Lang "ku" }}گەڕان بۆ داتاسێتەکان{{ else }}Back to Datasets{{ end }}
             </a>
           </div>
         </div>
