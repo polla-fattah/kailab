@@ -6,7 +6,7 @@ banner:
   button:
     enable: true
     label: "بەشداربووان"
-    link: "/authors"
+    link: "/ku/authors"
 
 # Recent Blogs
 recent_blogs:

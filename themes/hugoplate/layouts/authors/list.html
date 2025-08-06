@@ -1,11 +1,11 @@
 {{ define "main" }}
 
 <!-- page title -->
-<section class="page-title bg-primary position-relative">
+<section class="page-title bg-light dark:bg-darkmode-light position-relative">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="text-white font-tertiary">{{ .Title }}</h1>
+        <h1 class="text-text-dark dark:text-darkmode-text-dark font-tertiary">{{ .Title }}</h1>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-12">
         <!-- Load authors from content files -->
-        {{ $authors := where site.RegularPages "Type" "authors" }}
+        {{ $authors := where site.RegularPages "Section" "authors" }}
         
         <!-- Authors Grid -->
         <div class="row gy-8">
@@ -77,25 +77,40 @@
         <div class="row mt-8">
           <div class="col-12">
             <div class="bg-light dark:bg-darkmode-light rounded-lg p-6">
-              <div class="row text-center">
-                <div class="col-md-4">
-                  <div class="mb-4">
-                    <h3 class="h2 text-primary">{{ len $authors }}</h3>
-                    <p class="text-text-light dark:text-darkmode-text-light mb-0">Total Contributors</p>
-                  </div>
+              <h3 class="h4 mb-4 text-center">Statistics</h3>
+              <div class="flex flex-wrap justify-center gap-8 text-center">
+                <div class="flex-1 min-w-0">
+                  <h3 class="h2 text-primary">{{ len $authors }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Total Contributors</p>
                 </div>
-                <div class="col-md-4">
-                  <div class="mb-4">
-                    {{ $papers := where site.RegularPages "Type" "papers" }}
-                    <h3 class="h2 text-primary">{{ len $papers }}</h3>
-                    <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Papers</p>
-                  </div>
+                <div class="flex-1 min-w-0">
+                  {{ $papers := where site.RegularPages "Section" "papers" }}
+                  <h3 class="h2 text-primary">{{ len $papers }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Papers</p>
                 </div>
-                <div class="col-md-4">
-                  <div class="mb-4">
-                    {{ $projects := where site.RegularPages "Type" "projects" }}
-                    <h3 class="h2 text-primary">{{ len $projects }}</h3>
-                    <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Projects</p>
+                <div class="flex-1 min-w-0">
+                  {{ $projects := where site.RegularPages "Section" "projects" }}
+                  <h3 class="h2 text-primary">{{ len $projects }}</h3>
+                  <p class="text-text-light dark:text-darkmode-text-light mb-0">Research Projects</p>
+                </div>
+              </div>
+              
+              <!-- Related Links -->
+              <div class="row mt-4">
+                <div class="col-12">
+                  <div class="flex flex-wrap justify-center gap-4">
+                    <a href="{{ `/papers/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-file-alt mr-2"></i>
+                      View All Papers
+                    </a>
+                    <a href="{{ `/projects/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-project-diagram mr-2"></i>
+                      View All Projects
+                    </a>
+                    <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-database mr-2"></i>
+                      View All Datasets
+                    </a>
                   </div>
                 </div>
               </div>

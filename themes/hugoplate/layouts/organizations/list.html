@@ -1,11 +1,11 @@
 {{ define "main" }}
 
 <!-- page title -->
-<section class="page-title bg-primary position-relative">
+<section class="page-title bg-light dark:bg-darkmode-light position-relative">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="text-white font-tertiary">{{ .Title }}</h1>
+        <h1 class="text-text-dark dark:text-darkmode-text-dark font-tertiary">{{ .Title }}</h1>
       </div>
     </div>
   </div>
@@ -125,38 +125,54 @@
         <div class="row mt-16">
           <div class="col-12">
             <div class="bg-gradient rounded-lg p-8 text-center">
-              <h2 class="h3 mb-4">Research Network Overview</h2>
-              <div class="row">
-                <div class="col-6 md:col-3 mb-4">
+              <h2 class="h3 mb-4">Statistics</h2>
+              <div class="flex flex-wrap justify-center gap-8 text-center">
+                <div class="flex-1 min-w-0">
                   <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
                     {{ len $organizations }}
                   </div>
                   <p class="text-sm">Partner Organizations</p>
                 </div>
-                <div class="col-6 md:col-3 mb-4">
+                <div class="flex-1 min-w-0">
                   <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
-                    {{ len (where site.RegularPages "Type" "papers") }}
+                    {{ len (where site.RegularPages "Section" "papers") }}
                   </div>
                   <p class="text-sm">Collaborative Papers</p>
                 </div>
-                <div class="col-6 md:col-3 mb-4">
+                <div class="flex-1 min-w-0">
                   <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
-                    {{ len (where site.RegularPages "Type" "datasets") }}
+                    {{ len (where site.RegularPages "Section" "datasets") }}
                   </div>
                   <p class="text-sm">Shared Datasets</p>
                 </div>
-                <div class="col-6 md:col-3 mb-4">
+                <div class="flex-1 min-w-0">
                   <div class="text-3xl font-bold text-primary dark:text-darkmode-primary mb-2">
                     50+
                   </div>
                   <p class="text-sm">Active Researchers</p>
                 </div>
               </div>
+              
+              <!-- Related Links -->
               <div class="mt-6">
-                <a href="{{ `/projects/` | relLangURL }}" class="btn btn-primary">
-                  <i class="fas fa-project-diagram mr-2"></i>
-                  Explore Projects
-                </a>
+                <div class="flex flex-wrap justify-center gap-4">
+                  <a href="{{ `/papers/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    View All Papers
+                  </a>
+                  <a href="{{ `/datasets/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-database mr-2"></i>
+                    View All Datasets
+                  </a>
+                  <a href="{{ `/authors/` | relLangURL }}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-users mr-2"></i>
+                    View All Contributors
+                  </a>
+                  <a href="{{ `/projects/` | relLangURL }}" class="btn btn-primary">
+                    <i class="fas fa-project-diagram mr-2"></i>
+                    Explore Projects
+                  </a>
+                </div>
               </div>
             </div>
           </div>
