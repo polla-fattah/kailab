@@ -7,7 +7,8 @@ established: "2005"
 type: "Academic Department"
 focus: ["Computer Science Education", "Speech Technology", "Language Processing", "Student Research"]
 paperIds: ["paper-3", "paper-4", "paper-5"]
-contributors: ["Dr. Bryar Kareem", "Prof. Rebwar Ahmed", "Dr. Soma Jamal", "Dr. Kovan Salar", "Prof. Dler Hama", "Dr. Shwan Dilshad", "Prof. Nawroz Tahir"]
-datasetIds: ["dataset-5", "dataset-6", "dataset-7", "dataset-8", "dataset-9"]
+projectIds: ["asr", "ocr", "tts", "corpus-creation"]
+memberIds: ["john-doe", "fatima-hassan", "ahmad-kurdish", "karim-mohammad", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
+datasetIds: ["dataset-5", "dataset-6"]
 draft: false
 --- 

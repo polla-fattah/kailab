@@ -7,7 +7,8 @@ established: "2018"
 type: "دامەزراوەی کلتووری"
 focus: ["میراتی دیجیتاڵی", "پاراستنی مێژوویی", "دۆکیومێنتکردنی کلتووری", "دیجیتاڵکردنی ئەرشیف"]
 paperIds: ["paper-1", "paper-6", "paper-7"]
-contributors: ["د. ئارام محمود", "د. ژین عومەر", "پڕۆف. کاردۆ حەسەن", "د. ڕەناس جەمال", "پڕۆف. هێرش ساڵەح"]
-datasetIds: ["dataset-1", "dataset-2", "dataset-10", "dataset-11", "dataset-12"]
+projectIds: ["corpus-creation", "dictionary", "spell-checker"]
+memberIds: ["john-doe", "ahmad-kurdish", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
+datasetIds: ["dataset-1", "dataset-2"]
 draft: false
 --- 

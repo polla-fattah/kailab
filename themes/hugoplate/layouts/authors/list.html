@@ -13,7 +13,7 @@
 <!-- /page title -->
 
 <!-- authors -->
-<section class="section">
+<section class="section authors-page">
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -26,10 +26,56 @@
             <div class="col-12 md:col-6 lg:col-4 mb-8">
               <article class="bg-light dark:bg-darkmode-light rounded-lg p-6 h-full flex flex-col text-center">
                 <!-- Author Avatar -->
-                <div class="mb-4">
+                <div class="mb-4 flex justify-center author-avatar">
                   {{ $avatar := "/images/avatar.png" }}
-                  {{ partial "image" (dict "Src" $avatar "Size" "120x120" "Class" "rounded-full mx-auto" "Alt" .Title) }}
+                  {{ partial "image" (dict "Src" $avatar "Size" "120x120" "Class" "rounded-full" "Alt" .Title) }}
                 </div>
+                
+                <!-- Social Media Links -->
+                {{ with .Params.social }}
+                  <div class="mb-4 flex justify-center space-x-3">
+                    {{ with .website }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Website">
+                        <i class="fas fa-globe text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .github }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="GitHub">
+                        <i class="fab fa-github text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .linkedin }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="LinkedIn">
+                        <i class="fab fa-linkedin text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .twitter }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Twitter">
+                        <i class="fab fa-twitter text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .facebook }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Facebook">
+                        <i class="fab fa-facebook text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .researchgate }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="ResearchGate">
+                        <i class="fas fa-microscope text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .googlescholar }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Google Scholar">
+                        <i class="fas fa-graduation-cap text-lg"></i>
+                      </a>
+                    {{ end }}
+                    {{ with .huggingface }}
+                      <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Hugging Face">
+                        <i class="fas fa-robot text-lg"></i>
+                      </a>
+                    {{ end }}
+                  </div>
+                {{ end }}
                 
                 <!-- Author Name -->
                 <h3 class="h5 mb-3">
@@ -49,9 +95,6 @@
                 <!-- Author Description -->
                 <div class="mb-4 flex-grow">
                   {{ $description := .Params.description }}
-                  {{ if eq site.Language.Lang "ku" }}
-                    {{ $description = .Params.description_ku }}
-                  {{ end }}
                   <p class="text-sm">{{ $description }}</p>
                 </div>
                 

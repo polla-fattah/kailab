@@ -1,5 +1,5 @@
 ---
-# Banner
+# بانەر
 banner:
   title: "پێشخستنی زمانی کوردی لە ڕێگەی نوێکاریەوە"
   content: "کایلاب دەستپێکێکی توێژینەوەی پێشەنگە کە تایبەتە بە پێشخستنی زمانی کوردی لە سەردەمی دیجیتاڵدا لە ڕێگەی تەکنەلۆجیای زیرەکی دەستکرد و فێربوونی ئامێرەوە."
@@ -8,7 +8,7 @@ banner:
     label: "بەشداربووان"
     link: "/ku/authors"
 
-# Recent Blogs
+# بلۆگە نوێیەکان
 recent_blogs:
   enable: true
   title: "کۆتا توێژینەوە و تێگەیشتنەکان"
@@ -18,7 +18,7 @@ recent_blogs:
     label: "بینینی هەموو وتارەکان"
     link: "/blog"
 
-# Features
+# تایبەتمەندییەکان
 features:
   - title: "تەکنەلۆجیای زمانی بە زیرەکی دەستکرد"
     image: "/images/service-1.png"
@@ -61,22 +61,24 @@ features:
       label: "بڵاوکراوەکان"
       link: "/ku/papers"
 
-# Datasets Section
+# بەشی داتاسێتەکان
 datasets:
   enable: true
+  title: "داتاسێتە توێژینەوەییەکان"
+  subtitle: "داتاسێتە پێشکەوتووەکانمان بۆ توێژینەوەی زمانی کوردی"
   show_more:
     enable: true
     label: "هەموو داتاسێتەکان"
     link: "/datasets"
   featured_datasets: [1, 2, 3] # Show these dataset IDs
 
-# Organizations Section
+# بەشی ڕێکخراوەکان
 organizations:
   enable: true
-  title: "ڕێکخراوە هاوکارەکان"
+  title: "ڕێکخراوە ئەندامەکان"
   description: "ئێمە لەگەڵ دامەزراوە و ڕێکخراوە پێشڕەوەکان کار دەکەین بۆ پێشخستنی توێژینەوەی تەکنەلۆژیای زمانی کوردی و گەشەپێدان."
   organizations_link:
     enable: true
     label: "هەموو ڕێکخراوەکان"
-    link: "/ku/organizations"
+    link: "/organizations"
 --- 

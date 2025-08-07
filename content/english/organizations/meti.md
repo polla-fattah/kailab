@@ -7,7 +7,8 @@ established: "2010"
 type: "International Institute"
 focus: ["Cross-cultural Research", "Language Technology", "International Collaboration", "Policy Research"]
 paperIds: ["paper-2", "paper-8"]
-contributors: ["Dr. Nizar Salim", "Prof. Layla Rashid", "Dr. Bayan Aziz", "Prof. Chiman Kareem"]
-datasetIds: ["dataset-3", "dataset-4", "dataset-13"]
+projectIds: ["translation", "tts", "summarization"]
+memberIds: ["mohammad-ali", "sara-ahmed", "ahmad-kurdish", "karim-mohammad"]
+datasetIds: ["dataset-3", "dataset-4"]
 draft: false
 --- 

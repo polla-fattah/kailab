@@ -7,7 +7,8 @@ established: "2005"
 type: "بەشی ئەکادیمی"
 focus: ["پەروەردەی زانستی کۆمپیوتەر", "تەکنەلۆژیای قسەکردن", "پرۆسێسکردنی زمان", "توێژینەوەی قوتابیان"]
 paperIds: ["paper-3", "paper-4", "paper-5"]
-contributors: ["د. بریار کەریم", "پڕۆف. ڕەبوار ئەحمەد", "د. سۆما جەمال", "د. کۆڤان ساڵار", "پڕۆف. دلێر هەما", "د. شوان دڵشاد", "پڕۆف. نەورۆز تاهیر"]
-datasetIds: ["dataset-5", "dataset-6", "dataset-7", "dataset-8", "dataset-9"]
+projectIds: ["asr", "ocr", "tts", "corpus-creation"]
+memberIds: ["john-doe", "fatima-hassan", "ahmad-kurdish", "karim-mohammad", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
+datasetIds: ["dataset-5", "dataset-6"]
 draft: false
 --- 

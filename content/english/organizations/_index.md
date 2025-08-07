@@ -1,5 +1,5 @@
 ---
 title: "Organizations"
-description: "Research organizations and institutions collaborating on Kurdish language technology"
+description: "Research organizations and institutions working as members on Kurdish language technology"
 draft: false
 --- 

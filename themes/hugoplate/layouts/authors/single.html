@@ -19,16 +19,56 @@
               {{ partial "image" (dict "Src" $avatar "Size" "200x200" "Class" "rounded-full" "Alt" $author.Title) }}
             </div>
             
-            <!-- Author Name -->
-            <h1 class="h3 mb-3">
-              {{ $title := $author.Params.title_en }}
-              {{ $name := $author.Params.name_en }}
-              {{ if eq $lang "ku" }}
-                {{ $title = $author.Params.title_ku }}
-                {{ $name = $author.Params.name_ku }}
-              {{ end }}
-              {{ $title }} {{ $name }}
-            </h1>
+            <!-- Social Media Links -->
+            {{ with $author.Params.social }}
+              <div class="mb-6 flex justify-center space-x-4">
+                {{ with .website }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Website">
+                    <i class="fas fa-globe text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .github }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="GitHub">
+                    <i class="fab fa-github text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .linkedin }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="LinkedIn">
+                    <i class="fab fa-linkedin text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .twitter }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Twitter">
+                    <i class="fab fa-twitter text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .facebook }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Facebook">
+                    <i class="fab fa-facebook text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .researchgate }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="ResearchGate">
+                    <i class="fas fa-microscope text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .googlescholar }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Google Scholar">
+                    <i class="fas fa-graduation-cap text-xl"></i>
+                  </a>
+                {{ end }}
+                {{ with .huggingface }}
+                  <a href="{{ . }}" target="_blank" rel="noopener" class="text-text-light dark:text-darkmode-text-light hover:text-primary dark:hover:text-darkmode-primary transition-colors duration-200" title="Hugging Face">
+                    <i class="fas fa-robot text-xl"></i>
+                  </a>
+                {{ end }}
+              </div>
+            {{ end }}
+            
+                         <!-- Author Name -->
+             <h1 class="h3 mb-3">
+               {{ $author.Title }}
+             </h1>
             
             <!-- Author Email -->
             {{ with $author.Params.email }}
@@ -41,9 +81,6 @@
             <!-- Author Description -->
             <div class="content mb-6">
               {{ $description := $author.Params.description }}
-              {{ if eq $lang "ku" }}
-                {{ $description = $author.Params.description_ku }}
-              {{ end }}
               <p>{{ $description }}</p>
             </div>
             
@@ -57,6 +94,31 @@
                 {{ end }}
                 <i class="fa fa-envelope ml-2"></i>
               </a>
+            {{ end }}
+            
+            <!-- Author Organizations -->
+            {{ if $author.Params.organizationIds }}
+              <div class="mt-6">
+                <h4 class="h6 mb-3">{{ if eq $lang "ku" }}ڕێکخراوەکان{{ else }}Organizations{{ end }}</h4>
+                <div class="flex flex-wrap gap-2 justify-center">
+                  {{ range $author.Params.organizationIds }}
+                    {{ $orgId := . }}
+                    {{ $organizations := where site.RegularPages "Section" "organizations" }}
+                    {{ $organization := where $organizations "File.BaseFileName" $orgId }}
+                    {{ if $organization }}
+                      {{ $organization = index $organization 0 }}
+                      <a href="{{ $organization.RelPermalink }}" 
+                         class="inline-block bg-primary/10 text-primary dark:bg-darkmode-primary/10 dark:text-darkmode-primary text-sm px-3 py-1 rounded hover:bg-primary/20 dark:hover:bg-darkmode-primary/20 transition-colors duration-200">
+                        {{ $organization.Title }}
+                      </a>
+                    {{ else }}
+                      <span class="inline-block bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-sm px-3 py-1 rounded">
+                        {{ $orgId }}
+                      </span>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              </div>
             {{ end }}
           </div>
         </div>
@@ -161,8 +223,17 @@
               </div>
             {{ end }}
             
-            <!-- Related Blog Posts -->
-            {{ $authorPosts := where site.RegularPages "Params.contributors" "==" $authorId }}
+                         <!-- Related Blog Posts -->
+             {{ $authorPosts := slice }}
+             {{ $blogPosts := where site.RegularPages "Section" "blog" }}
+             {{ range $blogPosts }}
+               {{ $currentPost := . }}
+               {{ range .Params.authors }}
+                 {{ if eq . $authorId }}
+                   {{ $authorPosts = $authorPosts | append $currentPost }}
+                 {{ end }}
+               {{ end }}
+             {{ end }}
             {{ if $authorPosts }}
               <div class="bg-light dark:bg-darkmode-light py-8 rounded-lg">
                 <div class="container">
@@ -200,39 +271,7 @@
               </div>
             {{ end }}
             
-            <!-- Navigation Buttons -->
-            <div class="text-center py-8">
-              <div class="flex flex-wrap justify-center gap-4">
-                <a href="{{ `papers/` | relLangURL }}" class="btn btn-outline-primary">
-                  {{ if eq $lang "ku" }}
-                    وتارەکان
-                  {{ else }}
-                    Papers
-                  {{ end }}
-                </a>
-                <a href="{{ `projects/` | relLangURL }}" class="btn btn-outline-primary">
-                  {{ if eq $lang "ku" }}
-                    پڕۆژەکان
-                  {{ else }}
-                    Projects
-                  {{ end }}
-                </a>
-                <a href="{{ `authors/` | relLangURL }}" class="btn btn-outline-primary">
-                  {{ if eq $lang "ku" }}
-                    بەشداربووان
-                  {{ else }}
-                    Contributors
-                  {{ end }}
-                </a>
-                <a href="{{ `datasets/` | relLangURL }}" class="btn btn-outline-primary">
-                  {{ if eq $lang "ku" }}
-                    داتاسێتەکان
-                  {{ else }}
-                    Datasets
-                  {{ end }}
-                </a>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

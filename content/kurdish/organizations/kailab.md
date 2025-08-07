@@ -7,7 +7,8 @@ established: "2020"
 type: "تاقیگەی توێژینەوە"
 focus: ["ئەنستیتۆتی دەستکرد", "پرۆسێسکردنی زمانی سروشتی", "تەکنەلۆژیای زمانی کوردی", "زانستە مرۆییە دیجیتاڵیەکان"]
 paperIds: ["paper-1", "paper-2", "paper-3", "paper-4", "paper-5", "paper-6", "paper-7", "paper-8", "paper-9"]
-contributors: ["د. ئارام محمود", "پڕۆف. سامان عەلی", "د. ڕۆژین حەسەن", "د. نزار سالم", "پڕۆف. لەیلە رەشید", "د. بریار کەریم", "پڕۆف. ڕەبوار ئەحمەد", "د. سۆما جەمال"]
-datasetIds: ["dataset-1", "dataset-2", "dataset-3", "dataset-4", "dataset-5", "dataset-6", "dataset-7", "dataset-8", "dataset-9", "dataset-10", "dataset-11", "dataset-12", "dataset-13", "dataset-14", "dataset-15"]
+projectIds: ["asr", "ocr", "translation", "tts", "terminology-standardization", "summarization", "corpus-creation", "dictionary", "spell-checker"]
+memberIds: ["john-doe", "fatima-hassan", "ahmad-kurdish", "karim-mohammad", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
+datasetIds: ["dataset-1", "dataset-2", "dataset-3", "dataset-4", "dataset-5", "dataset-6", "dataset-7", "dataset-8", "dataset-9", "dataset-10", "dataset-11", "dataset-12", "dataset-13", "dataset-4", "dataset-5"]
 draft: false
 --- 

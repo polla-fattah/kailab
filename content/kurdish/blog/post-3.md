@@ -5,8 +5,8 @@ description: "ئەمە وەسفی مێتا"
 date: 2022-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["نەرمەفەر"]
-contributors: "zainab-hussein"
-tags: ["نەرمەفەر", "tailwind"]
+authors: ["zainab-hussein"]
+tags: ["نەرمەفەر", "فرەیموۆرک"]
 draft: false
 ---
 

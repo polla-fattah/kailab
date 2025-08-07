@@ -7,7 +7,8 @@ established: "2010"
 type: "دامەزراوەی نێودەوڵەتی"
 focus: ["توێژینەوەی نێوان کلتووری", "تەکنەلۆژیای زمان", "هاوکاری نێودەوڵەتی", "توێژینەوەی پۆلەسی"]
 paperIds: ["paper-2", "paper-8"]
-contributors: ["د. نزار سالم", "پڕۆف. لەیلە رەشید", "د. بەیەن عەزیز", "پڕۆف. چیمان کەریم"]
-datasetIds: ["dataset-3", "dataset-4", "dataset-13"]
+projectIds: ["translation", "tts", "summarization"]
+memberIds: ["mohammad-ali", "sara-ahmed", "ahmad-kurdish", "karim-mohammad"]
+datasetIds: ["dataset-3", "dataset-4"]
 draft: false
 --- 

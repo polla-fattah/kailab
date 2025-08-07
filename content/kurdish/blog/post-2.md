@@ -5,8 +5,8 @@ description: "ئەمە وەسفی مێتا"
 date: 2022-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["تەکنەلۆجیا", "داتا"]
-contributors: "karim-mohammad"
-tags: ["تەکنەلۆجیا", "tailwind"]
+authors: ["karim-mohammad"]
+tags: ["تەکنەلۆجیا", "فرەیموۆرک"]
 draft: false
 ---
 

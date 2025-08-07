@@ -7,7 +7,8 @@ established: "2018"
 type: "Cultural Institution"
 focus: ["Digital Heritage", "Historical Preservation", "Cultural Documentation", "Archive Digitization"]
 paperIds: ["paper-1", "paper-6", "paper-7"]
-contributors: ["Dr. Aram Mahmood", "Dr. Zhyan Omar", "Prof. Kardo Hassan", "Dr. Renas Jamal", "Prof. Hersh Saleh"]
-datasetIds: ["dataset-1", "dataset-2", "dataset-10", "dataset-11", "dataset-12"]
+projectIds: ["corpus-creation", "dictionary", "spell-checker"]
+memberIds: ["john-doe", "ahmad-kurdish", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
+datasetIds: ["dataset-1", "dataset-2"]
 draft: false
 --- 

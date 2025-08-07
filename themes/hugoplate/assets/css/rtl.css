@@ -797,6 +797,67 @@
 }
 
 /* RTL Author Single Page - Target the image partial specifically */
+
+/* RTL Authors List Page - Fix avatar centering in cards */
+[dir="rtl"] .authors-page .bg-light.dark\:bg-darkmode-light.rounded-lg.p-6.h-full.flex.flex-col.text-center .mb-4 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+[dir="rtl"] .authors-page .bg-light.dark\:bg-darkmode-light.rounded-lg.p-6.h-full.flex.flex-col.text-center .mb-4 img {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+[dir="rtl"] .authors-page .bg-light.dark\:bg-darkmode-light.rounded-lg.p-6.h-full.flex.flex-col.text-center .mb-4 .rounded-full {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* RTL Authors List Page - Alternative targeting for avatar container */
+[dir="rtl"] .section .container .row .col-12 .row.gy-8 .col-12.md\:col-6.lg\:col-4.mb-8 article .mb-4 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+[dir="rtl"] .section .container .row .col-12 .row.gy-8 .col-12.md\:col-6.lg\:col-4.mb-8 article .mb-4 img {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* RTL Authors List Page - Force center for any avatar in the grid */
+[dir="rtl"] .authors-page article .mb-4 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+[dir="rtl"] .authors-page article .mb-4 img {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* RTL Authors List Page - Target the specific author-avatar class */
+[dir="rtl"] .authors-page .author-avatar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+[dir="rtl"] .authors-page .author-avatar img {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+[dir="rtl"] .authors-page .author-avatar .rounded-full {
+  margin: 0 auto !important;
+  display: block !important;
+}
 [dir="rtl"] .section-sm .col-12.lg\:col-6.xl\:col-4.mx-auto .mb-6 .img {
   margin: 0 auto !important;
   display: block !important;

@@ -93,8 +93,8 @@
                       <div class="text-xs text-text-light dark:text-darkmode-text-light">Datasets</div>
                     </div>
                     <div>
-                      <div class="font-bold text-primary dark:text-darkmode-primary">{{ len .Params.contributors }}</div>
-                      <div class="text-xs text-text-light dark:text-darkmode-text-light">Contributors</div>
+                      <div class="font-bold text-primary dark:text-darkmode-primary">{{ len .Params.memberIds }}</div>
+                      <div class="text-xs text-text-light dark:text-darkmode-text-light">{{ if eq site.Language.Lang "ku" }}ئەندامەکان{{ else }}Members{{ end }}</div>
                     </div>
                   </div>
                 </div>

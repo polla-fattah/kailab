@@ -1,12 +1,17 @@
 ---
 title: "د. ئەحمەد کوردی"
 name: "ئەحمەد کوردی"
-title_en: "Dr."
-title_ku: "د."
-name_en: "Ahmad Kurdish"
-name_ku: "ئەحمەد کوردی"
 email: "ahmad.kurdish@kailab.org"
-description: "Research team member at KaiLab, specializing in Kurdish language technology and computational linguistics."
-description_ku: "بەشداربووی تیمی توێژینەوەی کایلاب و پسپۆڕ لە بواری تەکنەلۆژیای زمانی کوردی."
+description: "ئەندامی تیمی توێژینەوە لە کایلاب، تایبەت بە تەکنەلۆژیای زمانی کوردی و زمانناسی کۆمپیوتەری."
+# Social Media Links (optional)
+social:
+  website: "https://ahmad-kurdish.com"
+  github: "https://github.com/ahmad-kurdish"
+  linkedin: "https://linkedin.com/in/ahmad-kurdish"
+  twitter: "https://twitter.com/ahmad_kurdish"
+  facebook: "https://facebook.com/ahmad.kurdish"
+  researchgate: "https://researchgate.net/profile/ahmad-kurdish"
+  googlescholar: "https://scholar.google.com/citations?user=ahmad-kurdish"
+  huggingface: "https://huggingface.co/ahmad-kurdish"
 draft: false
 ---

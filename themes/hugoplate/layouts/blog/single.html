@@ -16,35 +16,30 @@
                   <i class="fa-regular fa-calendar mr-2"></i>
                   {{ .PublishDate.Format "January 2, 2006" }}
                 </span>
-                {{ with .Params.contributors }}
+                {{ with .Params.authors }}
                   <span>
                     <i class="fa-regular fa-user mr-2"></i>
-                    {{ $contributorId := . }}
-                    {{ $authorFound := false }}
-                    {{ $displayName := $contributorId }}
-                    
-                    <!-- Check if contributor exists in authors content files -->
-                    {{ $authors := where site.RegularPages "Type" "authors" }}
-                    {{ $author := where $authors "File.BaseFileName" $contributorId }}
-                    {{ if $author }}
-                      {{ $author = index $author 0 }}
-                      {{ $lang := site.Language.Lang }}
-                      {{ $name := $author.Params.name_en }}
-                      {{ $title := $author.Params.title_en }}
-                      {{ if eq $lang "ku" }}
-                        {{ $name = $author.Params.name_ku }}
-                        {{ $title = $author.Params.title_ku }}
+                    {{ range $index, $authorId := . }}
+                      {{ if gt $index 0 }}, {{ end }}
+                      {{ $authorFound := false }}
+                      {{ $displayName := $authorId }}
+                      
+                      <!-- Check if author exists in authors content files -->
+                      {{ $authors := where site.RegularPages "Section" "authors" }}
+                      {{ $author := where $authors "File.BaseFileName" $authorId }}
+                      {{ if $author }}
+                        {{ $author = index $author 0 }}
+                        {{ $displayName = $author.Title }}
+                        {{ $authorFound = true }}
                       {{ end }}
-                      {{ $displayName = printf "%s %s" $title $name }}
-                      {{ $authorFound = true }}
-                    {{ end }}
-                    
-                    {{ if $authorFound }}
-                      <a href="{{ `authors/` | relLangURL }}{{ $contributorId }}" class="hover:text-primary dark:hover:text-primary">
-                        {{ $displayName }}
-                      </a>
-                    {{ else }}
-                      {{ $contributorId }}
+                      
+                      {{ if $authorFound }}
+                        <a href="{{ `authors/` | relLangURL }}{{ $authorId }}" class="hover:text-primary dark:hover:text-primary">
+                          {{ $displayName }}
+                        </a>
+                      {{ else }}
+                        {{ $authorId }}
+                      {{ end }}
                     {{ end }}
                   </span>
                 {{ end }}

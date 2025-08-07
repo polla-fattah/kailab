@@ -7,7 +7,8 @@ established: "1992"
 type: "Language Academy"
 focus: ["Language Standardization", "Terminology Development", "Academic Coordination", "Policy Development"]
 paperIds: ["paper-9"]
-contributors: ["Dr. Aras Mohammed", "Prof. Galawezh Ahmed", "Dr. Sardar Karim", "Prof. Bangin Hassan"]
-datasetIds: ["dataset-14", "dataset-15"]
+projectIds: ["terminology-standardization", "dictionary"]
+memberIds: ["ahmad-kurdish", "karim-mohammad", "mohammad-ali", "zainab-hussein"]
+datasetIds: ["dataset-4", "dataset-5"]
 draft: false
 --- 

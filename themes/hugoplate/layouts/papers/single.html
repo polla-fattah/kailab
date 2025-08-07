@@ -65,7 +65,7 @@
                 {{ if $paper.Params.organizationIds }}
                   <div class="mb-4">
                     <span class="text-sm text-text-light dark:text-darkmode-text-light mr-3">
-                      {{ if eq site.Language.Lang "ku" }}ڕێکخراوە هاوکارەکان:{{ else }}Collaborating Organizations:{{ end }}
+                      {{ if eq site.Language.Lang "ku" }}ڕێکخراوە ئەندامەکان:{{ else }}Member Organizations:{{ end }}
                     </span>
                     <div class="inline-flex flex-wrap gap-2 mt-2">
                       {{ range $paper.Params.organizationIds }}

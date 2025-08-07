@@ -73,7 +73,7 @@ datasets:
 # Organizations Section
 organizations:
   enable: true
-  title: "Collaborating Organizations"
+  title: "Member Organizations"
   description: "We work with leading institutions and organizations to advance Kurdish language technology research and development."
   organizations_link:
     enable: true

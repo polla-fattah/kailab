@@ -7,7 +7,8 @@ established: "1992"
 type: "ئەکادیمیای زمان"
 focus: ["ستاندەردکردنی زمان", "پەرەپێدانی تێرمینۆلۆژی", "هاوکاری ئەکادیمی", "پەرەپێدانی پۆلەسی"]
 paperIds: ["paper-9"]
-contributors: ["د. ئەراس محەمەد", "پڕۆف. گەلاوێژ ئەحمەد", "د. سەردار کەریم", "پڕۆف. بانگین حەسەن"]
-datasetIds: ["dataset-14", "dataset-15"]
+projectIds: ["terminology-standardization", "dictionary"]
+memberIds: ["ahmad-kurdish", "karim-mohammad", "mohammad-ali", "zainab-hussein"]
+datasetIds: ["dataset-4", "dataset-5"]
 draft: false
 --- 

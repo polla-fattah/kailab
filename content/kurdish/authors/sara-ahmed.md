@@ -1,12 +1,7 @@
 ---
 title: "د. سارا ئەحمەد"
 name: "سارا ئەحمەد"
-title_en: "Dr."
-title_ku: "د."
-name_en: "Sara Ahmed"
-name_ku: "سارا ئەحمەد"
 email: "sara.ahmed@kailab.org"
-description: "Research team member at KaiLab, specializing in Kurdish language technology and computational linguistics."
-description_ku: "بەشداربووی تیمی توێژینەوەی کایلاب و پسپۆڕ لە بواری تەکنەلۆژیای زمانی کوردی."
+description: "ئەندامی تیمی توێژینەوە لە کایلاب، تایبەت بە تەکنەلۆژیای زمانی کوردی و زمانناسی کۆمپیوتەری."
 draft: false
 ---

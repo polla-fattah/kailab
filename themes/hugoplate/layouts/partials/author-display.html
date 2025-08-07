@@ -1,14 +1,11 @@
 {{/*
-  Author Display Partial - Displays author names ONLY from authors.json database
-  Usage: {{ partial "author-display.html" (dict "Authors" $authors "Context" .) }}
+  Author Display Partial - Displays author names from content files
+  Usage: {{ partial "author-display.html" $authorId }}
   
   Parameters:
-  - Authors: Array of author IDs or names
-  - Context: Current page context for language detection
-  - ShowTitle: (optional) Whether to show titles like "Dr." (default: true)
-  - Separator: (optional) Separator between authors (default: ", ")
+  - $authorId: Author ID to display
   
-  NOTE: Only authors that exist in data/authors.json will be displayed/linked
+  NOTE: Only authors that exist in content/authors/ will be displayed/linked
 */}}
 
 {{ $authorId := . }}
@@ -16,18 +13,11 @@
 {{ $displayName := $authorId }}
 
 <!-- Check if author exists in authors content files -->
-{{ $authors := where site.RegularPages "Type" "authors" }}
+{{ $authors := where site.RegularPages "Section" "authors" }}
 {{ $author := where $authors "File.BaseFileName" $authorId }}
 {{ if $author }}
   {{ $author = index $author 0 }}
-  {{ $lang := site.Language.Lang }}
-  {{ $name := $author.Params.name_en }}
-  {{ $title := $author.Params.title_en }}
-  {{ if eq $lang "ku" }}
-    {{ $name = $author.Params.name_ku }}
-    {{ $title = $author.Params.title_ku }}
-  {{ end }}
-  {{ $displayName = printf "%s %s" $title $name }}
+  {{ $displayName = $author.Title }}
   {{ $authorFound = true }}
 {{ end }}
 
