@@ -1,14 +1,15 @@
 ---
-title: "دامەزراوەی میراتی دیجیتاڵی کوردستان"
-description: "دامەزراوەیەکی هاوکاری کە تایبەتە بە پاراستن و دیجیتاڵکردنی میراتی کلتووری کوردی لە ڕێگەی چارەسەری تەکنەلۆژیا پێشکەوتووەکان. کە دی ئێچ ئای لەگەڵ دامەزراوە ئەکادیمییەکان بە نزیک کاردەکات بۆ دڵنیابوون لەوەی دۆکیومێنتە مێژووییە کوردییەکان و بەرهەمە کلتوورییەکان بۆ نەوەی داهاتوو پارێزراون."
+title: "کەدی - پڕۆژەی مرۆڤایەتی دیجیتاڵی کوردی"
+description: "کەدی تایبەتە بە پێشکەوتنی توێژینەوەی مرۆڤایەتی دیجیتاڵی لە خوێندنی کوردی. ئێمە ئامراز و میسۆدۆلۆجیەکان پەرەپێدەدەین بۆ پاراستن، شیکردنەوە، و دەستگەیشتنی میراتی کەلتووری و زمانەوانی کوردی لە ڕێگەی تەکنەلۆجیای دیجیتاڵی نوێ."
 website: "https://kdhi.org"
-location: "هەولێر، هەرێمی کوردستان"
-established: "2018"
-type: "دامەزراوەی کلتووری"
-focus: ["میراتی دیجیتاڵی", "پاراستنی مێژوویی", "دۆکیومێنتکردنی کلتووری", "دیجیتاڵکردنی ئەرشیف"]
-paperIds: ["paper-1", "paper-6", "paper-7"]
-projectIds: ["corpus-creation", "dictionary", "spell-checker"]
-memberIds: ["john-doe", "ahmad-kurdish", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
-datasetIds: ["dataset-1", "dataset-2"]
+location: "هەرێمی کوردستان، عێراق"
+established: "2019"
+type: "پڕۆژەی توێژینەوە"
+layout: "organizations/single"
+focus: ["مرۆڤایەتی دیجیتاڵی", "میراتی کەلتووری", "شیکردنەوەی تێکست", "پاراستنی دیجیتاڵی"]
+paperIds: ["paper-1", "paper-2", "paper-3"]
+projectIds: ["corpus-creation", "dictionary", "terminology-standardization"]
+memberIds: ["john-doe", "fatima-hassan", "ahmad-kurdish"]
+datasetIds: ["dataset-1", "dataset-2", "dataset-3"]
 draft: false
 --- 

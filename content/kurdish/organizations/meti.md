@@ -1,14 +1,15 @@
 ---
-title: "دامەزراوەی تەکنیکی ڕۆژهەڵاتی ناوین"
-description: "دامەزراوەی توێژینەوەی نێودەوڵەتی کە تایبەتە بە زمانەکانی ڕۆژهەڵاتی ناوین و تەکنەلۆژیاکان. مەتی پشتگیری گرنگ دەکات بۆ توێژینەوەی زمانی کوردی لە ڕێگەی هاوکارییە نێودەوڵەتییەکان و پڕۆژە دارایییەکان."
-website: "https://meti.org"
-location: "ئەنقەرە، تورکیا"
-established: "2010"
-type: "دامەزراوەی نێودەوڵەتی"
-focus: ["توێژینەوەی نێوان کلتووری", "تەکنەلۆژیای زمان", "هاوکاری نێودەوڵەتی", "توێژینەوەی پۆلەسی"]
-paperIds: ["paper-2", "paper-8"]
+title: "مەتی - پڕۆژەی تەکنەلۆجیای پەروەردە وەزارەتی پەروەردە"
+description: "مەتی پێشکەوتنی دیجیتاڵی پەروەردە لە کوردستان ڕابەر دەکات لە ڕێگەی چارەسەری تەکنەلۆجیای نوێ. ئێمە پلاتفۆرمە پەروەردەییەکان، ئامرازە فێربوونی دیجیتاڵی، و بەرنامەکانی تەکنەلۆجیای زمان پەرەپێدەدەین بۆ باشترکردنی ئەنجامە پەروەردەییەکان لە سەرانسەری ناوچەکە."
+website: "https://meti.edu.krd"
+location: "هەرێمی کوردستان، عێراق"
+established: "2022"
+type: "پڕۆژەی حکوومەت"
+layout: "organizations/single"
+focus: ["تەکنەلۆجیای پەروەردەیی", "فێربوونی دیجیتاڵی", "پەروەردەی زمان", "پەرەپێدانی پلاتفۆرم"]
+paperIds: ["paper-7", "paper-8", "paper-9"]
 projectIds: ["translation", "tts", "summarization"]
-memberIds: ["mohammad-ali", "sara-ahmed", "ahmad-kurdish", "karim-mohammad"]
-datasetIds: ["dataset-3", "dataset-4"]
+memberIds: ["zainab-hussein", "sara-ahmed", "fatima-hassan"]
+datasetIds: ["dataset-1", "dataset-2", "dataset-3"]
 draft: false
 --- 

@@ -1,14 +1,15 @@
 ---
-title: "Kurdish Language Academy"
-description: "The official body responsible for Kurdish language standardization and terminology development. KLA coordinates with researchers worldwide to establish consistent terminology across scientific, technical, and academic domains in Kurdish."
-website: "https://kurdishlanguageacademy.org"
-location: "Sulaymaniyah, Kurdistan Region"
-established: "1992"
+title: "KLA - Kurdish Language Academy"
+description: "KLA is the premier institution for Kurdish language standardization and development. We establish linguistic standards, develop educational resources, and promote the use of Kurdish in digital environments through comprehensive language technology solutions."
+website: "https://kla.org"
+location: "Kurdistan Region, Iraq"
+established: "2021"
 type: "Language Academy"
-focus: ["Language Standardization", "Terminology Development", "Academic Coordination", "Policy Development"]
-paperIds: ["paper-9"]
-projectIds: ["terminology-standardization", "dictionary"]
-memberIds: ["ahmad-kurdish", "karim-mohammad", "mohammad-ali", "zainab-hussein"]
-datasetIds: ["dataset-4", "dataset-5"]
+layout: "organizations/single"
+focus: ["Language Standardization", "Educational Technology", "Linguistic Research", "Digital Learning"]
+paperIds: ["paper-4", "paper-5", "paper-6"]
+projectIds: ["dictionary", "spell-checker", "terminology-standardization"]
+memberIds: ["karim-mohammad", "mohammad-ali", "sara-ahmed"]
+datasetIds: ["dataset-4", "dataset-5", "dataset-6"]
 draft: false
 --- 

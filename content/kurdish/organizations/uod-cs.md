@@ -1,14 +1,15 @@
 ---
-title: "زانکۆی دەھۆک - بەشی زانستی کۆمپیوتەر"
-description: "بەشی ئەکادیمی پێشکەوتوو لە توێژینەوەی کۆمپیوتەردا کە تایبەتە بە پەرەپێدانی تەکنەلۆژیای زمانی ناوخۆیی. ئەم بەشە گرنگ بووە لە ڕاهێناندنی نەوەی داهاتووی توێژەرانی تەکنەلۆژیای زمانی کوردی."
-website: "https://uod.ac/cs"
+title: "زانکۆی دەھۆک - زانستی کۆمپیوتەر"
+description: "زانکۆی دەھۆک - زانستی کۆمپیوتەر بەشی سەرەکی ئەکادیمی بۆ توێژینەوەی زانستی کۆمپیوتەر و تەکنەلۆجیای زمان لە کوردستانە. مامۆستا و خوێندکارەکانمان بەشداری توێژینەوەی پێشکەوتوو دەکەن لە پرۆسێسکردنی زمانی سروشتی، فێربوونی مەشین، و تەکنەلۆجیای زمانی کوردی."
+website: "https://uod.ac"
 location: "دەھۆک، هەرێمی کوردستان"
 established: "2005"
 type: "بەشی ئەکادیمی"
-focus: ["پەروەردەی زانستی کۆمپیوتەر", "تەکنەلۆژیای قسەکردن", "پرۆسێسکردنی زمان", "توێژینەوەی قوتابیان"]
-paperIds: ["paper-3", "paper-4", "paper-5"]
-projectIds: ["asr", "ocr", "tts", "corpus-creation"]
-memberIds: ["john-doe", "fatima-hassan", "ahmad-kurdish", "karim-mohammad", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
-datasetIds: ["dataset-5", "dataset-6"]
+layout: "organizations/single"
+focus: ["زانستی کۆمپیوتەر", "فێربوونی مەشین", "پرۆسێسکردنی زمانی سروشتی", "توێژینەوەی ئەکادیمی"]
+paperIds: ["paper-1", "paper-2", "paper-3", "paper-4", "paper-5"]
+projectIds: ["asr", "ocr", "translation", "tts", "summarization"]
+memberIds: ["john-doe", "ahmad-kurdish", "karim-mohammad", "mohammad-ali"]
+datasetIds: ["dataset-1", "dataset-2", "dataset-3", "dataset-4", "dataset-5"]
 draft: false
 --- 

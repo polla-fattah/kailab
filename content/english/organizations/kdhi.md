@@ -1,14 +1,15 @@
 ---
-title: "Kurdistan Digital Heritage Institute"
-description: "A collaborative institution dedicated to preserving and digitizing Kurdish cultural heritage through advanced technological solutions. KDHI works closely with academic institutions to ensure Kurdish historical documents and cultural artifacts are preserved for future generations."
+title: "KDHI - Kurdish Digital Humanities Initiative"
+description: "KDHI is dedicated to advancing digital humanities research in Kurdish studies. We develop tools and methodologies for preserving, analyzing, and making accessible Kurdish cultural and linguistic heritage through innovative digital technologies."
 website: "https://kdhi.org"
-location: "Erbil, Kurdistan Region"
-established: "2018"
-type: "Cultural Institution"
-focus: ["Digital Heritage", "Historical Preservation", "Cultural Documentation", "Archive Digitization"]
-paperIds: ["paper-1", "paper-6", "paper-7"]
-projectIds: ["corpus-creation", "dictionary", "spell-checker"]
-memberIds: ["john-doe", "ahmad-kurdish", "mohammad-ali", "sara-ahmed", "zainab-hussein"]
-datasetIds: ["dataset-1", "dataset-2"]
+location: "Kurdistan Region, Iraq"
+established: "2019"
+type: "Research Initiative"
+layout: "organizations/single"
+focus: ["Digital Humanities", "Cultural Heritage", "Text Analysis", "Digital Preservation"]
+paperIds: ["paper-1", "paper-2", "paper-3"]
+projectIds: ["corpus-creation", "dictionary", "terminology-standardization"]
+memberIds: ["john-doe", "fatima-hassan", "ahmad-kurdish"]
+datasetIds: ["dataset-1", "dataset-2", "dataset-3"]
 draft: false
 --- 
