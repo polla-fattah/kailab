@@ -4,7 +4,7 @@ description: "کەدی تایبەتە بە پێشکەوتنی توێژینەوە
 website: "https://kdhi.org"
 location: "هەرێمی کوردستان، عێراق"
 established: "2019"
-type: "پڕۆژەی توێژینەوە"
+category: "پڕۆژەی توێژینەوە"
 layout: "organizations/single"
 focus: ["مرۆڤایەتی دیجیتاڵی", "میراتی کەلتووری", "شیکردنەوەی تێکست", "پاراستنی دیجیتاڵی"]
 paperIds: ["paper-1", "paper-2", "paper-3"]

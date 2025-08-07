@@ -4,7 +4,7 @@ description: "KDHI is dedicated to advancing digital humanities research in Kurd
 website: "https://kdhi.org"
 location: "Kurdistan Region, Iraq"
 established: "2019"
-type: "Research Initiative"
+category: "Research Initiative"
 layout: "organizations/single"
 focus: ["Digital Humanities", "Cultural Heritage", "Text Analysis", "Digital Preservation"]
 paperIds: ["paper-1", "paper-2", "paper-3"]

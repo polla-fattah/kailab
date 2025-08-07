@@ -4,7 +4,7 @@ description: "ئەکادیمیای زمانی کوردی دامەزراوەی س
 website: "https://kla.org"
 location: "هەرێمی کوردستان، عێراق"
 established: "2021"
-type: "ئەکادیمیای زمان"
+category: "ئەکادیمیای زمان"
 layout: "organizations/single"
 focus: ["ستاندەردکردنی زمان", "تەکنەلۆجیای پەروەردەیی", "توێژینەوەی زمانەوانی", "فێربوونی دیجیتاڵی"]
 paperIds: ["paper-4", "paper-5", "paper-6"]

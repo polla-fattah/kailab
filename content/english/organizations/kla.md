@@ -4,7 +4,7 @@ description: "KLA is the premier institution for Kurdish language standardizatio
 website: "https://kla.org"
 location: "Kurdistan Region, Iraq"
 established: "2021"
-type: "Language Academy"
+category: "Language Academy"
 layout: "organizations/single"
 focus: ["Language Standardization", "Educational Technology", "Linguistic Research", "Digital Learning"]
 paperIds: ["paper-4", "paper-5", "paper-6"]

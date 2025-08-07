@@ -4,7 +4,7 @@ description: "زانکۆی دەھۆک - زانستی کۆمپیوتەر بەشی
 website: "https://uod.ac"
 location: "دەھۆک، هەرێمی کوردستان"
 established: "2005"
-type: "بەشی ئەکادیمی"
+category: "بەشی ئەکادیمی"
 layout: "organizations/single"
 focus: ["زانستی کۆمپیوتەر", "فێربوونی مەشین", "پرۆسێسکردنی زمانی سروشتی", "توێژینەوەی ئەکادیمی"]
 paperIds: ["paper-1", "paper-2", "paper-3", "paper-4", "paper-5"]

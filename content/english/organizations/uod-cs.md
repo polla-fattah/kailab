@@ -4,7 +4,7 @@ description: "UOD-CS is the leading academic department for computer science and
 website: "https://uod.ac"
 location: "Duhok, Kurdistan Region"
 established: "2005"
-type: "Academic Department"
+category: "Academic Department"
 layout: "organizations/single"
 focus: ["Computer Science", "Machine Learning", "Natural Language Processing", "Academic Research"]
 paperIds: ["paper-1", "paper-2", "paper-3", "paper-4", "paper-5"]

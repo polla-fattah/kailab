@@ -4,7 +4,7 @@ description: "METI leads the digital transformation of education in Kurdistan th
 website: "https://meti.edu.krd"
 location: "Kurdistan Region, Iraq"
 established: "2022"
-type: "Government Initiative"
+category: "Government Initiative"
 layout: "organizations/single"
 focus: ["Educational Technology", "Digital Learning", "Language Education", "Platform Development"]
 paperIds: ["paper-7", "paper-8", "paper-9"]

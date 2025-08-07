@@ -4,7 +4,7 @@ description: "KaiLab is the pioneering research initiative at the forefront of K
 website: "https://kailab.org"
 location: "Kurdistan Region, Iraq"
 established: "2020"
-type: "Research Laboratory"
+category: "Research Laboratory"
 focus: ["Artificial Intelligence", "Natural Language Processing", "Kurdish Language Technology", "Digital Humanities"]
 paperIds: ["paper-1", "paper-2", "paper-3", "paper-4", "paper-5", "paper-6", "paper-7", "paper-8", "paper-9"]
 projectIds: ["asr", "ocr", "translation", "tts", "terminology-standardization", "summarization", "corpus-creation", "dictionary", "spell-checker"]

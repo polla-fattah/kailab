@@ -4,7 +4,7 @@ description: "مەتی پێشکەوتنی دیجیتاڵی پەروەردە لە
 website: "https://meti.edu.krd"
 location: "هەرێمی کوردستان، عێراق"
 established: "2022"
-type: "پڕۆژەی حکوومەت"
+category: "پڕۆژەی حکوومەت"
 layout: "organizations/single"
 focus: ["تەکنەلۆجیای پەروەردەیی", "فێربوونی دیجیتاڵی", "پەروەردەی زمان", "پەرەپێدانی پلاتفۆرم"]
 paperIds: ["paper-7", "paper-8", "paper-9"]
